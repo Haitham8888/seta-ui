@@ -1,8 +1,8 @@
 /* =========================================================
    SETA — Arabic & RTL
-   Thmanyah is used from the viewer's installed fonts (local()) — its licence does
-   not allow hosting the files on a public site. Open-licence Arabic faces fill in
-   everywhere else (IBM Plex Sans Arabic, Noto Naskh Arabic).
+   Thmanyah (© thmanyah, font.thmanyah.com) is served with the publisher's permission
+   for this project. Installed copies (local()) are used first; IBM Plex Sans Arabic
+   and Noto Naskh Arabic are fallbacks.
    ========================================================= */
 @font-face { font-family: "Thmanyah Sans"; font-weight: 300; font-display: swap; src: local("thmanyah sans Light"), local("thmanyahsans-Light"), url("../fonts/thmanyahsans-Light.woff2") format("woff2"); }
 @font-face { font-family: "Thmanyah Sans"; font-weight: 400; font-display: swap; src: local("thmanyah sans Regular"), local("thmanyahsans-Regular"), url("../fonts/thmanyahsans-Regular.woff2") format("woff2"); }
