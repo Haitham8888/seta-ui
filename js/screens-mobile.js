@@ -80,7 +80,7 @@
     id: "m-day", part: PART, title: "Mobile · match day", kind: "full",
     render() {
       const home = `<div class="m-body">
-          <div class="m-top"><div class="row" style="gap:10px">${av("Faris Alharbi", "sm")}<div style="line-height:1.2"><span class="faint" style="font-size:11px">Sunday, 8 Nov</span><div style="font-weight:650">Evening, Nyx</div></div></div><span class="m-ib">${ic("bell")}<span class="pip"></span></span></div>
+          <div class="m-top"><div class="row" style="gap:10px">${av("Yara Hamami", "sm")}<div style="line-height:1.2"><span class="faint" style="font-size:11px">Sunday, 8 Nov</span><div style="font-weight:650">Evening, Nyx</div></div></div><span class="m-ib">${ic("bell")}<span class="pip"></span></span></div>
           <div class="m-card ink" style="display:flex;gap:14px;align-items:center;position:relative;overflow:hidden">${orbit({ w: 280, h: 120, color: "#9677FF", op: 0.4, stars: false })}
             <div style="position:relative">${ring(74, { size: 78, stroke: 7, color: "#45D6A2", track: "#2A2245", label: "74" }).replace("fill:var(--text)", "fill:#EDEAF4")}</div>
             <div style="position:relative;flex:1"><span class="w-lbl" style="color:rgba(237,234,244,.5)">Readiness</span><div style="font-weight:650;font-size:15px;margin:2px 0">Good day for ranked</div><div style="font-size:11.5px;color:rgba(237,234,244,.6)" class="row">${ic("watch", "i-sm")} Slept 7h 40m · HRV 68</div></div></div>
@@ -165,7 +165,7 @@
           <div class="m-top">${ic("chevron-left")}<span style="font-weight:650">Talent Passport</span><span class="m-ib">${ic("share")}</span></div>
           <div class="passport" style="min-height:0;padding:16px;gap:12px;border-radius:20px">${guil(280, 330)}
             <div class="row between" style="position:relative">${wordmark(12, true)}<span class="tag" style="background:rgba(69,214,162,.14);color:#45D6A2;font-size:10px">${ic("badge-check")}Verified</span></div>
-            <div class="row" style="gap:10px;position:relative">${av("Faris Alharbi", "lg")}<div><b class="wide" style="font-size:22px">NYX</b><div class="lbl">Valorant · Duelist · ST-10427</div></div></div>
+            <div class="row" style="gap:10px;position:relative">${av("Yara Hamami", "lg")}<div><b class="wide" style="font-size:22px">NYX</b><div class="lbl">Valorant · Duelist · ST-10427</div></div></div>
             <div style="position:relative;display:grid;place-items:center;padding:4px 0"><div class="qr">${qr("NYX", 136)}</div></div>
             <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:8px;position:relative">${[["Score", "82"], ["Potential", "92"], ["Rank", "Imm 1"]].map(([a, b]) => `<div><div class="lbl">${a}</div><div class="v">${b}</div></div>`).join("")}</div>
           </div>
@@ -173,7 +173,7 @@
           <span class="m-btn" style="margin-top:auto;margin-bottom:30px">${ic("scan-line")}Show QR to a scout</span></div>`;
       const me = `<div class="m-body" style="gap:10px">
           <div class="m-top"><h2 class="m-title">Me</h2><span class="m-ib">${ic("settings")}</span></div>
-          <div class="row" style="gap:12px">${av("Faris Alharbi", "lg")}<div style="flex:1"><b style="font-size:15px">Faris Alharbi</b><div class="faint" style="font-size:12px">NYX · Player · Jazan</div></div><span class="tag v mono">PRO 92%</span></div>
+          <div class="row" style="gap:12px">${av("Yara Hamami", "lg")}<div style="flex:1"><b style="font-size:15px">Yara Hamami</b><div class="faint" style="font-size:12px">NYX · Player · Jazan</div></div><span class="tag v mono">PRO 92%</span></div>
           <span class="m-label">Linked accounts</span>
           <div class="m-group">${[["riotgames", "Riot Games", "NYX#KSA1", true], ["discord", "Discord", "nyx.sa", true], ["steam", "Steam", "Not linked", false]].map(([k, n, d, on]) => `<div class="m-row"><span class="brand-tile sm">${K.brand(k, 15)}</span><div class="grow"><b>${n}</b><div class="s">${d}</div></div>${on ? ic("circle-check", "i-sm") : `<span class="link" style="font-size:12px">Link</span>`}</div>`).join("").replace(/<i data-lucide="circle-check" class="i-sm"><\/i>/g, `<span style="color:var(--mint)">${ic("circle-check", "i-sm")}</span>`)}</div>
           <span class="m-label">Devices</span>

@@ -47,7 +47,7 @@
       ["Players", [["discovery", "radar", "Discovery"], ["team", "shield", "Team & Club"], ["performance", "activity", "Analytics"]]],
     ],
   };
-  const ME = { player: ["Faris Alharbi", "NYX · Duelist"], coach: ["Reem Alqahtani", "Head Coach · Tihama"] };
+  const ME = { player: ["Yara Hamami", "NYX · Duelist"], coach: ["Reem Alqahtani", "Head Coach · Falcon"] };
 
   function shell(scr, body) {
     const role = scr.role || "player";
@@ -60,15 +60,15 @@
         <nav>${groups}</nav>
         <div class="foot">
           <a class="nav-item" href="#/system" title="Settings">${ic("settings-2")}<span>Settings</span></a>
-          <div class="me">${av(ME[role][0], "sm")}<div class="who"><b>${ME[role][0]}</b><span>${ME[role][1]}</span></div>${ic("chevrons-up-down", "i-sm faint")}</div>
+          <div class="me" data-pop="me" role="button" tabindex="0">${av(ME[role][0], "sm")}<div class="who"><b>${ME[role][0]}</b><span>${ME[role][1]}</span></div>${ic("chevrons-up-down", "i-sm faint")}</div>
         </div>
       </aside>
       <div class="main">
         <header class="topbar">
           <div class="crumbs">${scr.crumbs ? scr.crumbs.map((c, i, a) => (i === a.length - 1 ? `<b>${c}</b>` : `<span>${c}</span>${ic("chevron-right")}`)).join("") : `<b>${scr.title}</b>`}</div>
-          <label class="search">${ic("search")}<input placeholder="Search players, matches, drills"><span class="kbd">Ctrl K</span></label>
-          <button class="icon-btn" title="Notifications" onclick="toast('3 new notifications')">${ic("bell")}<span class="pip"></span></button>
-          <button class="icon-btn hide-m" title="Help">${ic("life-buoy")}</button>
+          <label class="search" data-palette>${ic("search")}<input placeholder="Search players, matches, drills"><span class="kbd">Ctrl K</span></label>
+          <button class="icon-btn" title="Notifications" data-pop="notif">${ic("bell")}<span class="pip"></span></button>
+          <button class="icon-btn hide-m" title="Shortcuts" data-pop="help">${ic("life-buoy")}</button>
         </header>
         ${body}
       </div>
@@ -112,6 +112,7 @@
     lucide.createIcons();
     applyTheme(themeMode);
     scr.mount && scr.mount(root);
+    document.dispatchEvent(new CustomEvent("seta:render", { detail: scr }));
     window.scrollTo(0, 0);
   }
   window.rerender = () => { const y = scrollY; render(); scrollTo(0, y); };

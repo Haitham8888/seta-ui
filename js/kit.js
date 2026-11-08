@@ -98,7 +98,9 @@
       mk = `<line x1="${x}" x2="${x}" y1="${padT}" y2="${padT + ih}" stroke="var(--text-3)" stroke-dasharray="2 3"/>
         <g transform="translate(${Math.min(x + 8, w - 172)} ${Math.max(y - 44, padT)})"><rect width="164" height="38" rx="8" fill="var(--text)"/><text x="10" y="15" style="fill:var(--bg);opacity:.6">${marker.label}</text><text x="10" y="30" style="fill:var(--bg);font-size:12px;font-weight:600">${marker.value}</text></g>`;
     }
-    return `<svg class="chart" viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="none" style="height:auto;overflow:visible"><g class="grid">${grid}</g>${bandSvg}${xl}${paths}${mk}</svg>`;
+    const n0 = series[0].data.length, cw = iw / Math.max(1, n0 - 1);
+    const hov = series[0].data.map((_, i) => { const lab = (o.tipLabels && o.tipLabels[i]) || labels[i] || ""; const vals = series.map((s) => Math.round(s.data[i] * 10) / 10 + unit).join(" · "); return `<rect class="hv" x="${Math.max(padL, X(i, n0) - cw / 2)}" y="${padT}" width="${cw}" height="${ih}" data-tip="${lab ? lab + ": " : ""}${vals}${o.tipUnit || ""}" data-hx="${X(i, n0)}"/>`; }).join("");
+    return `<svg class="chart" viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="none" style="height:auto;overflow:visible"><g class="grid">${grid}</g>${bandSvg}${xl}${paths}${mk}<g class="hovs">${hov}</g></svg>`;
   };
 
   /* ---------- radar ---------- */
@@ -112,7 +114,7 @@
     const shapes = sets.map((s) => {
       const pts = s.data.map((v, i) => P(i, v));
       return `<polygon points="${pts.map((p) => p.join(",")).join(" ")}" fill="${s.color}" fill-opacity="${s.fill ?? 0.16}" stroke="${s.color}" stroke-width="${s.dash ? 1.2 : 1.8}" ${s.dash ? 'stroke-dasharray="3 3"' : ""} stroke-linejoin="round"/>
-        ${s.dash ? "" : pts.map((p) => `<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="var(--surface)" stroke="${s.color}" stroke-width="1.6"/>`).join("")}`;
+        ${s.dash ? "" : pts.map((p, i) => `<circle class="pt" cx="${p[0]}" cy="${p[1]}" r="3" fill="var(--surface)" stroke="${s.color}" stroke-width="1.6" data-tip="${axes[i]}: ${s.data[i]}"/>`).join("")}`;
     }).join("");
     const lb = labels ? axes.map((a, i) => {
       const [x, y] = P(i, max * 1.2); const anchor = Math.abs(x - c) < 6 ? "middle" : x > c ? "start" : "end";
@@ -146,7 +148,7 @@
     const big = size * (sub ? 0.27 : 0.28), small = Math.max(9, size * 0.075);
     return `<svg viewBox="${-pad} ${-pad} ${size + pad * 2} ${size + pad * 2}" width="${size + pad * 2}" height="${size + pad * 2}" aria-hidden="true">${tk}
       <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/>
-      <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${Math.max(0, (C * pct) / 100 - (pct < 100 ? 0.01 : 0))} ${C}" transform="rotate(-90 ${c} ${c})"/>
+      <circle class="ring-arc" cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${Math.max(0, (C * pct) / 100 - (pct < 100 ? 0.01 : 0))} ${C}" transform="rotate(-90 ${c} ${c})"/>
       ${pct > 0 && pct < 100 && ticks ? `<circle cx="${ex.toFixed(2)}" cy="${ey.toFixed(2)}" r="${stroke * 0.32}" fill="var(--surface)"/>` : ""}
       ${mk}
       ${label ? `<text x="${c}" y="${sub ? c - small * 0.55 : c}" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-ui);font-stretch:122%;font-weight:650;font-size:${big}px;letter-spacing:-.02em;fill:var(--text);font-variant-numeric:tabular-nums">${label}</text>` : ""}
@@ -160,7 +162,7 @@
     const mx = Math.max(...vals), bw = (w - gap * (vals.length - 1)) / vals.length, lh = labels ? 16 : 0;
     return `<svg class="chart" viewBox="0 0 ${w} ${h}" width="100%" preserveAspectRatio="none" style="height:${h}px">${vals.map((v, i) => {
       const bh = ((h - lh) * v) / mx;
-      return `<rect x="${i * (bw + gap)}" y="${h - lh - bh}" width="${bw}" height="${bh}" rx="2" fill="${i === hl ? "var(--ember)" : color}" opacity="${i === hl ? 1 : 0.85}"/>${labels ? `<text x="${i * (bw + gap) + bw / 2}" y="${h - 3}" text-anchor="middle">${labels[i]}</text>` : ""}`;
+      return `<rect class="bar" data-tip="${labels ? labels[i] + ": " : ""}${v}" x="${i * (bw + gap)}" y="${h - lh - bh}" width="${bw}" height="${bh}" rx="2" fill="${i === hl ? "var(--ember)" : color}" opacity="${i === hl ? 1 : 0.85}"/>${labels ? `<text x="${i * (bw + gap) + bw / 2}" y="${h - 3}" text-anchor="middle">${labels[i]}</text>` : ""}`;
     }).join("")}</svg>`;
   };
 
