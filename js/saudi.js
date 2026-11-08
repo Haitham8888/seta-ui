@@ -85,7 +85,7 @@
       <div class="sec-h"><div><span class="eyebrow">${K.isAr ? "المشهد السعودي" : "The Saudi scene"}</span><h2>${K.isAr ? "أندية سعودية<br>تنافس العالم." : "Saudi clubs<br>taking on the world."}</h2></div>
         <p>${K.isAr ? "أندية سعودية لها فرق احترافية نشطة. كل معلومة مرتبطة بمصدرها المنشور." : "Saudi-based organisations with active pro rosters. Every fact links to its published source."}</p></div>
       <a class="sef-card" href="${S.sef}" target="_blank" rel="noopener">
-        <span class="sef-ic">${K.ic("shield-check")}</span>
+        <span class="sef-logo"><img class="l" src="assets/sef-light.png" alt="Saudi Esports"><img class="d" src="assets/sef-dark.png" alt="" aria-hidden="true"></span>
         <span class="grow"><span class="eyebrow">${K.isAr ? "الجهة الرسمية" : "Official body"}</span><b>${K.isAr ? "الاتحاد السعودي للرياضات الإلكترونية" : "Saudi Esports Federation"}</b><span class="faint">${K.isAr ? "البطولات الوطنية والأندية المعتمدة والأخبار الرسمية" : "National tournaments, registered clubs and official news"}</span></span>
         <span class="sef-go mono">saudiesports.sa ${K.ic("arrow-up-right", "i-sm")}</span>
       </a>
