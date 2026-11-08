@@ -50,6 +50,7 @@
   const slider = (key, v) => `<div class="pp-slider" data-slider="${key}"><i class="tr"></i><i class="fl" style="width:${v}%"></i><i class="th" style="left:${v}%"></i></div>`;
   const sw = (on, act, extra = "") => `<button class="switch ${on ? "on" : ""}" data-act="${act}" ${extra} aria-label="toggle"></button>`;
   const RANGE = { "7D": [84, 6, [87, 79, 81, 84, 77, 84]], "30D": [82, 4, [86, 78, 80, 83, 76, 83]], "90D": [79, 9, [83, 76, 82, 80, 74, 80]], Season: [77, 14, [81, 75, 83, 78, 73, 78]] };
+  const SHORT = { VAL: "Valorant", CS2: "CS2", LoL: "LoL", RL: "Rocket League", DOTA: "Dota 2", PUBG: "PUBG", FC: "EA FC", R6: "R6 Siege" };
   const SKILLS = ["Aim", "Reaction", "Decision", "Game sense", "Teamwork", "Consistency"];
   const SKD = [12, 9, -6, 9, 3, 11];
 
@@ -66,7 +67,7 @@
         <button class="faint pp-tap" data-act="emailSheet" style="font-size:12px;padding:8px">Use email instead</button></div>` }),
     role: () => ({ html: `${nav("", `<div class="m-steps" style="width:110px"><i class="on"></i><i></i><i></i></div>`)}
       <div><h2 class="pp-large">How will you use SETA?</h2><p class="m-sub">This sets your home screen. Add another role any time.</p></div>
-      <div class="col" style="gap:8px">${[["player", "gamepad-2", "Player", "Track, improve and get scouted"], ["coach", "clipboard-list", "Coach", "Review and train your players"], ["club", "shield", "Club", "Scout talent, manage a roster"]].map(([k, i, t, d]) => `<button class="role-card pp-tap pp-row-btn ${st.role === k ? "on" : ""}" data-act="role" data-v="${k}" style="flex-direction:row;align-items:center;gap:12px;padding:14px"><span class="ic">${ic(i)}</span><div style="flex:1"><b style="font-size:14px">${t}</b><div class="faint" style="font-size:12px">${d}</div></div><span class="radio ${st.role === k ? "on" : ""}" style="position:static"></span></button>`).join("")}</div>
+      <div class="col" style="gap:8px">${[["player", "gamepad-2", "Player", "Track, improve and get scouted"], ["coach", "clipboard-list", "Coach", "Review and train your players"], ["club", "shield", "Club", "Scout talent, manage a roster"]].map(([k, i, t, d]) => `<button class="role-card pp-tap pp-row-btn ${st.role === k ? "on" : ""}" data-act="role" data-v="${k}" style="flex-direction:row;align-items:center;gap:12px;padding:14px"><span class="ic">${ic(i)}</span><div style="flex:1"><b style="font-size:14px">${t}</b><div class="faint" style="font-size:12px">${d}</div></div><span class="radio ${st.role === k ? "on" : ""}" style="position:relative;top:auto;right:auto;flex:none"></span></button>`).join("")}</div>
       <button class="m-btn pp-tap" data-go="link" style="margin-top:auto">Continue ${ic("arrow-right")}</button>` }),
     link: () => ({ html: `${nav("", `<div class="m-steps" style="width:110px"><i class="on"></i><i class="on"></i><i></i></div>`)}
       <div><h2 class="pp-large">Connect your games</h2><p class="m-sub">We read match history only. We never post or play for you.</p></div>
@@ -115,14 +116,14 @@
       if (!s.live) return { tabs: true, html: `<h1 class="pp-large" style="margin-top:6px">Ready to play?</h1>
         <div class="m-card row" style="gap:12px">${ring(st.watch ? 74 : 0, { size: 60, stroke: 6, color: "var(--mint)", label: st.watch ? "74" : "–" })}<div style="flex:1"><b style="font-size:13px">${st.watch ? "Readiness 74 · good" : "No readiness yet"}</b><div class="faint" style="font-size:11.5px">${st.checked ? "Checked in today" : "Tip: do a 20-second check-in first"}</div></div>${st.checked ? "" : `<button class="link" data-act="checkin">Check in</button>`}</div>
         <span class="m-label">Game</span>
-        <div class="row wrap" style="gap:8px">${["VAL", "CS2", "LoL", "RL"].map((g) => `<button class="m-chip pp-tap ${st.game === g ? "on" : ""}" data-act="game" data-v="${g}" style="height:36px;padding-left:4px">${K.game(g, 26, 8)}${K.gameName(g).split(" ")[0]}</button>`).join("")}</div>
+        <div class="row wrap" style="gap:8px">${["VAL", "CS2", "LoL", "RL"].map((g) => `<button class="m-chip pp-tap ${st.game === g ? "on" : ""}" data-act="game" data-v="${g}" style="height:36px;padding-left:4px">${K.game(g, 26, 8)}${SHORT[g]}</button>`).join("")}</div>
         <span class="m-label">Mode</span>
         <div class="m-seg">${["Ranked", "Premier", "Practice"].map((m) => `<span class="${st.mode === m ? "on" : ""}" data-act="mode" data-v="${m}">${m}</span>`).join("")}</div>
         <div class="m-card row" style="gap:10px">${st.watch ? `<span class="brand-tile sm">${K.brand("apple", 14)}</span><span style="flex:1;font-size:12.5px"><b>Apple Watch</b> will record heart rate</span><span class="tag m">${ic("check")}Ready</span>` : `<span class="brand-tile sm" style="color:var(--text-3)">${ic("watch", "i-sm")}</span><span style="flex:1;font-size:12.5px">No watch, heart rate off</span><button class="link" data-go="pair1">Link</button>`}</div>
         <button class="m-btn pp-tap" data-act="startSession" style="margin-top:6px;height:54px;font-size:15px">${ic("play")}Start session</button>
         <p class="faint" style="font-size:11px;margin:0;text-align:center">Your phone stays silent. Nudges go to the watch.</p>` };
       const el = Date.now() - s.t0, w = s.matches.filter((m) => m.r === "W").length;
-      return { tabs: true, html: `<div class="pp-nav"><span class="row" style="gap:8px;font-weight:650"><span class="dot live"></span>Session live</span><span class="tag mono">${K.gameName(st.game).split(" ")[0].toUpperCase()} · ${st.mode.toUpperCase()}</span></div>
+      return { tabs: true, html: `<div class="pp-nav"><span class="row" style="gap:8px;font-weight:650"><span class="dot live"></span>Session live</span><span class="tag mono">${SHORT[st.game].toUpperCase()} · ${st.mode.toUpperCase()}</span></div>
         <div style="text-align:center;padding:4px 0 0"><span class="m-label">Playing for</span><div class="m-big" style="font-size:54px;margin-top:4px" data-timer>${fmt(el)}</div></div>
         <div class="m-card"><div class="row between"><span class="row" style="gap:6px;font-weight:650">${ic("heart-pulse", "i-sm")}<span style="color:var(--rose)" data-hr>${st.watch ? hrNow() : "–"}</span><span class="faint" style="font-weight:500;font-size:11.5px">bpm</span></span><span class="row faint" style="gap:4px;font-size:11px">${ic("watch", "i-sm")}${st.watch ? "Apple Watch · live" : "No watch"}</span></div><div data-hrchart>${st.watch ? hrChart() : `<p class="pp-empty" style="padding:16px 0">Link a watch to see live heart rate</p>`}</div></div>
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><div class="m-card" style="padding:12px"><span class="m-label" style="padding:0">Matches</span><div class="row" style="gap:6px;align-items:baseline"><b class="num" style="font-size:22px">${s.matches.length}</b><span class="faint" style="font-size:11px">${w}W · ${s.matches.length - w}L</span></div></div><div class="m-card" style="padding:12px"><span class="m-label" style="padding:0">Avg in match</span><div class="row" style="gap:6px;align-items:baseline"><b class="num" style="font-size:22px">${st.watch ? Math.round(s.hr.slice(-20).reduce((a, b) => a + b, 0) / Math.min(20, s.hr.length)) : "–"}</b><span class="faint" style="font-size:11px">bpm</span></div></div></div>
@@ -149,7 +150,7 @@
     /* ---------- stats ---------- */
     stats: () => {
       const [score, d, sk] = RANGE[st.range];
-      return { tabs: true, html: `<div class="pp-nav"><h1 class="pp-large">Stats</h1><button class="m-chip pp-tap" data-act="gameSheet" style="height:32px">${K.brand(K.GAME_META[st.game].k, 13, st.game === "VAL" ? "#FA4454" : undefined)}${K.gameName(st.game).split(" ")[0]}${ic("chevron-down")}</button></div>
+      return { tabs: true, html: `<div class="pp-nav"><h1 class="pp-large">Stats</h1><button class="m-chip pp-tap" data-act="gameSheet" style="height:32px">${K.brand(K.GAME_META[st.game].k, 13, st.game === "VAL" ? "#FA4454" : undefined)}${SHORT[st.game]}${ic("chevron-down")}</button></div>
         <div class="m-seg">${Object.keys(RANGE).map((r) => `<span class="${st.range === r ? "on" : ""}" data-act="range" data-v="${r}">${r}</span>`).join("")}</div>
         <div class="m-card row" style="gap:14px">${ring(score, { size: 86, stroke: 7, label: String(score), mark: 76 })}<div class="col" style="gap:4px"><span class="m-label" style="padding:0">SETA Score</span>${delta(d)}<span class="faint" style="font-size:11.5px">Top 18% · Immortal in Saudi Arabia</span></div></div>
         <span class="m-label">Skills · tap for detail</span>
@@ -164,7 +165,7 @@
         <div class="m-card">${lines([{ data: Array.from({ length: 12 }, (_, k) => v - SKD[i] + (SKD[i] * k) / 11 + Math.sin(k) * 1.5), area: true, dots: true }], ["W1", "", "", "W4", "", "", "W7", "", "", "W10", "", "W12"], { w: 280, h: 130, ticks: 3 })}</div>
         <span class="m-label">How to improve</span>
         <div class="m-group">${tips.map(([t, d]) => `<div class="m-row"><span style="color:var(--violet)">${ic("lightbulb", "i-sm")}</span><span class="grow"><b style="font-size:12.5px">${t}</b><span class="s" style="display:block">${d}</span></span></div>`).join("")}</div>
-        <button class="m-btn pp-tap" data-act="addDrill" style="height:46px">${ic("dumbbell")}Add a ${SKILLS[i].toLowerCase()} drill</button>` };
+        <button class="m-btn pp-tap" data-act="addDrill" style="height:46px">${ic("dumbbell")}Add drill · ${SKILLS[i]}</button>` };
     },
     matches: () => ({ tabs: true, html: `${nav("Matches")}<div class="m-seg"><span class="on">All</span><span>Wins</span><span>Losses</span></div><div class="m-group">${K.MATCHES.map((m, i) => matchRow(m, i, true)).join("")}</div>` }),
     match: (p) => {
@@ -200,7 +201,7 @@
         <div><span class="m-label" style="padding:0">Week 3 of 6 · Entry timing</span><div class="row between" style="margin-top:6px"><b class="m-big" style="font-size:34px">${Math.round((done / (total + 10)) * 100)}%</b><span class="faint" style="font-size:12px">${done} of ${total + 10} drills</span></div><div class="meter" style="margin-top:8px"><i style="width:${Math.round((done / (total + 10)) * 100)}%"></i></div></div>
         <div class="row between">${days.map((d, i) => `<button class="col pp-tap" data-act="day" data-v="${d}" style="gap:4px;align-items:center;width:38px;padding:8px 0;border-radius:12px;${st.day === d ? "background:var(--violet);color:var(--on-violet)" : ""}"><span style="font-size:10.5px;font-weight:600;opacity:.75">${d[0]}</span><b style="font-size:14px">${8 + i}</b><i style="width:5px;height:5px;border-radius:50%;background:${i < 1 ? "currentColor" : (st.week[d] || []).length ? "var(--mint)" : "var(--line-2)"}"></i></button>`).join("")}</div>
         <span class="m-label">${st.day === "Sat" ? "Today" : st.day}</span>
-        <div class="col" style="gap:8px">${items.length ? items.map((t, i) => { const k = st.day + i, dn = st.weekDone[k]; const [name, meta] = t.split(" · "); return `<button class="drill pp-tap pp-row-btn ${["", "e", "s", "m"][i % 4]} ${dn ? "done" : ""}" data-act="drill" data-v="${k}" style="font-size:13px;padding:11px 12px;display:flex;justify-content:space-between;align-items:center"><span>${name}<span>${(meta || "").toUpperCase()}</span></span><span class="check ${dn ? "on" : ""}" style="width:20px;height:20px">${ic("check")}</span></button>`; }).join("") : `<p class="pp-empty">Nothing planned. Tap + to add a drill.</p>`}</div>
+        <div class="col" style="gap:8px">${items.length ? items.map((t, i) => { const k = st.day + i, dn = st.weekDone[k]; const [name, meta] = t.split(" · "); return `<button class="drill pp-tap pp-row-btn ${["", "e", "s", "m"][i % 4]} ${dn ? "done" : ""}" data-act="drill" data-v="${k}" style="font-size:13px;padding:11px 12px;display:flex;justify-content:space-between;align-items:center"><span class="dn"><b>${name}</b><em>${(meta || "").toUpperCase()}</em></span><span class="check ${dn ? "on" : ""}" style="width:20px;height:20px">${ic("check")}</span></button>`; }).join("") : `<p class="pp-empty">Nothing planned. Tap + to add a drill.</p>`}</div>
         <div class="m-card row" style="gap:10px;padding:12px">${av("Reem Alqahtani", "sm")}<span style="font-size:12px;flex:1"><b>Reem</b> <span class="muted">reviewed this plan · 2d ago</span></span></div>` };
     },
 
@@ -217,7 +218,7 @@
       <p class="faint mono" style="font-size:10px;text-align:center">SETA 2.0 · build 2611</p>` }),
     passport: () => ({ tabs: true, html: `${nav("Talent Passport", `<button class="m-ib pp-tap" data-act="shareSheet">${ic("share")}</button>`)}
       <div class="pp-flip ${st.flip ? "on" : ""}" data-act="flip"><div class="pp-flip-in">
-        <div class="pp-face passport" style="min-height:0;padding:16px;gap:12px;border-radius:20px">${guil(300, 340)}<div class="row between" style="position:relative"><span class="wm on-ink" style="height:12px"><img class="d" src="assets/wordmark-dark.png" alt="" style="height:12px"></span><span class="tag" style="background:rgba(69,214,162,.14);color:#45D6A2;font-size:10px">${ic("badge-check")}Verified</span></div><div class="row" style="gap:10px;position:relative">${av("Yara Hamami", "lg")}<div><b class="wide" style="font-size:22px">NYX</b><div class="lbl">Valorant · Duelist · ST-10427</div></div></div><div style="position:relative;display:grid;place-items:center;padding:4px 0"><div class="qr">${qr("NYX", 132)}</div></div><div class="lbl" style="text-align:center;position:relative">Tap to flip</div></div>
+        <div class="pp-face passport" style="min-height:0;padding:16px;gap:12px;border-radius:20px">${guil(300, 340)}<div class="row between" style="position:relative"><span class="wm on-ink" style="height:12px"><img class="d" src="assets/wordmark-dark.png" alt="" style="height:12px"></span><span class="tag" style="background:rgba(69,214,162,.14);color:#45D6A2;font-size:10px">${ic("badge-check")}Verified</span></div><div class="row" style="gap:10px;position:relative">${av("Yara Hamami", "lg")}<div><b class="wide" style="font-size:22px">NYX</b><div class="lbl">Valorant · Duelist</div></div></div><div style="position:relative;display:grid;place-items:center;padding:4px 0"><div class="qr">${qr("NYX", 132)}</div></div><div class="lbl" style="text-align:center;position:relative">Tap to flip</div></div>
         <div class="pp-face back passport" style="min-height:0;padding:16px;gap:10px;border-radius:20px">${guil(300, 340)}<div class="lbl" style="position:relative">Verified stats</div>${[["SETA Score", "82"], ["Potential", "92"], ["Rank", "Immortal 1"], ["Server", "Jazan · KSA"], ["Matches", "412"], ["Team", "Falcons"]].map(([a, b]) => `<div class="row between" style="position:relative;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:7px"><span class="lbl">${a}</span><b class="v">${b}</b></div>`).join("")}</div>
       </div></div>
       <button class="m-card pp-tap pp-row-btn row" data-go="privacy" style="gap:10px;padding:11px 13px"><span style="color:var(--violet)">${ic("eye")}</span><span style="font-size:12px;flex:1">Visible to <b>verified clubs</b></span><span class="link">Change</span></button>
@@ -328,7 +329,7 @@
     islandEl.className = "pp-island msg";
     islandEl.innerHTML = `<span class="pp-toast-dot">${ic(icon, "i-sm")}</span><span style="display:flex;flex-direction:column;line-height:1.3;text-align:left;min-width:0"><b style="font-size:12.5px">${title}</b>${sub ? `<span style="font-size:11px;font-weight:500;color:#A7A0B6;overflow:hidden;text-overflow:ellipsis">${sub}</span>` : ""}</span>`;
     window.lucide && lucide.createIcons();
-    islandTimer = setTimeout(islandIdle, 2400);
+    islandTimer = setTimeout(islandIdle, 1800);
   }
   function islandIdle() {
     if (st.session.live) { islandEl.className = "pp-island live"; islandEl.innerHTML = `<span class="row" style="gap:6px"><i class="rec"></i><span data-timer>${fmt(Date.now() - st.session.t0)}</span></span><span class="row" style="gap:4px;color:#FF6B81">${ic("heart", "i-sm")}<span data-hr>${st.watch ? hrNow() : "–"}</span></span>`; window.lucide && lucide.createIcons(); }
@@ -519,7 +520,7 @@
       const t = e.target.closest("[data-tab]"); if (t) { if (t.dataset.tab === "session" && top().name === "session" && st.session.live) return; return tab(t.dataset.tab); }
       const g = e.target.closest("[data-go]"); if (g) { let p; try { p = g.dataset.p ? JSON.parse(g.dataset.p) : undefined; } catch (x) {} return go(g.dataset.go, p); }
       const a = e.target.closest("[data-act]"); if (a) return act(a.dataset.act, a, e);
-      if (!e.target.closest("input,textarea,.pp-sheet,[data-slider]")) { scr.classList.add("hint"); setTimeout(() => scr.classList.remove("hint"), 650); }
+      if (top().name === "splash") { st.stack = [{ name: "welcome" }]; show("fade"); }
     }, true);
     function seekTo(e) { const s = $(".pp-scrub", viewsEl); if (!s) return; const r = s.getBoundingClientRect(); st.replayP = Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100)); paintScrub(); }
   }

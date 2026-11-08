@@ -148,7 +148,7 @@
     const big = size * (sub ? 0.27 : 0.28), small = Math.max(9, size * 0.075);
     return `<svg viewBox="${-pad} ${-pad} ${size + pad * 2} ${size + pad * 2}" width="${size + pad * 2}" height="${size + pad * 2}" aria-hidden="true">${tk}
       <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/>
-      <circle class="ring-arc" cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${Math.max(0, (C * pct) / 100 - (pct < 100 ? 0.01 : 0))} ${C}" transform="rotate(-90 ${c} ${c})"/>
+      ${pct <= 0 ? "" : `<circle class="ring-arc" cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${Math.max(0, (C * pct) / 100 - (pct < 100 ? 0.01 : 0))} ${C}" transform="rotate(-90 ${c} ${c})"/>`}
       ${pct > 0 && pct < 100 && ticks ? `<circle cx="${ex.toFixed(2)}" cy="${ey.toFixed(2)}" r="${stroke * 0.32}" fill="var(--surface)"/>` : ""}
       ${mk}
       ${label ? `<text x="${c}" y="${sub ? c - small * 0.55 : c}" text-anchor="middle" dominant-baseline="central" style="font-family:var(--font-ui);font-stretch:122%;font-weight:650;font-size:${big}px;letter-spacing:-.02em;fill:var(--text);font-variant-numeric:tabular-nums">${label}</text>` : ""}

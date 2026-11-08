@@ -33,14 +33,15 @@
 .pp-island { position: absolute; top: 11px; left: 50%; transform: translateX(-50%); z-index: 40; height: 32px; width: 108px; border-radius: 20px; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 650; overflow: hidden; transition: width .45s cubic-bezier(.3,1.4,.5,1), height .45s cubic-bezier(.3,1.4,.5,1), border-radius .45s; cursor: pointer; }
 .pp[data-device="pixel"] .pp-island { width: 14px; height: 14px; border-radius: 50%; top: 18px; }
 .pp-island > * { opacity: 0; transition: opacity .2s; white-space: nowrap; }
-.pp-island.live { width: 196px; justify-content: space-between; padding: 0 12px; }
+.pp-island.live { width: 148px; justify-content: space-between; padding: 0 11px; font-size: 11.5px; }
+.pp-island.live .lucide { width: 12px; height: 12px; }
 .pp-island.live > * { opacity: 1; transition-delay: .15s; }
-.pp-island.msg { width: calc(var(--pw) - 50px); height: 64px; border-radius: 26px; padding: 0 16px; justify-content: flex-start; gap: 12px; }
+.pp-island.msg { width: calc(var(--pw) - 60px); height: 48px; border-radius: 24px; padding: 0 12px; justify-content: flex-start; gap: 10px; pointer-events: none; }
 .pp-island.msg > * { opacity: 1; transition-delay: .15s; }
 .pp-island .rec { width: 8px; height: 8px; border-radius: 50%; background: #FF8550; animation: pulse 1.6s infinite; }
 .pp[data-device="pixel"] .pp-island.live, .pp[data-device="pixel"] .pp-island.msg { top: 10px; border-radius: 20px; }
-.pp[data-device="pixel"] .pp-island.live { width: 196px; height: 32px; }
-.pp[data-device="pixel"] .pp-island.msg { height: 64px; border-radius: 26px; }
+.pp[data-device="pixel"] .pp-island.live { width: 148px; height: 30px; }
+.pp[data-device="pixel"] .pp-island.msg { height: 48px; border-radius: 24px; }
 
 /* views + transitions */
 .pp-views { position: absolute; inset: 0; overflow: hidden; }
@@ -150,3 +151,13 @@
 /* status bar fade so scrolled content never sits under the clock */
 .pp-view::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 52px; z-index: 6; pointer-events: none; background: linear-gradient(var(--bg) 62%, color-mix(in srgb, var(--bg) 0%, transparent)); }
 .pp-view.ink::before { background: linear-gradient(#120D1F 62%, rgba(18,13,31,0)); }
+
+/* radios always own their dot */
+.radio { position: relative; }
+.role-card .radio[style*="position:relative"] { position: relative; top: auto; right: auto; }
+
+/* drill rows inside the phone */
+.pp-scr .drill > .dn { display: flex; flex-direction: column; gap: 2px; font-family: var(--font-ui); text-align: left; }
+.pp-scr .drill > .dn b { font-size: 13px; font-weight: 600; color: var(--text); font-family: var(--font-ui); }
+.pp-scr .drill > .dn em { font-style: normal; font-family: var(--font-mono); font-size: 10px; color: var(--text-3); font-weight: 500; letter-spacing: .04em; }
+.pp-scr .drill.done .dn b { text-decoration: line-through; color: var(--text-3); }
