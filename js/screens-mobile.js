@@ -45,7 +45,7 @@
       const role = `<div class="m-body">
           <div class="m-top">${ic("chevron-left")}<div class="m-steps" style="width:120px"><i class="on"></i><i></i><i></i></div><span class="faint" style="font-size:12px">Skip</span></div>
           <div><h2 class="m-title">How will you use SETA?</h2><p class="m-sub">This sets your home screen. Add another role any time.</p></div>
-          <div class="col" style="gap:8px">${roleOpts.map(([i, t, d, on]) => `<div class="role-card ${on ? "on" : ""}" style="flex-direction:row;align-items:center;gap:12px;padding:14px"><span class="ic">${ic(i)}</span><div style="flex:1"><b style="font-size:14px">${t}</b><div class="faint" style="font-size:12px">${d}</div></div><span class="radio ${on ? "on" : ""}" style="position:relative;top:auto;right:auto;flex:none"></span></div>`).join("")}</div>
+          <div class="col" style="gap:8px">${roleOpts.map(([i, t, d, on]) => `<div class="role-card ${on ? "on" : ""}" style="flex-direction:row;align-items:center;gap:12px;padding:14px"><span class="ic">${ic(i)}</span><div style="flex:1"><b style="font-size:14px">${t}</b><div class="faint" style="font-size:12px">${d}</div></div><span class="radio ${on ? "on" : ""}" style="position:relative;inset:auto;flex:none"></span></div>`).join("")}</div>
           <div class="m-card" style="display:flex;gap:10px;align-items:flex-start;background:var(--surface-2)"><span style="color:var(--violet)">${star(16)}</span><span class="muted" style="font-size:12px">Players get the daily loop. Coaches get a review queue. Clubs get Discovery.</span></div>
           <span class="m-btn" style="margin-top:auto;margin-bottom:30px">Continue ${ic("arrow-right")}</span></div>`;
       const games = [["riotgames", "Riot Games", "Valorant · NYX#KSA1", "on"], ["steam", "Steam", "Counter-Strike 2", ""], ["epicgames", "Epic Games", "Rocket League", ""], ["playstation", "PlayStation", "EA Sports FC", ""]];
@@ -94,7 +94,7 @@
           <div class="m-steps"><i class="on"></i><i class="on"></i><i></i></div>
           <div><h2 class="m-title" style="font-size:24px">How’s your energy right now?</h2></div>
           <div class="m-faces">${["angry", "frown", "meh", "smile", "laugh"].map((f, i) => `<span class="${i === 3 ? "on" : ""}">${ic(f)}</span>`).join("")}</div>
-          ${[["Focus", 70], ["Stress", 30]].map(([l, v]) => `<div><div class="row between" style="font-size:12.5px"><b>${l}</b><span class="mono faint">${v}</span></div><div class="m-slider"><i class="tr"></i><i class="fl" style="width:${v}%"></i><i class="th" style="left:${v}%"></i></div></div>`).join("")}
+          ${[["Focus", 70], ["Stress", 30]].map(([l, v]) => `<div><div class="row between" style="font-size:12.5px"><b>${l}</b><span class="mono faint">${v}</span></div><div class="m-slider"><i class="tr"></i><i class="fl" style="width:${v}%"></i><i class="th" style="inset-inline-start:${v}%"></i></div></div>`).join("")}
           <div class="m-label">From your watch</div>
           <div class="m-group">${[["moon", "Sleep", "7h 40m", "var(--violet)"], ["activity", "HRV", "68 ms", "var(--sky)"], ["heart", "Resting HR", "58 bpm", "var(--rose)"]].map(([i, l, v, c]) => `<div class="m-row"><span style="color:${c}">${ic(i)}</span><span class="grow">${l}</span><b class="num">${v}</b></div>`).join("")}</div>
           <span class="m-btn" style="margin-top:auto;margin-bottom:30px">Next ${ic("arrow-right")}</span></div>`;

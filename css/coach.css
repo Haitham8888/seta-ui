@@ -28,8 +28,8 @@
 .cal-ev.s { border-color: var(--sky); background: var(--sky-soft); }
 .cal-ev.m { border-color: var(--mint); background: var(--mint-soft); }
 .cal-ev.free { border: 1px dashed var(--line-2); background: transparent; color: var(--text-3); }
-.cal-now { position: absolute; left: 56px; right: 0; height: 2px; background: var(--ember); pointer-events: none; }
-.cal-now::before { content: ""; position: absolute; left: -5px; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--ember); }
+.cal-now { position: absolute; inset-inline-start: 56px; inset-inline-end: 0; height: 2px; background: var(--ember); pointer-events: none; }
+.cal-now::before { content: ""; position: absolute; inset-inline-start: -5px; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--ember); }
 
 /* plan builder */
 .day-add { margin-top: auto; height: 30px; border-radius: 8px; border: 1px dashed var(--line-2); color: var(--text-3); display: grid; place-items: center; transition: border-color .15s, color .15s, background .15s; }

@@ -47,7 +47,7 @@
   const hrNow = () => st.session.hr[st.session.hr.length - 1];
   const hrChart = (w = 280, h = 92) => lines([{ data: st.session.hr.slice(-36), color: "var(--rose)", area: true, width: 1.8 }], Array(Math.min(36, st.session.hr.length)).fill(""), { w, h, min: 60, max: 165, ticks: 2, padL: 0, padB: 0, padT: 6, padR: 6, tipUnit: " bpm" }).replace(/<text[^>]*>[^<]*<\/text>/g, "");
   const faces = (sel, act) => `<div class="m-faces">${["angry", "frown", "meh", "smile", "laugh"].map((f, i) => `<span class="pp-tap ${i === sel ? "on" : ""}" data-act="${act}" data-v="${i}">${ic(f)}</span>`).join("")}</div>`;
-  const slider = (key, v) => `<div class="pp-slider" data-slider="${key}"><i class="tr"></i><i class="fl" style="width:${v}%"></i><i class="th" style="left:${v}%"></i></div>`;
+  const slider = (key, v) => `<div class="pp-slider" data-slider="${key}"><i class="tr"></i><i class="fl" style="width:${v}%"></i><i class="th" style="inset-inline-start:${v}%"></i></div>`;
   const sw = (on, act, extra = "") => `<button class="switch ${on ? "on" : ""}" data-act="${act}" ${extra} aria-label="toggle"></button>`;
   const RANGE = { "7D": [84, 6, [87, 79, 81, 84, 77, 84]], "30D": [82, 4, [86, 78, 80, 83, 76, 83]], "90D": [79, 9, [83, 76, 82, 80, 74, 80]], Season: [77, 14, [81, 75, 83, 78, 73, 78]] };
   const SHORT = { VAL: "Valorant", CS2: "CS2", LoL: "LoL", RL: "Rocket League", DOTA: "Dota 2", PUBG: "PUBG", FC: "EA FC", R6: "R6 Siege" };
@@ -67,7 +67,7 @@
         <button class="faint pp-tap" data-act="emailSheet" style="font-size:12px;padding:8px">Use email instead</button></div>` }),
     role: () => ({ html: `${nav("", `<div class="m-steps" style="width:110px"><i class="on"></i><i></i><i></i></div>`)}
       <div><h2 class="pp-large">How will you use SETA?</h2><p class="m-sub">This sets your home screen. Add another role any time.</p></div>
-      <div class="col" style="gap:8px">${[["player", "gamepad-2", "Player", "Track, improve and get scouted"], ["coach", "clipboard-list", "Coach", "Review and train your players"], ["club", "shield", "Club", "Scout talent, manage a roster"]].map(([k, i, t, d]) => `<button class="role-card pp-tap pp-row-btn ${st.role === k ? "on" : ""}" data-act="role" data-v="${k}" style="flex-direction:row;align-items:center;gap:12px;padding:14px"><span class="ic">${ic(i)}</span><div style="flex:1"><b style="font-size:14px">${t}</b><div class="faint" style="font-size:12px">${d}</div></div><span class="radio ${st.role === k ? "on" : ""}" style="position:relative;top:auto;right:auto;flex:none"></span></button>`).join("")}</div>
+      <div class="col" style="gap:8px">${[["player", "gamepad-2", "Player", "Track, improve and get scouted"], ["coach", "clipboard-list", "Coach", "Review and train your players"], ["club", "shield", "Club", "Scout talent, manage a roster"]].map(([k, i, t, d]) => `<button class="role-card pp-tap pp-row-btn ${st.role === k ? "on" : ""}" data-act="role" data-v="${k}" style="flex-direction:row;align-items:center;gap:12px;padding:14px"><span class="ic">${ic(i)}</span><div style="flex:1"><b style="font-size:14px">${t}</b><div class="faint" style="font-size:12px">${d}</div></div><span class="radio ${st.role === k ? "on" : ""}" style="position:relative;inset:auto;flex:none"></span></button>`).join("")}</div>
       <button class="m-btn pp-tap" data-go="link" style="margin-top:auto">Continue ${ic("arrow-right")}</button>` }),
     link: () => ({ html: `${nav("", `<div class="m-steps" style="width:110px"><i class="on"></i><i class="on"></i><i></i></div>`)}
       <div><h2 class="pp-large">Connect your games</h2><p class="m-sub">We read match history only. We never post or play for you.</p></div>
@@ -474,7 +474,7 @@
   /* ================= gestures ================= */
   function bindSliders(root) {
     $$("[data-slider]", root).forEach((s) => {
-      const set = (e) => { const r = s.getBoundingClientRect(); const v = Math.round(Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100))); st[s.dataset.slider] = v; $(".fl", s).style.width = v + "%"; $(".th", s).style.left = v + "%"; const lbl = $(`[data-val=${s.dataset.slider}]`, root); if (lbl) lbl.textContent = v; };
+      const set = (e) => { const r = s.getBoundingClientRect(); const rtl = getComputedStyle(s).direction === "rtl"; const v = Math.round(Math.max(0, Math.min(100, ((rtl ? r.right - e.clientX : e.clientX - r.left) / r.width) * 100))); st[s.dataset.slider] = v; $(".fl", s).style.width = v + "%"; $(".th", s).style.insetInlineStart = v + "%"; const lbl = $(`[data-val=${s.dataset.slider}]`, root); if (lbl) lbl.textContent = v; };
       s.onpointerdown = (e) => { e.stopPropagation(); s.setPointerCapture(e.pointerId); set(e); s.onpointermove = set; s.onpointerup = () => { s.onpointermove = null; }; };
     });
   }
@@ -496,7 +496,7 @@
       if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
       if (mode === "scrub") return seekTo(e);
       if (mode === "sheet") { if (dy > 0) { sheetEl.classList.add("dragging"); sheetEl.style.transform = `translateY(${dy}px)`; } return; }
-      if (mode === "edge") { const ddx = document.documentElement.dir === "rtl" ? -dx : dx; if (ddx > 0) { view.classList.add("dragging"); view.style.transform = `translateX(${dx}px)`; view.style.boxShadow = "-10px 0 30px rgba(0,0,0,.25)"; } return; }
+      if (mode === "edge") { const ddx = document.documentElement.dir === "rtl" ? -dx : dx; if (ddx > 0) { view.classList.add("dragging"); view.style.transform = `translateX(${dx}px)`; view.style.boxShadow = `${document.documentElement.dir === "rtl" ? 10 : -10}px 0 30px rgba(0,0,0,.25)`; } return; }
       if (mode === "pending" && Math.abs(dy) > 5) mode = "scroll";
       if (mode === "scroll" && sc) {
         const now = performance.now(); vy = (e.clientY - lastY) / Math.max(1, now - lastT); lastY = e.clientY; lastT = now;

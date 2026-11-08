@@ -432,7 +432,7 @@ window.SETA_AR = {
 "Clean first bullet on A main. Good pre-aim.": "طلقة أولى نظيفة على A main. تصويب مسبق جيد.",
 "Clear, direct feedback with timestamps. My decision score went up 6 points in a month.": "ملاحظات واضحة ومباشرة مع توقيتات دقيقة. ارتفعت درجة اتخاذ القرار لدي 6 نقاط خلال شهر.",
 "Click": "انقر",
-"Click to tap · drag to scroll · drag from the left edge to go back · drag sheets down to close": "انقر للّمس · اسحب للتمرير · اسحب من الحافة اليسرى للرجوع · اسحب النوافذ للأسفل لإغلاقها",
+"Click to tap · drag to scroll · drag from the left edge to go back · drag sheets down to close": "انقر للّمس · اسحب للتمرير · اسحب من الحافة اليمنى للرجوع · اسحب النوافذ للأسفل لإغلاقها",
 "Climb ranked": "التقدّم في المصنّفة",
 "Close any panel": "إغلاق أي لوحة",
 "Club": "النادي",

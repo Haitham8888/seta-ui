@@ -25,7 +25,7 @@ a.card { transition: transform .2s var(--ease), box-shadow .2s, border-color .2s
 
 /* icon micro-motion */
 .nav-item .lucide { transition: transform .2s var(--ease); }
-.nav-item:hover .lucide { transform: translateX(2px); }
+.nav-item:hover .lucide { transform: translateX(calc(2px * var(--dir))); }
 .icon-btn:hover .lucide-bell { animation: bell .7s var(--ease); transform-origin: 50% 10%; }
 @keyframes bell { 20% { rotate: 16deg; } 40% { rotate: -12deg; } 60% { rotate: 7deg; } 80% { rotate: -3deg; } }
 .btn:hover .lucide-arrow-right, .link:hover .lucide-arrow-right, .m-btn:hover .lucide-arrow-right { transform: translateX(3px); }
@@ -35,11 +35,11 @@ a.card { transition: transform .2s var(--ease), box-shadow .2s, border-color .2s
 
 /* toggles feel physical */
 .switch:active::after { width: 21px; }
-.switch.on:active::after { transform: translateX(11px); }
+.switch.on:active::after { transform: translateX(calc(11px * var(--dir))); }
 .check.on, .radio.on::after { animation: pop .28s var(--ease); }
 @keyframes pop { 50% { transform: scale(1.22); } }
 .drill { transition: opacity .2s, transform .15s var(--ease); }
-.drill:hover { transform: translateX(2px); }
+.drill:hover { transform: translateX(calc(2px * var(--dir))); }
 .week .day { cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .15s; }
 .week .day:hover { transform: translateY(-2px); }
 
@@ -83,7 +83,7 @@ a.card { transition: transform .2s var(--ease), box-shadow .2s, border-color .2s
 .rv { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1); }
 .rv.in { opacity: 1; transform: none; }
 .hero > h1 em { position: relative; display: inline-block; }
-.hero > h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: .07em; border-radius: 1em; background: currentColor; transform-origin: left; animation: sweep 1s .6s cubic-bezier(.2,.7,.2,1) both; }
+.hero > h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .02em; height: .07em; border-radius: 1em; background: currentColor; transform-origin: var(--start); animation: sweep 1s .6s cubic-bezier(.2,.7,.2,1) both; }
 @keyframes sweep { from { transform: scaleX(0); } }
 
 /* theme circular reveal */

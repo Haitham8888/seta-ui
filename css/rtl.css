@@ -47,13 +47,13 @@
 :root[lang="ar"] .num, :root[lang="ar"] .kpi .val, :root[lang="ar"] .m-big, :root[lang="ar"] .w-big, :root[lang="ar"] .big, :root[lang="ar"] .ticker .big, :root[lang="ar"] b.num { font-family: var(--font-num); }
 
 /* ---------- mirroring ---------- */
-[dir="rtl"] .lucide-chevron-right, [dir="rtl"] .lucide-chevron-left, [dir="rtl"] .lucide-arrow-right, [dir="rtl"] .lucide-arrow-left,
-[dir="rtl"] .lucide-chevrons-right, [dir="rtl"] .lucide-chevrons-left, [dir="rtl"] .lucide-log-out, [dir="rtl"] .lucide-log-in, [dir="rtl"] .lucide-send, [dir="rtl"] .lucide-arrow-left-right { transform: scaleX(-1); }
-[dir="rtl"] .btn:hover .lucide-arrow-right, [dir="rtl"] .link:hover .lucide-arrow-right, [dir="rtl"] .m-btn:hover .lucide-arrow-right { transform: scaleX(-1) translateX(3px); }
-[dir="rtl"] .nav-item:hover .lucide { transform: translateX(-2px); }
-[dir="rtl"] .nav-item:hover .lucide-chevron-right { transform: scaleX(-1) translateX(2px); }
-[dir="rtl"] .nav-item.on::before { left: auto; right: -14px; border-radius: 3px 0 0 3px; }
-@media (max-width: 1080px) { [dir="rtl"] .nav-item.on::before { right: -10px; } }
+:root { --dir: 1; --start: left; }
+[dir="rtl"] { --dir: -1; --start: right; }
+/* directional icons flip in RTL. `scale` (not transform) so hover nudges never cancel the flip */
+[dir="rtl"] :is(.lucide-chevron-right, .lucide-chevron-left, .lucide-arrow-right, .lucide-arrow-left, .lucide-chevrons-right, .lucide-chevrons-left,
+  .lucide-log-out, .lucide-log-in, .lucide-send, .lucide-arrow-left-right, .lucide-arrow-up-right, .lucide-arrow-down-right,
+  .lucide-list, .lucide-list-checks, .lucide-delete, .lucide-message-square-quote, .lucide-message-square-text, .lucide-undo-2, .lucide-redo-2) { scale: -1 1; }
+[dir="rtl"] :is(svg, .chart, .scrub, .pp-scrub, .player .ctrl) .lucide { scale: none; }
 
 /* brand cut corner + slanted tags mirror */
 [dir="rtl"] .btn.primary { clip-path: polygon(0 0, 100% 0, 100% 100%, 9px 100%, 0 calc(100% - 9px)); }
@@ -66,17 +66,12 @@
 
 /* things that read left-to-right in every language */
 [dir="rtl"] .chart, [dir="rtl"] svg, [dir="rtl"] .scrub, [dir="rtl"] .pp-scrub, [dir="rtl"] .player .ctrl, [dir="rtl"] .mrz, [dir="rtl"] .code-box, [dir="rtl"] .pp-keypad,
-[dir="rtl"] .slot-grid, [dir="rtl"] .m-slider, [dir="rtl"] .pp-slider, [dir="rtl"] .kbd, [dir="rtl"] input[type="email"], [dir="rtl"] input[type="password"], [dir="rtl"] [data-timer], [dir="rtl"] .qr { direction: ltr; }
+[dir="rtl"] .slot-grid, [dir="rtl"] .kbd, [dir="rtl"] input[type="email"], [dir="rtl"] input[type="password"], [dir="rtl"] [data-timer], [dir="rtl"] .qr { direction: ltr; }
 [dir="rtl"] .meter { transform: scaleX(-1); }
 [dir="rtl"] .hero > .orbit { inset: -30px auto auto -10%; transform: scaleX(-1); }
 [dir="rtl"] .loop > div:not(:last-child)::after { right: auto; left: -9px; transform: rotate(-135deg); }
-[dir="rtl"] .cal-now { left: 0; right: 56px; }
-[dir="rtl"] .cal-now::before { left: auto; right: -5px; }
 [dir="rtl"] .msg.me .bub { border-radius: 14px 14px 14px 4px; }
 [dir="rtl"] .msg.ai .bub { border-radius: 14px 14px 4px 14px; }
-[dir="rtl"] .icon-btn .pip { right: auto; left: 9px; }
-[dir="rtl"] .m-ib .pip { right: auto; left: 8px; }
-[dir="rtl"] .pp-tabs .badge { margin-left: 0; margin-right: 18px; }
 [dir="rtl"] .search .kbd { margin-inline-start: auto; }
 
 /* phone navigation slides the other way */
