@@ -265,19 +265,6 @@
     c.style.setProperty("--my", e.clientY - r.top + "px");
   }, { passive: true });
 
-  /* ---------- logo intro (once per visit) ---------- */
-  (function intro() {
-    let seen = false;
-    try { seen = sessionStorage.getItem("seta-intro") === "1"; sessionStorage.setItem("seta-intro", "1"); } catch (e) {}
-    if (seen || reduced()) return;
-    const el = document.createElement("div");
-    el.className = "intro";
-    el.innerHTML = `<div class="intro-in"><svg class="intro-arc" viewBox="0 0 400 200" aria-hidden="true"><path d="M20 190 C 120 40, 300 0, 390 90" fill="none" stroke="#9677FF" stroke-width="2" stroke-linecap="round"/></svg><img src="assets/logo-dark.png" alt="SETA"><span>Smart Esports Talent Platform</span></div>`;
-    document.body.appendChild(el);
-    setTimeout(() => el.classList.add("out"), 1250);
-    setTimeout(() => el.remove(), 1900);
-  })();
-
   /* ---------- per-render enhancements ---------- */
   function countUp(root) {
     if (reduced()) return;
