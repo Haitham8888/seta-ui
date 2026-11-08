@@ -1,6 +1,6 @@
 /* SETA kit — tiny helpers + hand-built SVG charts (no chart library). */
 (function () {
-  const K = {};
+  const K = window.K || {};
   let uid = 0;
   const id = (p) => `${p}${++uid}`;
 

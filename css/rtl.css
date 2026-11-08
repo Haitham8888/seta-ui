@@ -1,0 +1,97 @@
+/* =========================================================
+   SETA — Arabic & RTL
+   Thmanyah is used from the viewer's installed fonts (local()) — its licence does
+   not allow hosting the files on a public site. Open-licence Arabic faces fill in
+   everywhere else (IBM Plex Sans Arabic, Noto Naskh Arabic).
+   ========================================================= */
+@font-face { font-family: "Thmanyah Sans"; font-weight: 300; font-display: swap; src: local("thmanyah sans Light"), local("thmanyahsans-Light"), url("../fonts/thmanyahsans-Light.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Sans"; font-weight: 400; font-display: swap; src: local("thmanyah sans Regular"), local("thmanyahsans-Regular"), url("../fonts/thmanyahsans-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Sans"; font-weight: 500; font-display: swap; src: local("thmanyah sans Medium"), local("thmanyahsans-Medium"), url("../fonts/thmanyahsans-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Sans"; font-weight: 600 700; font-display: swap; src: local("thmanyah sans Bold"), local("thmanyahsans-Bold"), url("../fonts/thmanyahsans-Bold.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Sans"; font-weight: 800 900; font-display: swap; src: local("thmanyah sans Black"), local("thmanyahsans-Black"), url("../fonts/thmanyahsans-Black.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Serif Display"; font-weight: 400; font-display: swap; src: local("thmanyah serif display Regular"), local("thmanyahserifdisplay-Regular"), url("../fonts/thmanyahserifdisplay-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Serif Display"; font-weight: 500; font-display: swap; src: local("thmanyah serif display Medium"), local("thmanyahserifdisplay-Medium"), url("../fonts/thmanyahserifdisplay-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Serif Display"; font-weight: 600 700; font-display: swap; src: local("thmanyah serif display Bold"), local("thmanyahserifdisplay-Bold"), url("../fonts/thmanyahserifdisplay-Bold.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Serif Display"; font-weight: 800 900; font-display: swap; src: local("thmanyah serif display Black"), local("thmanyahserifdisplay-Black"), url("../fonts/thmanyahserifdisplay-Black.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Serif Text"; font-weight: 400; font-display: swap; src: local("thmanyah serif text Regular"), local("thmanyahseriftext-Regular"), url("../fonts/thmanyahseriftext-Regular.woff2") format("woff2"); }
+@font-face { font-family: "Thmanyah Serif Text"; font-weight: 600 700; font-display: swap; src: local("thmanyah serif text Bold"), local("thmanyahseriftext-Bold"), url("../fonts/thmanyahseriftext-Bold.woff2") format("woff2"); }
+
+:root[lang="ar"] {
+  --font-ui: "Thmanyah Sans", "IBM Plex Sans Arabic", "Archivo", system-ui, sans-serif;
+  --font-display: "Thmanyah Serif Display", "Noto Naskh Arabic", "Thmanyah Sans", serif;
+  --font-read: "Thmanyah Serif Text", "Noto Naskh Arabic", serif;
+  --font-mono: "Thmanyah Sans", "IBM Plex Sans Arabic", "IBM Plex Mono", ui-monospace, monospace;
+  --font-num: "Archivo", "Thmanyah Sans", sans-serif;
+}
+
+/* Arabic must never be letter-spaced (it breaks the joins) */
+:root[lang="ar"] body, :root[lang="ar"] body * { letter-spacing: 0 !important; }
+:root[lang="ar"] body { font-family: var(--font-ui); line-height: 1.6; font-feature-settings: "kern" 1, "liga" 1, "calt" 1; }
+:root[lang="ar"] .eyebrow, :root[lang="ar"] .m-label, :root[lang="ar"] .w-lbl, :root[lang="ar"] .lbl, :root[lang="ar"] .dd-title, :root[lang="ar"] .dd-group, :root[lang="ar"] .pp-flows .grp { font-family: var(--font-ui); font-size: 11.5px; font-weight: 600; text-transform: none; }
+:root[lang="ar"] .tag.mono, :root[lang="ar"] .mono { font-family: var(--font-mono); }
+:root[lang="ar"] p, :root[lang="ar"] .lede, :root[lang="ar"] .m-sub, :root[lang="ar"] .bub { line-height: 1.75; }
+
+/* display typography — Thmanyah Serif Display with swashes, ligatures and alternates */
+:root[lang="ar"] .hero > h1, :root[lang="ar"] .sec-h h2, :root[lang="ar"] .cta-band h2, :root[lang="ar"] .canvas-head .h1, :root[lang="ar"] .page-head .h1,
+:root[lang="ar"] .h1, :root[lang="ar"] .h2, :root[lang="ar"] .feat h3, :root[lang="ar"] .loop h3, :root[lang="ar"] .pp-large, :root[lang="ar"] .m-title, :root[lang="ar"] .role-col .h2 {
+  font-family: var(--font-display); font-weight: 700; font-stretch: normal; letter-spacing: 0;
+  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "swsh" 1, "salt" 1, "calt" 1;
+}
+:root[lang="ar"] .hero > h1 { line-height: 1.22; font-size: clamp(42px, 6.6vw, 96px); }
+:root[lang="ar"] .sec-h h2, :root[lang="ar"] .cta-band h2 { line-height: 1.25; }
+:root[lang="ar"] .h1, :root[lang="ar"] .pp-large, :root[lang="ar"] .m-title { line-height: 1.3; }
+:root[lang="ar"] .k-live { cursor: default; }
+:root[lang="ar"] .hero > h1 em::after { bottom: -.04em; }
+
+/* numbers keep the wide Latin figures */
+:root[lang="ar"] .num, :root[lang="ar"] .kpi .val, :root[lang="ar"] .m-big, :root[lang="ar"] .w-big, :root[lang="ar"] .big, :root[lang="ar"] .ticker .big, :root[lang="ar"] b.num { font-family: var(--font-num); }
+
+/* ---------- mirroring ---------- */
+[dir="rtl"] .lucide-chevron-right, [dir="rtl"] .lucide-chevron-left, [dir="rtl"] .lucide-arrow-right, [dir="rtl"] .lucide-arrow-left,
+[dir="rtl"] .lucide-chevrons-right, [dir="rtl"] .lucide-chevrons-left, [dir="rtl"] .lucide-log-out, [dir="rtl"] .lucide-log-in, [dir="rtl"] .lucide-send, [dir="rtl"] .lucide-arrow-left-right { transform: scaleX(-1); }
+[dir="rtl"] .btn:hover .lucide-arrow-right, [dir="rtl"] .link:hover .lucide-arrow-right, [dir="rtl"] .m-btn:hover .lucide-arrow-right { transform: scaleX(-1) translateX(3px); }
+[dir="rtl"] .nav-item:hover .lucide { transform: translateX(-2px); }
+[dir="rtl"] .nav-item:hover .lucide-chevron-right { transform: scaleX(-1) translateX(2px); }
+[dir="rtl"] .nav-item.on::before { left: auto; right: -14px; border-radius: 3px 0 0 3px; }
+@media (max-width: 1080px) { [dir="rtl"] .nav-item.on::before { right: -10px; } }
+
+/* brand cut corner + slanted tags mirror */
+[dir="rtl"] .btn.primary { clip-path: polygon(0 0, 100% 0, 100% 100%, 9px 100%, 0 calc(100% - 9px)); }
+[dir="rtl"] .cut { clip-path: polygon(0 0, 100% 0, 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut))); }
+[dir="rtl"] .m-btn:not(.alt) { clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
+[dir="rtl"] .m-btn[style*="clip-path:none"] { clip-path: none; }
+[dir="rtl"] .tag, [dir="rtl"] .res { clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 100%, 5px 100%); }
+[dir="rtl"] .side .role-pill { clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%); }
+[dir="rtl"] .form i { transform: skewX(18deg); }
+
+/* things that read left-to-right in every language */
+[dir="rtl"] .chart, [dir="rtl"] svg, [dir="rtl"] .scrub, [dir="rtl"] .pp-scrub, [dir="rtl"] .player .ctrl, [dir="rtl"] .mrz, [dir="rtl"] .code-box, [dir="rtl"] .pp-keypad,
+[dir="rtl"] .slot-grid, [dir="rtl"] .m-slider, [dir="rtl"] .pp-slider, [dir="rtl"] .kbd, [dir="rtl"] input[type="email"], [dir="rtl"] input[type="password"], [dir="rtl"] [data-timer], [dir="rtl"] .qr { direction: ltr; }
+[dir="rtl"] .meter { transform: scaleX(-1); }
+[dir="rtl"] .hero > .orbit { inset: -30px auto auto -10%; transform: scaleX(-1); }
+[dir="rtl"] .loop > div:not(:last-child)::after { right: auto; left: -9px; transform: rotate(-135deg); }
+[dir="rtl"] .cal-now { left: 0; right: 56px; }
+[dir="rtl"] .cal-now::before { left: auto; right: -5px; }
+[dir="rtl"] .msg.me .bub { border-radius: 14px 14px 14px 4px; }
+[dir="rtl"] .msg.ai .bub { border-radius: 14px 14px 4px 14px; }
+[dir="rtl"] .icon-btn .pip { right: auto; left: 9px; }
+[dir="rtl"] .m-ib .pip { right: auto; left: 8px; }
+[dir="rtl"] .pp-tabs .badge { margin-left: 0; margin-right: 18px; }
+[dir="rtl"] .search .kbd { margin-inline-start: auto; }
+
+/* phone navigation slides the other way */
+[dir="rtl"] .pp-view.from-right { transform: translateX(-100%); }
+[dir="rtl"] .pp-view.to-left { transform: translateX(28%); }
+
+/* language switch */
+.lang-sw { display: inline-flex; padding: 3px; gap: 2px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; }
+.lang-sw button { min-width: 30px; height: 24px; padding: 0 8px; border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--text-3); font-family: "Thmanyah Sans", "IBM Plex Sans Arabic", "Archivo", sans-serif; transition: background .2s, color .2s; }
+.lang-sw button[lang="en"] { font-family: "Archivo", sans-serif; font-size: 11px; }
+.lang-sw button.on { background: var(--surface); color: var(--text); box-shadow: var(--shadow-1); }
+:root[data-theme="dark"] .lang-sw button.on { background: var(--surface-3); }
+
+/* kashida showcase in the design system */
+.k-sample { font-family: var(--font-display); font-weight: 700; font-feature-settings: "swsh" 1, "dlig" 1, "salt" 1; line-height: 1.2; }
+
+:root[lang="ar"] .sp-tag, :root[lang="ar"] .sp-row, :root[lang="ar"] .sp-hint { font-family: var(--font-ui); }
+:root[lang="ar"] .sp-tag { font-size: 15px; font-weight: 600; padding: 0; }

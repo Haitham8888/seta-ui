@@ -114,7 +114,7 @@ a.card { transition: transform .2s var(--ease), box-shadow .2s, border-color .2s
 .pal-in { display: flex; align-items: center; gap: 12px; padding: 0 16px; height: 58px; border-bottom: 1px solid var(--line); color: var(--text-3); }
 .pal-in input { flex: 1; border: 0; outline: none; background: transparent; font-size: 16px; color: var(--text); }
 .pal-list { max-height: 52vh; overflow: auto; padding: 6px; }
-.pal-i { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 11px; text-align: left; color: var(--text-2); }
+.pal-i { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 11px; text-align: start; color: var(--text-2); }
 .pal-i .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .pal-i .grow b { font-weight: 600; font-size: 13.5px; color: var(--text); }
 .pal-i .grow span { font-size: 11.5px; color: var(--text-3); }

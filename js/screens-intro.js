@@ -27,13 +27,13 @@
         ["03", "heart-pulse", "BioSync", "Recovery, sleep and heart rate next to your match times. Context, not diagnosis.", K.lines([{ data: [72, 74, 90, 118, 132, 126, 140, 121, 98, 84, 78], color: "var(--rose)", width: 1.6, end: false }], Array(11).fill(""), { w: 260, h: 80, min: 60, max: 150, ticks: 2, padL: 0, padB: 0, padT: 4, padR: 0 }).replace(/<text[^>]*>[^<]*<\/text>/g, "")],
         ["04", "graduation-cap", "Dual Coach", "An AI coach that never sleeps, and a human coach when it counts.", `<div class="row" style="height:80px;align-items:flex-end;gap:8px"><span class="coach-mark">${star(14)}</span><div class="msg ai"><div class="bub" style="font-size:12.5px">Your first-bullet accuracy drops 9% after round 15.</div></div></div>`],
         ["05", "id-card", "Talent Passport", "A verified, shareable identity scouts can actually trust.", `<div class="row" style="height:80px;gap:14px"><div class="qr" style="padding:5px">${qr("NYX", 66)}</div><div class="col" style="gap:4px"><span class="mono faint" style="font-size:11px">ST-10427</span><b class="wide" style="font-size:18px">NYX</b><span class="tag v">${ic("badge-check")}Verified</span></div></div>`],
-        ["06", "radar", "Discovery", "Clubs filter by role, region and potential. Players get seen.", `<div class="row" style="height:80px;gap:6px;align-items:center">${["Yara Hamami", "Kairo", "Zeta Q", "Ryn M", "Neo R"].map((n, i) => K.av(n, "", i)).join("")}<span class="tag mono" style="margin-left:6px">+2,340</span></div>`],
+        ["06", "radar", "Discovery", "Clubs filter by role, region and potential. Players get seen.", `<div class="row" style="height:80px;gap:6px;align-items:center">${["Yara Hamami", "Kairo", "Zeta Q", "Ryn M", "Neo R"].map((n, i) => K.av(n, "", i)).join("")}<span class="tag mono" style="margin-inline-start:6px">+2,340</span></div>`],
       ];
       return `<div class="land">
         <header class="land-nav">
           ${wm(22)}
           <nav><a href="#/landing">Platform</a><a href="#/landing">Players</a><a href="#/landing">Coaches</a><a href="#/landing">Clubs</a><a href="#/system">Design</a></nav>
-          <div class="r">${K.themeSwitch()}<a class="btn ghost hide-m" href="#/auth">Sign in</a><a class="btn primary" href="#/auth">Get started</a></div>
+          <div class="r">${K.langSwitch()}${K.themeSwitch()}<a class="btn ghost hide-m" href="#/auth">Sign in</a><a class="btn primary" href="#/auth">Get started</a></div>
         </header>
         <section class="hero">
           ${orbit({ w: 980, h: 560, op: 0.9 })}
@@ -74,7 +74,7 @@
           <h2 style="margin-top:14px">Better data. <br>Stronger you.</h2>
           <div class="row" style="margin-top:28px;gap:10px;flex-wrap:wrap;position:relative"><a class="btn primary lg" href="#/auth" style="--on-violet:#fff;background:#9677FF;border-color:#9677FF;color:#0E0C13">Get started free ${ic("arrow-right")}</a><a class="btn lg" href="#/m-start" style="background:transparent;color:#EDEAF4;border-color:#3A3349">Watch the tour</a></div>
         </section>
-        <footer class="land-foot">${wm(16)}<span>© 2026 SETA · Jazan University graduation project</span><span style="margin-left:auto" class="row" style="gap:16px"><a href="#/system">Design system</a> · <a href="#/landing">Privacy</a> · <a href="#/landing">Terms</a></span></footer>
+        <footer class="land-foot">${wm(16)}<span>© 2026 SETA · Jazan University graduation project</span><span style="margin-inline-start: auto" class="row" style="gap:16px"><a href="#/system">Design system</a> · <a href="#/landing">Privacy</a> · <a href="#/landing">Terms</a></span></footer>
       </div>`;
     },
     mount(root) {
@@ -145,7 +145,7 @@
       if (step === 1) body = `<div><span class="eyebrow">Step 2</span><h1 class="h1" style="margin-top:6px">How should we show you?</h1><p class="muted" style="margin:8px 0 0">This is what coaches and scouts see first.</p></div>
         <div class="row" style="gap:16px">${av("Yara Hamami", "xl")}<div class="col" style="gap:6px"><div class="row" style="gap:8px"><button class="btn sm">${ic("upload")} Upload photo</button><button class="btn sm ghost">Use initials</button></div><span class="hint">PNG or JPG, at least 400 × 400.</span></div></div>
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label>Gamer tag</label><div class="input"><span class="mono faint">@</span><input value="NYX"><span class="tag m">${ic("check")}Available</span></div></div><div class="field"><label>Riot ID</label><div class="input">${ic("link-2")}<input value="NYX#KSA1"></div></div><div class="field"><label>Date of birth</label><div class="input">${ic("calendar")}<input value="14 / 03 / 2005"></div></div><div class="field"><label>City</label><div class="input">${ic("map-pin")}<input value="Jazan, Saudi Arabia"></div></div></div>
-        <div class="field"><label>Short bio</label><div class="input" style="height:auto;padding:12px 14px;align-items:flex-start"><textarea rows="3" style="border:0;outline:none;background:transparent;width:100%;resize:none">Entry duelist. Aggressive on attack, learning to slow down on defense. Looking for a semi-pro roster for 2026.</textarea></div><span class="hint" style="text-align:right">118 / 200</span></div>`;
+        <div class="field"><label>Short bio</label><div class="input" style="height:auto;padding:12px 14px;align-items:flex-start"><textarea rows="3" style="border:0;outline:none;background:transparent;width:100%;resize:none">Entry duelist. Aggressive on attack, learning to slow down on defense. Looking for a semi-pro roster for 2026.</textarea></div><span class="hint" style="text-align: end">118 / 200</span></div>`;
       if (step === 2) body = `<div><span class="eyebrow">Step 3</span><h1 class="h1" style="margin-top:6px">What are you working toward?</h1><p class="muted" style="margin:8px 0 0">We use this to shape your Command Center and coaching plan.</p></div>
         <div class="row wrap" style="gap:8px">${["Aim consistency", "Better decisions", "Communication", "Climb ranked", "Join a team", "Get scouted", "Go pro", "Healthier routine", "Mental resilience"].map((g) => `<button class="chip ${goals.has(g) ? "on" : ""}" data-goal="${g}">${goals.has(g) ? ic("check") : ic("plus")}${g}</button>`).join("")}</div>
         <div class="field"><label>Weekly practice time</label><div class="card sunk" style="padding:18px"><div class="row between"><span class="muted">Hours per week</span><b class="wide num" style="font-size:22px">14 h</b></div><div class="meter" style="margin-top:12px;height:8px"><i style="width:47%"></i></div><div class="row between faint mono" style="font-size:10.5px;margin-top:8px"><span>0</span><span>10</span><span>20</span><span>30+</span></div></div></div>
@@ -163,7 +163,7 @@
             <div class="col fade-in" style="gap:22px">${body}</div>
             <div class="row between" style="margin-top:auto;padding-top:20px;border-top:1px solid var(--line)"><button class="btn ghost" data-back ${step === 0 ? 'style="visibility:hidden"' : ""}>${ic("arrow-left")} Back</button><span class="mono faint" style="font-size:11px">${step + 1} of 4</span><button class="btn primary" data-next>${step === 3 ? "Finish setup" : "Continue"} ${ic("arrow-right")}</button></div>
           </main>
-          <aside class="hide-m" style="border-left:1px solid var(--line);background:var(--bg-sunk);padding:36px 28px;display:flex;flex-direction:column;gap:16px">
+          <aside class="hide-m" style="border-inline-start:1px solid var(--line);background:var(--bg-sunk);padding:36px 28px;display:flex;flex-direction:column;gap:16px">
             <span class="eyebrow">Live preview</span>
             <div class="passport" style="min-height:0;gap:14px">${K.guil(360, 300)}
               <div class="row between" style="position:relative"><span class="wm on-ink" style="height:14px"><img class="l" src="assets/wordmark-light.png"><img class="d" src="assets/wordmark-dark.png"></span><span class="lbl">Draft passport</span></div>
@@ -205,7 +205,7 @@
           <p class="muted" style="max-width:520px;margin:0;font-size:16px">Your Command Center is ready. We pulled your last 40 Valorant matches, so your first score is already waiting.</p>
           <div class="row wrap" style="gap:8px;justify-content:center;margin-top:6px">${done.map(([i, t]) => `<span class="chip on" style="cursor:default">${ic(i)}${t}</span>`).join("")}</div>
           <div class="row" style="gap:10px;margin-top:10px;flex-wrap:wrap;justify-content:center"><a class="btn primary lg" href="#/command">Open Command Center ${ic("arrow-right")}</a><a class="btn lg" href="#/command">${ic("compass")} Take the 60-second tour</a></div>
-          <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:980px;width:100%;margin-top:36px;text-align:left" id="nextGrid">
+          <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:980px;width:100%;margin-top:36px;text-align: start" id="nextGrid">
             ${[["01", "activity", "Your first SETA Score", "82", "Top 18% of Immortal duelists in Saudi Arabia.", "#/performance"],
                ["02", "film", "Review your worst round", "8:42", "Round 14 on Haven. One wide peek cost the half.", "#/replay"],
                ["03", "graduation-cap", "Meet your AI coach", "3 drills", "A 25-minute plan is ready for today.", "#/coach"]].map(([n, i, t, big, d, h]) => `<a class="card" href="${h}" style="padding:20px;display:flex;flex-direction:column;gap:14px;transition:border-color .15s" onmouseover="this.style.borderColor='var(--violet)'" onmouseout="this.style.borderColor=''"><div class="row between"><span class="mono faint" style="font-size:11px">${n}</span>${ic(i, "faint")}</div><b class="wide num" style="font-size:30px;line-height:1">${big}</b><div><div class="h3">${t}</div><p class="faint" style="margin:4px 0 0;font-size:12.5px">${d}</p></div><span class="link">Open ${ic("arrow-right")}</span></a>`).join("")}

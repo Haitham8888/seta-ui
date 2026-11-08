@@ -24,7 +24,7 @@
             <div class="msg ai"><div class="bub" style="padding:0;overflow:hidden;background:var(--surface-2)"><div style="padding:12px 14px 4px" class="row between"><span class="eyebrow">Entry timing · last 40 matches</span><span class="mono" style="font-size:11px;color:var(--ember)">−18% WR</span></div><div style="padding:0 10px 10px">${bars([68, 64, 61, 52, 44, 38, 32], { w: 320, h: 80, labels: ["−3s", "−2s", "−1s", "0", "+1s", "+2s", "+3s"], hl: 1 })}</div></div></div>
             <div class="msg me"><div class="bub">So I should just wait for the dart every time?</div></div>
             <div class="msg ai"><div class="bub">Not every time. On <b>attack, B long on Bind</b> and <b>A main on Haven</b>, yes. Elsewhere your early peeks win 61%, so keep them. I added two drills to Saturday.</div></div>
-            <div class="row wrap" style="gap:6px;padding-left:2px">${["Show those rounds", "Make it a 3-day plan", "Ask Reem to review"].map((s) => `<button class="chip" style="height:30px">${s}</button>`).join("")}</div>
+            <div class="row wrap" style="gap:6px;padding-inline-start:2px">${["Show those rounds", "Make it a 3-day plan", "Ask Reem to review"].map((s) => `<button class="chip" style="height:30px">${s}</button>`).join("")}</div>
           </div>
           <div style="padding:12px 18px 18px"><div class="input">${ic("sparkles")}<input placeholder="Ask about any match, map or skill"><button class="btn primary sm" style="height:30px">${ic("arrow-up")}</button></div></div>
         </section>`;
@@ -109,12 +109,12 @@
         </div>
         <div class="grid g-12">
           <section class="card c-5 r-12"><div class="card-h"><span class="h3">${ic("users")}Players</span><span class="r mono faint" style="font-size:11px">SORT · POTENTIAL ↓</span></div>
-            <div class="card-b" style="padding-top:6px"><div class="list">${PL.map(([n, t, r, age, p, c], i) => `<div class="li" style="cursor:pointer" data-cmp="${i}">${av(n, "", i)}<div class="grow"><div class="row" style="gap:6px"><b style="font-size:14px">${t}</b>${ic("badge-check", "i-sm")}</div><div class="s row" style="gap:5px">${K.brand("valorant", 11, "#FA4454")}${r} · ${age} · ${c}</div></div><div class="col" style="gap:4px;align-items:flex-end;width:70px"><b class="num wide" style="font-size:16px">${p}</b><div class="meter thin" style="width:60px"><i style="width:${p}%"></i></div></div><span class="check ${cmp.has(i) ? "on" : ""}" style="margin-left:6px">${ic("check")}</span></div>`).join("")}</div>
+            <div class="card-b" style="padding-top:6px"><div class="list">${PL.map(([n, t, r, age, p, c], i) => `<div class="li" style="cursor:pointer" data-cmp="${i}">${av(n, "", i)}<div class="grow"><div class="row" style="gap:6px"><b style="font-size:14px">${t}</b>${ic("badge-check", "i-sm")}</div><div class="s row" style="gap:5px">${K.brand("valorant", 11, "#FA4454")}${r} · ${age} · ${c}</div></div><div class="col" style="gap:4px;align-items:flex-end;width:70px"><b class="num wide" style="font-size:16px">${p}</b><div class="meter thin" style="width:60px"><i style="width:${p}%"></i></div></div><span class="check ${cmp.has(i) ? "on" : ""}" style="margin-inline-start:6px">${ic("check")}</span></div>`).join("")}</div>
             <div class="row between" style="margin-top:12px"><span class="faint" style="font-size:12px">Showing 6 of 24</span><div class="row" style="gap:4px">${["1", "2", "3", "4"].map((p, i) => `<button class="btn sm ${i === 0 ? "ink" : "ghost"}" style="width:30px;padding:0">${p}</button>`).join("")}</div></div></div></section>
           <section class="card c-7 r-12"><div class="card-h"><span class="h3">${ic("git-compare")}Compare</span><span class="r faint" style="font-size:12px">Pick two players</span></div>
             <div class="card-b col" style="gap:20px">
               <div class="grid" style="grid-template-columns:1fr auto 1fr;gap:14px;align-items:center">
-                ${[a, b].map((p, k) => `<div class="row" style="gap:12px;${k ? "flex-direction:row-reverse;text-align:right" : ""}">${av(p[0], "lg", PL.indexOf(p))}<div><b class="wide" style="font-size:20px">${p[1]}</b><div class="faint" style="font-size:12px">${p[2]} · ${p[3]} · ${p[5]}</div><span class="tag ${k ? "e" : "v"} mono" style="margin-top:6px">POT ${p[4]}</span></div></div>`).join(`<span class="mono faint" style="font-size:12px;padding:8px;border:1px solid var(--line);border-radius:8px">VS</span>`)}
+                ${[a, b].map((p, k) => `<div class="row" style="gap:12px;${k ? "flex-direction:row-reverse;text-align: end" : ""}">${av(p[0], "lg", PL.indexOf(p))}<div><b class="wide" style="font-size:20px">${p[1]}</b><div class="faint" style="font-size:12px">${p[2]} · ${p[3]} · ${p[5]}</div><span class="tag ${k ? "e" : "v"} mono" style="margin-top:6px">POT ${p[4]}</span></div></div>`).join(`<span class="mono faint" style="font-size:12px;padding:8px;border:1px solid var(--line);border-radius:8px">VS</span>`)}
               </div>
               <div class="grid" style="grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px;align-items:center" id="cmpGrid">
                 <div>${radar(SK, [{ data: va, color: "var(--violet)" }, { data: vb, color: "var(--ember)", fill: 0.08 }], { size: 270, labels: false })}<div class="legend" style="justify-content:center;margin-top:6px"><span><i></i>${a[1]}</span><span><i style="background:var(--ember)"></i>${b[1]}</span></div></div>
@@ -140,7 +140,7 @@
           <div class="card-b row wrap" style="gap:22px;padding:22px;position:relative">
             <span style="width:72px;height:72px;border-radius:18px;background:var(--ink);color:var(--bg);display:grid;place-items:center" class="cut">${ic("bird", "i-lg")}</span>
             <div style="flex:1;min-width:220px"><span class="eyebrow">Club · Jazan · est. 2023</span><h1 class="h1" style="margin-top:4px">Falcons</h1><div class="row wrap" style="gap:6px;margin-top:8px"><span class="tag" style="background:color-mix(in srgb,#FA4454 14%,transparent);color:#FA4454">${K.brand("valorant", 12, "#FA4454")}Valorant</span><span class="tag">${ic("graduation-cap")}University league</span><span class="tag m">${ic("badge-check")}Verified club</span></div></div>
-            <div class="row hide-m" style="gap:0">${[["Players", "12"], ["Coaches", "3"], ["Win rate", "68%"], ["League rank", "#2"]].map(([a, b], i) => `<div style="padding:0 22px;${i ? "border-left:1px solid var(--line)" : ""}"><div class="eyebrow" style="font-size:10px">${a}</div><b class="wide num" style="font-size:24px">${b}</b></div>`).join("")}</div>
+            <div class="row hide-m" style="gap:0">${[["Players", "12"], ["Coaches", "3"], ["Win rate", "68%"], ["League rank", "#2"]].map(([a, b], i) => `<div style="padding:0 22px;${i ? "border-inline-start:1px solid var(--line)" : ""}"><div class="eyebrow" style="font-size:10px">${a}</div><b class="wide num" style="font-size:24px">${b}</b></div>`).join("")}</div>
             <button class="btn">${ic("settings-2")}Club settings</button>
           </div>
           <div style="padding:0 22px" class="tabs">${["Overview", "Roster", "Analysis", "Matches", "Training", "Strategy"].map((t) => `<button class="${teamTab === t ? "on" : ""}" data-tt="${t}">${t}</button>`).join("")}</div>
@@ -190,7 +190,7 @@
       const sw = (n, v, hexL, hexD) => `<div class="swatch"><div class="c" style="background:var(${v})"></div><div class="m"><b>${n}</b><span>${v}</span><span>${hexL} / ${hexD}</span></div></div>`;
       const icons = ["layout-dashboard", "activity", "swords", "heart-pulse", "graduation-cap", "id-card", "radar", "shield", "film", "crosshair", "target", "trophy", "brain", "sparkles", "gauge", "hexagon", "users", "calendar-days", "bell", "search", "settings-2", "share-2", "badge-check", "triangle-alert"];
       return `<div class="canvas" style="max-width:1280px;margin:0 auto;width:100%">
-        <div class="canvas-head" style="padding:0"><div><span class="eyebrow">SETA Interface System · v2</span><h1 class="h1" style="margin-top:8px;font-size:44px">Design system</h1><p>The rules behind every screen. One accent, a calm neutral base, and the 18° cut from the wordmark used as the only decoration.</p></div><div class="row" style="margin-left:auto;gap:8px">${K.themeSwitch()}<a class="btn primary" href="#/landing">View screens ${ic("arrow-right")}</a></div></div>
+        <div class="canvas-head" style="padding:0"><div><span class="eyebrow">SETA Interface System · v2</span><h1 class="h1" style="margin-top:8px;font-size:44px">Design system</h1><p>The rules behind every screen. One accent, a calm neutral base, and the 18° cut from the wordmark used as the only decoration.</p></div><div class="row" style="margin-inline-start: auto;gap:8px">${K.themeSwitch()}<a class="btn primary" href="#/landing">View screens ${ic("arrow-right")}</a></div></div>
 
         <section class="grid g-12">
           <div class="card c-7 r-12" style="padding:40px;display:grid;place-items:center;min-height:300px">${logo(150)}</div>
@@ -231,9 +231,31 @@
             <div class="grid" style="grid-template-columns:repeat(8,1fr);gap:8px;margin-top:18px">${icons.map((i) => `<div title="${i}" style="aspect-ratio:1;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center;color:var(--text-2)">${ic(i)}</div>`).join("")}</div></div>
         </section>
 
+        <section class="card" style="padding:24px" data-noi18n dir="rtl" lang="ar" id="arType">
+          <div class="row between wrap" style="gap:12px"><span class="eyebrow" style="font-family:var(--font-ui)">الطباعة العربية · خط ثمانية</span><span class="tag v mono">THMANYAH · RTL</span></div>
+          <div class="k-sample" id="kDemo" style="font-size:clamp(40px,6vw,84px);margin:18px 0 6px">موهبتك بيانات لم تُقرأ بعد</div>
+          <div class="row wrap" style="gap:16px;align-items:center">
+            <label class="row" style="gap:10px;font-size:13px;font-family:var(--font-ui)">الكشيدة <input type="range" min="0" max="6" value="2" id="kRange" style="accent-color:var(--violet);width:160px"><b class="num" id="kVal">2</b></label>
+            <div class="row wrap" style="gap:6px" id="kFeats">${[["swsh", "زخارف"], ["dlig", "ربطات"], ["salt", "بدائل"], ["ss01", "ss01"], ["ss03", "ss03"], ["ss04", "ss04"], ["ss05", "ss05"]].map(([f, l], i) => `<button class="chip ${i < 3 ? "on" : ""}" data-h data-feat="${f}" style="height:28px;font-size:12px;font-family:var(--font-ui)">${l}</button>`).join("")}</div>
+          </div>
+          <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px" id="arFaces">
+            ${[["Thmanyah Serif Display", "var(--font-display)", "للعناوين الكبيرة", "مركز القيادة"], ["Thmanyah Sans", "var(--font-ui)", "للواجهة والأزرار", "ابدأ الجلسة الآن"], ["Thmanyah Serif Text", "var(--font-read)", "للنصوص الطويلة", "التصويب هو الأفضل لك هذا الشهر."]].map(([n, f, d, ex]) => `<div class="card sunk" style="padding:16px"><div class="mono faint" style="font-size:10.5px;direction:ltr;text-align:start">${n}</div><div style="font-family:${f};font-size:24px;font-weight:700;margin:10px 0 4px;line-height:1.4">${ex}</div><div class="faint" style="font-size:12px;font-family:var(--font-ui)">${d}</div><div class="row" style="gap:10px;margin-top:10px;font-family:${f};font-size:18px">${[300, 400, 500, 700, 900].map((w) => `<span style="font-weight:${w}">أ</span>`).join("")}</div></div>`).join("")}
+          </div>
+          <p class="faint" style="font-size:12px;margin:14px 0 0;font-family:var(--font-ui)">يُعرض خط ثمانية من الخطوط المثبّتة على جهازك وفق ترخيصه. الزوّار الآخرون يرون بديلًا مفتوح الترخيص (IBM Plex Sans Arabic وNoto Naskh Arabic).</p>
+        </section>
         <section class="card" style="padding:24px"><span class="eyebrow">Principles</span>
           <div class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:18px" id="prGrid">${[["01", "Quiet base, one voice", "Neutrals do the work. Violet marks the one thing to look at."], ["02", "Numbers first", "Every card leads with its number. Charts support it, never replace it."], ["03", "Honest data", "Show the sample size and the comparison. BioSync never implies cause."], ["04", "Easy on the eyes", "Warm paper in light mode, ink (not black) in dark. Contrast AA or better."]].map(([n, t, d]) => `<div><span class="mono" style="color:var(--violet);font-size:11px">${n}</span><h3 class="h3" style="margin:8px 0 6px">${t}</h3><p class="faint" style="margin:0;font-size:13px">${d}</p></div>`).join("")}</div></section>
-      </div><style>@media (max-width:760px){#prGrid{grid-template-columns:1fr 1fr !important}}</style>`;
+      </div><style>@media (max-width:760px){#prGrid{grid-template-columns:1fr 1fr !important}#arFaces{grid-template-columns:1fr !important}}</style>`;
+    },
+    mount(root) {
+      const demo = root.querySelector("#kDemo"), range = root.querySelector("#kRange"), val = root.querySelector("#kVal");
+      if (!demo) return;
+      const base = demo.textContent;
+      const feats = new Set(["swsh", "dlig", "salt"]);
+      const paint = () => { const n = +range.value; val.textContent = n; demo.textContent = n ? K.kashida(base, n, 2) : base; demo.style.fontFeatureSettings = [...feats].map((f) => `"${f}" 1`).join(", ") || "normal"; };
+      range.oninput = paint;
+      root.querySelectorAll("[data-feat]").forEach((b) => (b.onclick = () => { const f = b.dataset.feat; feats.has(f) ? feats.delete(f) : feats.add(f); b.classList.toggle("on", feats.has(f)); paint(); }));
+      paint();
     },
   });
 })();

@@ -18,10 +18,10 @@
 .cal-h b.today { color: var(--violet); }
 .cal-b { position: relative; display: grid; grid-template-columns: 56px repeat(7, minmax(0, 1fr)); height: calc(var(--rh) * 7); }
 .cal-times { display: flex; flex-direction: column; }
-.cal-times span { height: var(--rh); font-family: var(--font-mono); font-size: 10px; color: var(--text-3); padding: 4px 8px 0; text-align: right; border-top: 1px solid var(--line); }
-.cal-col { position: relative; border-left: 1px solid var(--line); background-image: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px var(--rh)); }
+.cal-times span { height: var(--rh); font-family: var(--font-mono); font-size: 10px; color: var(--text-3); padding: 4px 8px 0; text-align: end; border-top: 1px solid var(--line); }
+.cal-col { position: relative; border-inline-start: 1px solid var(--line); background-image: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px var(--rh)); }
 .cal-col.today { background-color: color-mix(in srgb, var(--violet) 4%, transparent); }
-.cal-ev { position: absolute; left: 4px; right: 4px; border-radius: 8px; padding: 6px 8px; font-size: 11.5px; font-weight: 650; line-height: 1.25; overflow: hidden; border-left: 3px solid var(--violet); background: var(--violet-tint); color: var(--text); cursor: pointer; transition: transform .15s var(--ease), box-shadow .15s; }
+.cal-ev { position: absolute; left: 4px; right: 4px; border-radius: 8px; padding: 6px 8px; font-size: 11.5px; font-weight: 650; line-height: 1.25; overflow: hidden; border-inline-start: 3px solid var(--violet); background: var(--violet-tint); color: var(--text); cursor: pointer; transition: transform .15s var(--ease), box-shadow .15s; }
 .cal-ev span { display: block; font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; color: var(--text-3); margin-top: 2px; }
 .cal-ev:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); z-index: 2; }
 .cal-ev.e { border-color: var(--ember); background: var(--ember-soft); }

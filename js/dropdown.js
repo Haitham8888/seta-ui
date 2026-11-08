@@ -16,14 +16,14 @@
   ];
   const opts = (arr, icon) => arr.map((label) => ({ label, icon }));
   const RULES = [
-    [/^\s*for/i, () => [{ group: "Your players" }, ...(K.COACH_PLAYERS || []).map((p) => ({ label: p.t, note: `${p.n} · ${p.role}`, icon: "user-round" })), { group: "Groups" }, { label: "Whole team · Falcons", icon: "users" }]],
-    [/jazan|riyadh|jeddah|dammam|ksa|server|region/i, () => SAUDI],
-    [/days|week|season|period/i, () => opts(["This week", "Last 7 days", "30 days", "90 days", "This season"], "calendar")],
-    [/map/i, () => opts(["All maps", "Haven", "Bind", "Ascent", "Lotus", "Split", "Sunset", "Icebox", "Pearl"], "map")],
-    [/agent/i, () => opts(["All agents", "Jett", "Raze", "Neon", "Reyna", "Phoenix"], "user-round")],
-    [/role/i, () => opts(["Any role", "Duelist", "Initiator", "Controller", "Sentinel", "Flex"], "crosshair")],
-    [/potential/i, () => opts(["Potential ≥ 70", "Potential ≥ 80", "Potential ≥ 85", "Potential ≥ 90"], "sparkles")],
-    [/\d+\s*–\s*\d+|age/i, () => opts(["13 – 15", "16 – 18", "16 – 22", "19 – 24", "25 +"], "cake")],
+    [/^\s*(for\b|لـ|ل |إلى|لـ)/i, () => [{ group: "Your players" }, ...(K.COACH_PLAYERS || []).map((p) => ({ label: p.t, note: `${p.n} · ${p.role}`, icon: "user-round" })), { group: "Groups" }, { label: "Whole team · Falcons", icon: "users" }]],
+    [/jazan|riyadh|jeddah|dammam|ksa|server|region|جازان|الرياض|جدة|الدمام|المملكة|السعودية|خادم|منطقة/i, () => SAUDI],
+    [/days|week|season|period|يوم|أيام|أسبوع|الموسم|فترة|آخر/i, () => opts(["This week", "Last 7 days", "30 days", "90 days", "This season"], "calendar")],
+    [/map|خريطة|خرائط|الخرائط/i, () => opts(["All maps", "Haven", "Bind", "Ascent", "Lotus", "Split", "Sunset", "Icebox", "Pearl"], "map")],
+    [/agent|عميل|العملاء|عملاء/i, () => opts(["All agents", "Jett", "Raze", "Neon", "Reyna", "Phoenix"], "user-round")],
+    [/role|دور|الأدوار|أدوار/i, () => opts(["Any role", "Duelist", "Initiator", "Controller", "Sentinel", "Flex"], "crosshair")],
+    [/potential|الإمكانات|إمكانات/i, () => opts(["Potential ≥ 70", "Potential ≥ 80", "Potential ≥ 85", "Potential ≥ 90"], "sparkles")],
+    [/\d+\s*–\s*\d+|age|العمر|عمر/i, () => opts(["13 – 15", "16 – 18", "16 – 22", "19 – 24", "25 +"], "cake")],
   ];
 
   /* ---------- menu ---------- */
@@ -48,7 +48,8 @@
     menu.style.minWidth = Math.max(220, r.width) + "px";
     const h = menu.offsetHeight, w = menu.offsetWidth;
     const below = r.bottom + 6 + h < innerHeight || r.top < h;
-    menu.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left)) + "px";
+    const rtl = document.documentElement.dir === "rtl";
+    menu.style.left = Math.max(8, Math.min(innerWidth - w - 8, rtl ? r.right - w : r.left)) + "px";
     menu.style.top = (below ? r.bottom + 6 : r.top - h - 6) + "px";
     menu.style.transformOrigin = below ? "top left" : "bottom left";
     menu.querySelector(".dd-i.sel, .dd-i.on")?.scrollIntoView({ block: "nearest" });
@@ -102,7 +103,7 @@
     e.preventDefault(); e.stopImmediatePropagation();
     const tn = textNodeOf(s); const cur = tn ? tn.textContent.trim() : "";
     const full = s.textContent.trim();
-    if (/filter/i.test(full)) { toast("Filters opened"); return; }
+    if (/filter|فلاتر|التصفية|عوامل/i.test(full)) { toast("Filters opened"); return; }
     const rule = RULES.find(([re]) => re.test(full));
     const list = rule ? rule[1]() : opts([cur, "Option 2", "Option 3"]);
     open(s, list, cur, (x) => { if (tn) tn.textContent = x.label; s.classList.add("dd-changed"); setTimeout(() => s.classList.remove("dd-changed"), 500); });

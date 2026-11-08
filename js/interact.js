@@ -184,7 +184,8 @@
     pop.querySelectorAll(".theme-sw button").forEach((b) => b.classList.toggle("on", b.dataset.mode === mode));
     const r = anchor.getBoundingClientRect(), w = pop.offsetWidth;
     const below = r.bottom + 8 + pop.offsetHeight < innerHeight;
-    pop.style.left = Math.max(8, Math.min(innerWidth - w - 8, kind === "me" ? r.left : r.right - w)) + "px";
+    const rtlP = document.documentElement.dir === "rtl";
+    pop.style.left = Math.max(8, Math.min(innerWidth - w - 8, (kind === "me") !== rtlP ? r.left : r.right - w)) + "px";
     pop.style.top = (below ? r.bottom + 8 : r.top - pop.offsetHeight - 8) + "px";
     pop.style.transformOrigin = below ? "top right" : "bottom left";
     const mark = pop.querySelector("[data-markall]");

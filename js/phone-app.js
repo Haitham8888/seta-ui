@@ -57,7 +57,7 @@
   const R = {
     /* ---------- onboarding ---------- */
     splash: () => ({ ink: true, html: `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;position:relative;margin:-54px -18px -18px;min-height:100%">${orbit({ w: 340, h: 700, color: "#9677FF", op: 0.6, stars: false })}<img src="assets/logo-dark.png" alt="SETA" style="width:220px;position:relative;animation:spLogo 1s cubic-bezier(.2,.7,.2,1) both"><span class="mono" style="font-size:10px;letter-spacing:.22em;color:rgba(237,234,244,.5);text-transform:uppercase;position:relative">Smart Esports Talent Platform</span></div>` }),
-    welcome: () => ({ html: `<div class="pp-nav">${K.wm(15)}<button class="m-chip pp-tap" data-act="lang">${ic("languages")}EN · ع</button></div>
+    welcome: () => ({ html: `<div class="pp-nav">${K.wm(15)}<button class="m-chip pp-tap" data-act="lang">${ic("languages")}${K.isAr ? "English" : "العربية"}</button></div>
       <div style="position:relative;height:190px;border-radius:22px;overflow:hidden;background:var(--violet-tint);flex:none">${orbit({ w: 300, h: 190, op: 0.9 })}<div style="position:absolute;left:16px;bottom:14px;right:16px" class="row between"><div class="col" style="gap:2px"><span class="m-label" style="padding:0">SETA Score</span><b class="m-big" style="font-size:40px">82</b></div>${spark([70, 72, 71, 75, 77, 76, 80, 82], { w: 130, h: 46 })}</div></div>
       <div><h2 class="pp-large" style="font-size:28px">Talent is data you haven’t read yet.</h2><p class="m-sub">Sign in to sync your matches, body data and coaching.</p></div>
       <div class="col" style="gap:8px;margin-top:auto">
@@ -85,7 +85,7 @@
     today: () => {
       const done = st.plan.filter((x) => x.d).length;
       return { tabs: true, html: `<div class="pp-ptr">${ic("loader-circle")}</div>
-      <div class="pp-nav"><button class="row pp-tap" data-tab="me" style="gap:10px;text-align:left">${av("Yara Hamami", "sm")}<span style="line-height:1.2"><span class="faint" style="font-size:11px">${new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "short" })}</span><b style="display:block;font-size:13px">Yara · NYX</b></span></button><button class="m-ib pp-tap" data-go="notifs">${ic("bell")}${st.unread ? `<span class="pip"></span>` : ""}</button></div>
+      <div class="pp-nav"><button class="row pp-tap" data-tab="me" style="gap:10px;text-align: start">${av("Yara Hamami", "sm")}<span style="line-height:1.2"><span class="faint" style="font-size:11px">${new Date().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "short" })}</span><b style="display:block;font-size:13px">Yara · NYX</b></span></button><button class="m-ib pp-tap" data-go="notifs">${ic("bell")}${st.unread ? `<span class="pip"></span>` : ""}</button></div>
       <h1 class="pp-large">${greet()}, Nyx.</h1>
       <button class="m-card ink pp-tap pp-row-btn" data-go="biosync" style="display:flex;gap:14px;align-items:center;position:relative;overflow:hidden">${orbit({ w: 300, h: 120, color: "#9677FF", op: 0.4, stars: false })}<span style="position:relative">${ring(st.watch ? 74 : 0, { size: 76, stroke: 7, color: "#45D6A2", track: "#2A2245", label: st.watch ? "74" : "–" }).replace(/fill:var\(--text\)/, "fill:#EDEAF4")}</span><span style="position:relative;flex:1"><span class="w-lbl" style="color:rgba(237,234,244,.5)">Readiness</span><b style="display:block;font-size:15px;margin:2px 0">${st.watch ? "Good day for ranked" : "Link a watch to see it"}</b><span style="font-size:11.5px;color:rgba(237,234,244,.6)" class="row">${ic("watch", "i-sm")}${st.watch ? " Slept 7h 40m · HRV 68" : " Takes about a minute"}</span></span>${ic("chevron-right")}</button>
       ${st.checked ? `<button class="m-card pp-tap pp-row-btn row" data-act="checkin" style="gap:12px;border-color:color-mix(in srgb,var(--mint) 40%,var(--line))"><span class="brand-tile" style="background:var(--mint-soft);color:var(--mint);border:0">${ic(["angry", "frown", "meh", "smile", "laugh"][st.energy])}</span><span style="flex:1"><b style="font-size:13px">Checked in</b><span class="faint" style="display:block;font-size:11.5px">Focus ${st.focus} · Stress ${st.stress} · tap to edit</span></span>${ic("pencil", "i-sm faint")}</button>`
@@ -116,7 +116,7 @@
       if (!s.live) return { tabs: true, html: `<h1 class="pp-large" style="margin-top:6px">Ready to play?</h1>
         <div class="m-card row" style="gap:12px">${ring(st.watch ? 74 : 0, { size: 60, stroke: 6, color: "var(--mint)", label: st.watch ? "74" : "–" })}<div style="flex:1"><b style="font-size:13px">${st.watch ? "Readiness 74 · good" : "No readiness yet"}</b><div class="faint" style="font-size:11.5px">${st.checked ? "Checked in today" : "Tip: do a 20-second check-in first"}</div></div>${st.checked ? "" : `<button class="link" data-act="checkin">Check in</button>`}</div>
         <span class="m-label">Game</span>
-        <div class="row wrap" style="gap:8px">${["VAL", "CS2", "LoL", "RL"].map((g) => `<button class="m-chip pp-tap ${st.game === g ? "on" : ""}" data-act="game" data-v="${g}" style="height:36px;padding-left:4px">${K.game(g, 26, 8)}${SHORT[g]}</button>`).join("")}</div>
+        <div class="row wrap" style="gap:8px">${["VAL", "CS2", "LoL", "RL"].map((g) => `<button class="m-chip pp-tap ${st.game === g ? "on" : ""}" data-act="game" data-v="${g}" style="height:36px;padding-inline-start:4px">${K.game(g, 26, 8)}${SHORT[g]}</button>`).join("")}</div>
         <span class="m-label">Mode</span>
         <div class="m-seg">${["Ranked", "Premier", "Practice"].map((m) => `<span class="${st.mode === m ? "on" : ""}" data-act="mode" data-v="${m}">${m}</span>`).join("")}</div>
         <div class="m-card row" style="gap:10px">${st.watch ? `<span class="brand-tile sm">${K.brand("apple", 14)}</span><span style="flex:1;font-size:12.5px"><b>Apple Watch</b> will record heart rate</span><span class="tag m">${ic("check")}Ready</span>` : `<span class="brand-tile sm" style="color:var(--text-3)">${ic("watch", "i-sm")}</span><span style="flex:1;font-size:12.5px">No watch, heart rate off</span><button class="link" data-go="pair1">Link</button>`}</div>
@@ -127,14 +127,14 @@
         <div style="text-align:center;padding:4px 0 0"><span class="m-label">Playing for</span><div class="m-big" style="font-size:54px;margin-top:4px" data-timer>${fmt(el)}</div></div>
         <div class="m-card"><div class="row between"><span class="row" style="gap:6px;font-weight:650">${ic("heart-pulse", "i-sm")}<span style="color:var(--rose)" data-hr>${st.watch ? hrNow() : "–"}</span><span class="faint" style="font-weight:500;font-size:11.5px">bpm</span></span><span class="row faint" style="gap:4px;font-size:11px">${ic("watch", "i-sm")}${st.watch ? "Apple Watch · live" : "No watch"}</span></div><div data-hrchart>${st.watch ? hrChart() : `<p class="pp-empty" style="padding:16px 0">Link a watch to see live heart rate</p>`}</div></div>
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><div class="m-card" style="padding:12px"><span class="m-label" style="padding:0">Matches</span><div class="row" style="gap:6px;align-items:baseline"><b class="num" style="font-size:22px">${s.matches.length}</b><span class="faint" style="font-size:11px">${w}W · ${s.matches.length - w}L</span></div></div><div class="m-card" style="padding:12px"><span class="m-label" style="padding:0">Avg in match</span><div class="row" style="gap:6px;align-items:baseline"><b class="num" style="font-size:22px">${st.watch ? Math.round(s.hr.slice(-20).reduce((a, b) => a + b, 0) / Math.min(20, s.hr.length)) : "–"}</b><span class="faint" style="font-size:11px">bpm</span></div></div></div>
-        ${s.matches.length ? `<div class="row" style="gap:6px">${s.matches.map((m) => `<span class="res ${m.r === "W" ? "w" : "l"}">${m.r}</span>`).join("")}<span class="faint" style="font-size:11.5px;margin-left:4px">${s.matches.map((m) => m.map).join(" · ")}</span></div>` : ""}
+        ${s.matches.length ? `<div class="row" style="gap:6px">${s.matches.map((m) => `<span class="res ${m.r === "W" ? "w" : "l"}">${m.r}</span>`).join("")}<span class="faint" style="font-size:11.5px;margin-inline-start:4px">${s.matches.map((m) => m.map).join(" · ")}</span></div>` : ""}
         ${el > 45000 ? `<div class="m-card row" style="gap:10px;background:var(--amber-soft);border-color:transparent"><span style="color:var(--amber)">${ic("coffee")}</span><span style="font-size:12.5px;flex:1"><b>Break soon.</b> <span class="muted">Heart rate recovery is slowing.</span></span></div>` : ""}
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:4px"><button class="m-btn alt pp-tap" data-act="matchEnded" style="height:46px">${ic("flag")}Match ended</button><button class="m-btn ember pp-tap" data-act="endSession" style="height:46px">${ic("square")}End</button></div>` };
     },
     debrief: (p) => {
       const m = p.m || { map: "Bind", r: "L", sc: "8–13" };
       return { html: `${nav("Debrief", `<button class="m-ib pp-tap" data-act="share">${ic("share")}</button>`)}
-        <div class="row between" style="align-items:flex-end"><div><span class="m-label row" style="padding:0;gap:6px">${K.brand(K.GAME_META[st.game].k, 11, K.GAME_META[st.game].bg === "#1B1A20" ? undefined : K.GAME_META[st.game].bg)}${m.map} · ${st.mode}</span><div class="row" style="gap:10px;align-items:baseline"><b class="m-big">${m.sc}</b><span class="tag ${m.r === "W" ? "m" : "r"}">${m.r === "W" ? "Victory" : "Defeat"}</span></div></div><div style="text-align:right"><span class="m-label" style="padding:0">SETA</span><div>${delta(m.r === "W" ? 2 : -2)}</div></div></div>
+        <div class="row between" style="align-items:flex-end"><div><span class="m-label row" style="padding:0;gap:6px">${K.brand(K.GAME_META[st.game].k, 11, K.GAME_META[st.game].bg === "#1B1A20" ? undefined : K.GAME_META[st.game].bg)}${m.map} · ${st.mode}</span><div class="row" style="gap:10px;align-items:baseline"><b class="m-big">${m.sc}</b><span class="tag ${m.r === "W" ? "m" : "r"}">${m.r === "W" ? "Victory" : "Defeat"}</span></div></div><div style="text-align: end"><span class="m-label" style="padding:0">SETA</span><div>${delta(m.r === "W" ? 2 : -2)}</div></div></div>
         <button class="m-card pp-tap pp-row-btn" data-go="moment" style="padding:0;overflow:hidden"><div style="height:120px">${K.map().replace('width="100%" height="100%"', 'width="100%" height="120"')}</div><div style="padding:12px"><span class="tag e mono">ONE THING TO FIX · 08:42</span><b style="display:block;margin-top:8px">${m.r === "W" ? "Late rotation on round 9" : "Wide peek before the recon dart"}</b><span class="faint" style="font-size:12px">${m.r === "W" ? "Rotate on the first sound cue." : "Wait about 2 s, then swing as a pair."}</span></div></button>
         <div><div class="m-label" style="margin-bottom:8px">How was your focus?</div>${faces(st.focusFace, "focusFace")}</div>
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:auto"><button class="m-btn alt pp-tap" data-go="moment" style="height:46px">${ic("play")}Watch</button><button class="m-btn pp-tap" data-act="addDrill" style="height:46px">${ic("plus")}Add drill</button></div>
@@ -142,7 +142,7 @@
     },
     moment: () => ({ html: `${nav("Round 14", `<button class="m-ib pp-tap" data-act="sendCoach">${ic("send")}</button>`)}
       <div style="border-radius:16px;overflow:hidden;height:190px;position:relative;flex:none">${K.map().replace('width="100%" height="100%"', 'width="100%" height="190"')}<button class="pp-tap" data-act="play" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.92);color:#0E0C13;display:grid;place-items:center">${ic(st.playing ? "pause" : "play")}</button><span class="w-pill" style="position:absolute;top:10px;left:10px;color:#EDEAF4" data-ts>${ts(st.replayP)}</span></div>
-      <div class="scrub pp-scrub" style="height:40px;touch-action:none;cursor:pointer"><div class="track" style="top:16px;height:5px"></div><div class="fill" style="top:16px;height:5px;width:${st.replayP}%"></div>${[9, 24, 41, 55, 72, 88].map((p, i) => `<i class="mk" data-act="seek" data-v="${p}" style="left:${p}%;top:6px;height:24px;cursor:pointer;background:${["var(--violet)", "var(--sky)", "var(--ember)", "var(--ember)", "var(--mint)", "var(--ember)"][i]}"></i>`).join("")}<span class="head" style="left:${st.replayP}%;top:12px;height:14px;width:10px;margin-left:-5px"></span></div>
+      <div class="scrub pp-scrub" style="height:40px;touch-action:none;cursor:pointer"><div class="track" style="top:16px;height:5px"></div><div class="fill" style="top:16px;height:5px;width:${st.replayP}%"></div>${[9, 24, 41, 55, 72, 88].map((p, i) => `<i class="mk" data-act="seek" data-v="${p}" style="left:${p}%;top:6px;height:24px;cursor:pointer;background:${["var(--violet)", "var(--sky)", "var(--ember)", "var(--ember)", "var(--mint)", "var(--ember)"][i]}"></i>`).join("")}<span class="head" style="left:${st.replayP}%;top:12px;height:14px;width:10px;margin-inline-start:-5px"></span></div>
       <div class="m-card" style="padding:12px"><b class="row" style="gap:6px;color:var(--ember);font-size:12.5px">${ic("x-circle", "i-sm")}What happened</b><p style="margin:6px 0 0;font-size:12px" class="muted">Peeked B long 2.1 s before the dart landed. Lost the duel.</p></div>
       <div class="m-card" style="padding:12px;border-color:color-mix(in srgb,var(--mint) 40%,var(--line))"><b class="row" style="gap:6px;color:var(--mint);font-size:12.5px">${ic("check-circle-2", "i-sm")}Better play</b><p style="margin:6px 0 0;font-size:12px" class="muted">Swing after info. In 41 similar rounds, this won 68% of duels.</p></div>
       <button class="m-btn alt pp-tap" data-act="sendCoach" style="height:46px">${ic("message-square")}Ask Coach Reem</button>` }),
@@ -154,7 +154,7 @@
         <div class="m-seg">${Object.keys(RANGE).map((r) => `<span class="${st.range === r ? "on" : ""}" data-act="range" data-v="${r}">${r}</span>`).join("")}</div>
         <div class="m-card row" style="gap:14px">${ring(score, { size: 86, stroke: 7, label: String(score), mark: 76 })}<div class="col" style="gap:4px"><span class="m-label" style="padding:0">SETA Score</span>${delta(d)}<span class="faint" style="font-size:11.5px">Top 18% · Immortal in Saudi Arabia</span></div></div>
         <span class="m-label">Skills · tap for detail</span>
-        <div class="m-group">${SKILLS.map((s, i) => `<button class="m-row pp-row-btn" data-go="skill" data-p='{"i":${i}}'><span class="grow" style="font-weight:600">${s}</span><div class="meter" style="width:64px"><i style="width:${sk[i]}%;${SKD[i] < 0 ? "background:var(--rose)" : ""}"></i></div><b class="num" style="width:22px;text-align:right">${sk[i]}</b><span style="width:40px;text-align:right">${delta(SKD[i])}</span>${ic("chevron-right", "chev")}</button>`).join("")}</div>
+        <div class="m-group">${SKILLS.map((s, i) => `<button class="m-row pp-row-btn" data-go="skill" data-p='{"i":${i}}'><span class="grow" style="font-weight:600">${s}</span><div class="meter" style="width:64px"><i style="width:${sk[i]}%;${SKD[i] < 0 ? "background:var(--rose)" : ""}"></i></div><b class="num" style="width:22px;text-align: end">${sk[i]}</b><span style="width:40px;text-align: end">${delta(SKD[i])}</span>${ic("chevron-right", "chev")}</button>`).join("")}</div>
         <button class="m-card pp-tap pp-row-btn row" data-go="matches" style="gap:10px">${ic("swords", "faint")}<span style="flex:1;font-weight:600">Match history</span><span class="faint" style="font-size:12px">40 matches</span>${ic("chevron-right", "faint")}</button>` };
     },
     skill: (p) => {
@@ -214,6 +214,8 @@
         <button class="m-row pp-row-btn" data-act="healthSheet"><span>${K.healthIcon ? K.healthIcon(20) : ""}</span><span class="grow"><b style="font-weight:500">Apple Health</b></span><span class="faint" style="font-size:12px">${st.watch ? "Connected" : "Off"}</span>${ic("chevron-right", "chev")}</button></div>
       <span class="m-label">Appearance</span>
       <div class="m-seg">${[["light", "sun", "Light"], ["system", "monitor", "Auto"], ["dark", "moon", "Dark"]].map(([m, i, l]) => `<span class="${themeMode() === m ? "on" : ""}" data-act="theme" data-v="${m}">${ic(i)}${l}</span>`).join("")}</div>
+      <span class="m-label">Language</span>
+      <div class="m-seg" data-noi18n><span class="${K.isAr ? "on" : ""}" data-act="setLang" data-v="ar">العربية</span><span class="${K.isAr ? "" : "on"}" data-act="setLang" data-v="en">English</span></div>
       <div class="m-group"><button class="m-row pp-row-btn" data-act="help"><span class="faint">${ic("life-buoy", "i-sm")}</span><span class="grow"><b style="font-weight:500">Help & feedback</b></span>${ic("chevron-right", "chev")}</button><button class="m-row pp-row-btn" data-act="signout"><span style="color:var(--rose)">${ic("log-out", "i-sm")}</span><span class="grow" style="color:var(--rose)"><b style="font-weight:500">Sign out</b></span></button></div>
       <p class="faint mono" style="font-size:10px;text-align:center">SETA 2.0 · build 2611</p>` }),
     passport: () => ({ tabs: true, html: `${nav("Talent Passport", `<button class="m-ib pp-tap" data-act="shareSheet">${ic("share")}</button>`)}
@@ -255,7 +257,7 @@
 
   const ts = (p) => { const s = Math.round((p / 100) * 1290); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
   const bubble = (m) => `<div class="msg ${m.me ? "me" : "ai"}">${m.me ? "" : `<span class="coach-mark" style="width:26px;height:26px">${st.coachMode === "ai" ? star(12) : `<b style="font-size:10px">RA</b>`}</span>`}<div class="bub" style="font-size:12.5px">${m.t}</div></div>`;
-  const matchRow = (m, i, chev) => `<button class="m-row pp-row-btn ${chev ? "" : "m-card"}" data-go="match" data-p='{"id":${i}}' style="${chev ? "" : "padding:12px"}">${K.game("VAL", 30, 8)}<span class="grow"><b>${m[0]}</b> <span class="faint" style="font-weight:500">· ${m[8]}</span><span class="s" style="display:block">${m[1]} · ${m[7]}</span></span><span class="res ${m[2] === "W" ? "w" : "l"}">${m[2]}</span><b class="num" style="width:44px;text-align:right">${m[3]}</b></button>`;
+  const matchRow = (m, i, chev) => `<button class="m-row pp-row-btn ${chev ? "" : "m-card"}" data-go="match" data-p='{"id":${i}}' style="${chev ? "" : "padding:12px"}">${K.game("VAL", 30, 8)}<span class="grow"><b>${m[0]}</b> <span class="faint" style="font-weight:500">· ${m[8]}</span><span class="s" style="display:block">${m[1]} · ${m[7]}</span></span><span class="res ${m[2] === "W" ? "w" : "l"}">${m[2]}</span><b class="num" style="width:44px;text-align: end">${m[3]}</b></button>`;
   const accountsGroup = () => `<div class="m-group">${[["riotgames", "Riot Games", "Valorant · NYX#KSA1"], ["steam", "Steam", "Counter-Strike 2"], ["epicgames", "Epic Games", "Rocket League"], ["playstation", "PlayStation", "EA Sports FC"], ["discord", "Discord", "Team voice"]].map(([k, n, d]) => `<div class="m-row"><span class="brand-tile">${K.brand(k, 18)}</span><span class="grow"><b>${n}</b><span class="s" style="display:block">${d}</span></span>${st.linked[k] ? `<button class="tag m pp-tap" data-act="link" data-v="${k}">${ic("check")}Linked</button>` : `<button class="m-chip pp-tap" data-act="link" data-v="${k}" style="height:28px">Connect</button>`}</div>`).join("")}</div>`;
   const themeMode = () => { try { return localStorage.getItem("seta-theme") || "system"; } catch (e) { return "system"; } };
 
@@ -301,7 +303,7 @@
     viewsEl.insertBefore(v, old);
     after(out);
     old.style.transition = "transform .28s cubic-bezier(.2,.8,.2,1)";
-    old.style.transform = "translateX(100%)";
+    old.style.transform = document.documentElement.dir === "rtl" ? "translateX(-100%)" : "translateX(100%)";
     setTimeout(() => old.remove(), 300);
   }
   const back = () => { if (st.stack.length > 1) { st.stack.pop(); show("pop"); return true; } return false; };
@@ -327,7 +329,7 @@
   function island(icon, title, sub) {
     clearTimeout(islandTimer);
     islandEl.className = "pp-island msg";
-    islandEl.innerHTML = `<span class="pp-toast-dot">${ic(icon, "i-sm")}</span><span style="display:flex;flex-direction:column;line-height:1.3;text-align:left;min-width:0"><b style="font-size:12.5px">${title}</b>${sub ? `<span style="font-size:11px;font-weight:500;color:#A7A0B6;overflow:hidden;text-overflow:ellipsis">${sub}</span>` : ""}</span>`;
+    islandEl.innerHTML = `<span class="pp-toast-dot">${ic(icon, "i-sm")}</span><span style="display:flex;flex-direction:column;line-height:1.3;text-align: start;min-width:0"><b style="font-size:12.5px">${title}</b>${sub ? `<span style="font-size:11px;font-weight:500;color:#A7A0B6;overflow:hidden;text-overflow:ellipsis">${sub}</span>` : ""}</span>`;
     window.lucide && lucide.createIcons();
     islandTimer = setTimeout(islandIdle, 1800);
   }
@@ -363,7 +365,7 @@
   /* ================= actions ================= */
   const ACT = {
     noop() {},
-    lang() { island("languages", "Arabic layout", "Coming in the next build"); },
+    lang() { K.setLang(K.isAr ? "en" : "ar"); },
     signin(el) { island("check", `Signed in with ${el.dataset.v}`, "Welcome to SETA"); setTimeout(() => go("role"), 300); },
     emailSheet() { sheet(`<b style="font-size:17px">Sign in with email</b><div class="input" style="height:44px">${ic("at-sign")}<input value="yara@jazanu.edu.sa"></div><div class="input" style="height:44px">${ic("lock")}<input type="password" value="seta-2026"></div><button class="m-btn pp-tap" data-act="emailGo">Continue</button>`); },
     emailGo() { closeSheet(); setTimeout(() => go("role"), 250); },
@@ -428,6 +430,7 @@
     drillSheet() { sheet(`<b style="font-size:17px">Add a drill to ${st.day}</b><div class="m-group">${[["Crossfire timing", "15 min"], ["Trade spacing", "20 min"], ["Retake protocol", "25 min"], ["Box breathing reset", "5 min"], ["Replay self-review", "10 min"]].map(([t, m]) => `<button class="m-row pp-row-btn" data-act="addToDay" data-v="${t} · ${m}"><span style="color:var(--violet)">${ic("dumbbell", "i-sm")}</span><span class="grow"><b>${t}</b></span><span class="faint">${m}</span></button>`).join("")}</div>`); },
     addToDay(el) { (st.week[st.day] = st.week[st.day] || []).push(el.dataset.v); closeSheet(); refresh(); island("plus", "Added to " + st.day, el.dataset.v.split(" · ")[0]); },
     theme(el) { setTheme(el.dataset.v); setTimeout(refresh, 600); },
+    setLang(el) { if ((el.dataset.v === "ar") !== K.isAr) K.setLang(el.dataset.v); },
     help() { island("life-buoy", "Help centre", "Opens seta.gg/help"); },
     settingsToast() { go("notifset"); },
     signout() { alertBox("Sign out?", "You can sign back in with Apple, Google or your gaming ID.", "Cancel", "Sign out", (ok) => { if (!ok) return; const keepTheme = true; st = fresh(); st.stack = [{ name: "welcome" }]; clearInterval(liveTimer); islandIdle(); show("fade"); }); },
@@ -443,6 +446,8 @@
     deleteData() { alertBox("Delete body data?", "This removes all imported sleep, HRV and heart rate. It can’t be undone.", "Cancel", "Delete", (ok) => ok && island("trash-2", "Body data deleted", "")); },
   };
   function act(name, el, e) { (ACT[name] || ACT.noop)(el || document.createElement("i"), e); }
+  K.ppAct = (name, v) => { const el = document.createElement("i"); if (v !== undefined) el.dataset.v = v; act(name, el); };
+  K.ppState = () => st;
   function paintScrub() { const f = $(".pp-scrub .fill", viewsEl), h = $(".pp-scrub .head", viewsEl), t = $("[data-ts]", viewsEl); if (f) f.style.width = st.replayP + "%"; if (h) h.style.left = st.replayP + "%"; if (t) t.textContent = ts(st.replayP); }
   function sendMsg(text) {
     const key = st.coachMode === "ai" ? "chat" : "reem";
@@ -482,7 +487,8 @@
       if (sheetEl.classList.contains("on") && e.target.closest(".pp-sheet")) { const body = $(".pp-sheet-body", sheetEl); if (e.target.closest(".pp-grab") || (body && body.scrollTop <= 0)) { mode = "sheet"; } else mode = null; return; }
       if (e.target.closest(".pp-scrub")) { mode = "scrub"; seekTo(e); return; }
       view = current(); sc = view && $(".pp-scroll", view); st0 = sc ? sc.scrollTop : 0;
-      mode = sx - scrRect.left < 28 && st.stack.length > 1 ? "edge" : "pending";
+      const rtl = document.documentElement.dir === "rtl";
+      mode = (rtl ? scrRect.right - sx < 28 : sx - scrRect.left < 28) && st.stack.length > 1 ? "edge" : "pending";
     });
     window.addEventListener("pointermove", (e) => {
       if (!mode) return;
@@ -490,7 +496,7 @@
       if (Math.abs(dx) > 5 || Math.abs(dy) > 5) moved = true;
       if (mode === "scrub") return seekTo(e);
       if (mode === "sheet") { if (dy > 0) { sheetEl.classList.add("dragging"); sheetEl.style.transform = `translateY(${dy}px)`; } return; }
-      if (mode === "edge") { if (dx > 0) { view.classList.add("dragging"); view.style.transform = `translateX(${dx}px)`; view.style.boxShadow = "-10px 0 30px rgba(0,0,0,.25)"; } return; }
+      if (mode === "edge") { const ddx = document.documentElement.dir === "rtl" ? -dx : dx; if (ddx > 0) { view.classList.add("dragging"); view.style.transform = `translateX(${dx}px)`; view.style.boxShadow = "-10px 0 30px rgba(0,0,0,.25)"; } return; }
       if (mode === "pending" && Math.abs(dy) > 5) mode = "scroll";
       if (mode === "scroll" && sc) {
         const now = performance.now(); vy = (e.clientY - lastY) / Math.max(1, now - lastT); lastY = e.clientY; lastT = now;
@@ -503,7 +509,7 @@
       if (!mode) return;
       const dx = e.clientX - sx, dy = e.clientY - sy, m = mode; mode = null;
       if (m === "sheet") { sheetEl.classList.remove("dragging"); if (dy > 90) closeSheet(); else sheetEl.style.transform = ""; return; }
-      if (m === "edge" && view) { view.classList.remove("dragging"); view.style.boxShadow = ""; if (dx > 90) edgeBack(view); else { view.style.transition = "transform .25s cubic-bezier(.2,.8,.2,1)"; view.style.transform = ""; setTimeout(() => (view.style.transition = ""), 260); } return; }
+      if (m === "edge" && view) { view.classList.remove("dragging"); view.style.boxShadow = ""; if ((document.documentElement.dir === "rtl" ? -dx : dx) > 90) edgeBack(view); else { view.style.transition = "transform .25s cubic-bezier(.2,.8,.2,1)"; view.style.transform = ""; setTimeout(() => (view.style.transition = ""), 260); } return; }
       if (m === "scroll" && sc) {
         const ptr = $(".pp-ptr", view);
         if (ptr && parseFloat(ptr.style.height) >= 50) { ptr.classList.add("spin"); setTimeout(() => { ptr.classList.remove("spin"); ptr.style.height = "0px"; island("refresh-cw", "Up to date", "Synced matches and BioSync"); }, 900); }
@@ -540,7 +546,7 @@
           <div class="card"><div class="row between"><h3>Jump to</h3><button class="link" data-h data-pp="restart">${ic("rotate-ccw")}Restart</button></div><div class="pp-flows">${FLOWS.map(([g, list]) => `<div class="grp">${g}</div>${list.map(([r, i]) => `<button data-h data-jump="${r}">${ic(i)}${TITLES[r]}</button>`).join("")}`).join("")}</div></div>
           <div class="card col" style="gap:10px"><h3>Device</h3><div class="seg" style="width:100%">${[["iphone", "iPhone"], ["pixel", "Pixel"], ["small", "Small"]].map(([d, l]) => `<button class="${device === d ? "on" : ""}" data-h data-dev="${d}" style="flex:1">${l}</button>`).join("")}</div>
             <div class="row between" style="font-size:12.5px"><span>Show hotspots</span><button class="switch ${hintAlways ? "on" : ""}" data-h data-pp="hints" aria-label="Show hotspots"></button></div>
-            <div class="row between" style="font-size:12.5px"><span>Theme</span>${K.themeSwitch()}</div></div>
+            <div class="row between" style="font-size:12.5px"><span>Theme</span>${K.themeSwitch()}</div><div class="row between" style="font-size:12.5px"><span>Language</span>${K.langSwitch()}</div></div>
         </aside>
         <div class="pp-stage">
           <div class="pp-crumb"></div>

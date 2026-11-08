@@ -5,7 +5,7 @@
 /* ---------- triggers ---------- */
 .dd-native { display: none !important; }
 .dd-trigger {
-  flex: 1; min-width: 0; height: 100%; display: flex; align-items: center; text-align: left;
+  flex: 1; min-width: 0; height: 100%; display: flex; align-items: center; text-align: start;
   font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; background: none; border: 0; padding: 0;
 }
 .dd-trigger .dd-val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -22,7 +22,7 @@ button.select { font: inherit; cursor: pointer; }
 .select:active { transform: scale(.98); }
 .select.dd-changed { animation: ddFlash .5s var(--ease); }
 @keyframes ddFlash { 30% { border-color: var(--violet); box-shadow: 0 0 0 3px var(--violet-tint); } }
-.game-sel { padding-left: 6px; gap: 8px; }
+.game-sel { padding-inline-start: 6px; gap: 8px; }
 
 /* ---------- menu ---------- */
 .dd-menu { width: auto; max-width: min(360px, calc(100vw - 16px)); padding: 6px; z-index: 260; }
@@ -30,7 +30,7 @@ button.select { font: inherit; cursor: pointer; }
 .dd-scroll { max-height: min(360px, 60vh); overflow: auto; overscroll-behavior: contain; }
 .dd-group { padding: 10px 10px 4px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
 .dd-group:first-child { padding-top: 4px; }
-.dd-i { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 9px; text-align: left; color: var(--text-2); font-size: 13px; transition: background .12s, color .12s; }
+.dd-i { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 9px; text-align: start; color: var(--text-2); font-size: 13px; transition: background .12s, color .12s; }
 .dd-i .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .dd-i .grow b { font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dd-i .grow span { font-size: 11px; color: var(--text-3); }
@@ -56,7 +56,7 @@ button.select { font: inherit; cursor: pointer; }
 @keyframes mq { to { transform: translateX(calc(-50% - 7px)); } }
 
 /* ---------- logo placements ---------- */
-.crumb-mark { color: var(--violet); display: grid; margin-right: 2px; }
+.crumb-mark { color: var(--violet); display: grid; margin-inline-end: 2px; }
 .app-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 18px 28px 26px; margin-top: auto; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-2); }
 .app-foot .sp { flex: 1; }
 .app-foot a:hover { color: var(--violet); }

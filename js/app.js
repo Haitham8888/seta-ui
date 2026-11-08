@@ -96,6 +96,7 @@
       <label class="proto-sel">${ic("layers", "i-sm faint")}<select onchange="location.hash='#/'+this.value">${opts}</select>${ic("chevron-down", "i-sm faint")}</label>
       <div class="nav-arrows"><button class="icon-btn" style="width:30px;height:30px" onclick="go(1)" title="Next screen">${ic("arrow-right", "i-sm")}</button></div>
       <span class="sp"></span>
+      ${K.langSwitch()}
       ${themeSwitch()}
     </div>`;
   }

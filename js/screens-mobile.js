@@ -11,7 +11,7 @@
     i === "go" ? `<span class="go ${live ? "live" : ""}"><i class="b">${ic(live ? "square" : "play")}</i>${live ? "Live" : "Session"}</span>` : `<span class="${k === on ? "on" : ""}">${ic(i)}${l}</span>`).join("")}</nav>`;
   const shot = (p, code, cap) => `<div class="ph-col">${p}<div class="caption"><span class="mono">${code}</span>${cap}</div></div>`;
   const wordmark = (h, ink) => `<span class="wm ${ink ? "on-ink" : ""}" style="height:${h}px"><img class="l" src="assets/wordmark-light.png" alt="SETA"><img class="d" src="assets/wordmark-dark.png" alt="SETA"></span>`;
-  const head = (eyebrow, title, text, right = "") => `<div class="canvas-head flow-row"><div><span class="eyebrow">${eyebrow}</span><h1 class="h1" style="margin-top:8px">${title}</h1><p>${text}</p></div><div class="row" style="margin-left:auto;gap:8px;flex-wrap:wrap">${right}${K.themeSwitch()}</div></div>`;
+  const head = (eyebrow, title, text, right = "") => `<div class="canvas-head flow-row"><div><span class="eyebrow">${eyebrow}</span><h1 class="h1" style="margin-top:8px">${title}</h1><p>${text}</p></div><div class="row" style="margin-inline-start: auto;gap:8px;flex-wrap:wrap">${right}${K.themeSwitch()}</div></div>`;
   const row = (title, sub, phones) => `<section class="flow-row"><div class="row-h"><h2>${title}</h2><p>${sub}</p></div><div class="phones fade-in" style="justify-content:flex-start">${phones}</div></section>`;
   K.mHead = head; K.mRow = row; K.mShot = shot;
 
@@ -109,7 +109,7 @@
         </div>${tabs(-1, true)}`;
       const debrief = `<div class="m-body">
           <div class="m-top">${ic("chevron-left")}<span style="font-weight:650">Debrief</span><span class="m-ib">${ic("share")}</span></div>
-          <div class="row between" style="align-items:flex-end"><div><span class="m-label row" style="padding:0;gap:6px">${K.brand("valorant", 11, "#FA4454")}Bind · Premier</span><div class="row" style="gap:10px;align-items:baseline"><b class="m-big">8–13</b><span class="tag r">Defeat</span></div></div><div style="text-align:right"><span class="m-label" style="padding:0">SETA</span><div>${delta(-2)}</div></div></div>
+          <div class="row between" style="align-items:flex-end"><div><span class="m-label row" style="padding:0;gap:6px">${K.brand("valorant", 11, "#FA4454")}Bind · Premier</span><div class="row" style="gap:10px;align-items:baseline"><b class="m-big">8–13</b><span class="tag r">Defeat</span></div></div><div style="text-align: end"><span class="m-label" style="padding:0">SETA</span><div>${delta(-2)}</div></div></div>
           <div class="m-card" style="padding:0;overflow:hidden"><div style="height:110px">${K.map().replace('width="100%" height="100%"', 'width="100%" height="110"')}</div>
             <div style="padding:12px"><span class="tag e mono">ONE THING TO FIX · 08:42</span><div style="font-weight:650;margin-top:8px">Wide peek before the recon dart</div><p class="faint" style="margin:4px 0 0;font-size:12px">Wait about 2 s, then swing as a pair with Kairo.</p></div></div>
           <div><div class="m-label" style="margin-bottom:8px">How was your focus?</div><div class="m-faces">${["angry", "frown", "meh", "smile", "laugh"].map((f, i) => `<span class="${i === 2 ? "on" : ""}">${ic(f)}</span>`).join("")}</div></div>
@@ -117,7 +117,7 @@
       const replay = `<div class="m-body">
           <div class="m-top">${ic("chevron-left")}<span style="font-weight:650">Round 14</span><span class="m-ib">${ic("send")}</span></div>
           <div style="border-radius:16px;overflow:hidden;height:170px;position:relative">${K.map().replace('width="100%" height="100%"', 'width="100%" height="170"')}<span class="w-pill" style="position:absolute;top:10px;left:10px;color:#EDEAF4">${ic("play")}08:42</span></div>
-          <div class="scrub" style="height:36px"><div class="track" style="top:15px;height:4px"></div><div class="fill" style="top:15px;height:4px;width:41%"></div>${[9, 24, 41, 55, 72, 88].map((p, i) => `<i class="mk" style="left:${p}%;top:6px;height:22px;background:${["var(--violet)", "var(--sky)", "var(--ember)", "var(--ember)", "var(--mint)", "var(--ember)"][i]}"></i>`).join("")}<span class="head" style="left:41%;top:11px;height:12px;width:10px;margin-left:-5px"></span></div>
+          <div class="scrub" style="height:36px"><div class="track" style="top:15px;height:4px"></div><div class="fill" style="top:15px;height:4px;width:41%"></div>${[9, 24, 41, 55, 72, 88].map((p, i) => `<i class="mk" style="left:${p}%;top:6px;height:22px;background:${["var(--violet)", "var(--sky)", "var(--ember)", "var(--ember)", "var(--mint)", "var(--ember)"][i]}"></i>`).join("")}<span class="head" style="left:41%;top:11px;height:12px;width:10px;margin-inline-start:-5px"></span></div>
           <div class="m-card" style="padding:12px"><b class="row" style="gap:6px;color:var(--ember);font-size:12.5px">${ic("x-circle", "i-sm")}What happened</b><p style="margin:6px 0 0;font-size:12px" class="muted">Peeked B long 2.1 s before the dart landed. Lost the duel.</p></div>
           <div class="m-card" style="padding:12px;border-color:color-mix(in srgb,var(--mint) 40%,var(--line))"><b class="row" style="gap:6px;color:var(--mint);font-size:12.5px">${ic("check-circle-2", "i-sm")}Better play</b><p style="margin:6px 0 0;font-size:12px" class="muted">Swing after info. In 41 similar rounds, this won 68% of duels.</p></div>
           <span class="m-btn alt" style="margin-top:auto;margin-bottom:30px;height:44px">${ic("message-square")}Ask Coach Reem</span></div>`;
@@ -137,7 +137,7 @@
           <div class="m-top"><h2 class="m-title">Stats</h2><span class="m-chip" style="height:30px">${K.brand("valorant", 13, "#FA4454")}Valorant${ic("chevron-down")}</span></div>
           <div class="m-seg">${["7D", "30D", "90D", "Season"].map((p, i) => `<span class="${i === 1 ? "on" : ""}">${p}</span>`).join("")}</div>
           <div class="m-card" style="display:flex;gap:14px;align-items:center">${ring(82, { size: 84, stroke: 7, label: "82", mark: 76 })}<div class="col" style="gap:4px"><span class="m-label" style="padding:0">SETA Score</span>${delta(4)}<span class="faint" style="font-size:11.5px">Top 18% · Immortal duelists</span></div></div>
-          <div class="m-group">${[["Aim", 86, 12], ["Reaction", 78, 9], ["Decision", 80, -6], ["Game sense", 83, 9], ["Teamwork", 76, 3]].map(([s, v, d]) => `<div class="m-row"><span class="grow" style="font-weight:600">${s}</span><div class="meter" style="width:70px"><i style="width:${v}%;${d < 0 ? "background:var(--rose)" : ""}"></i></div><b class="num" style="width:22px;text-align:right">${v}</b><span style="width:42px;text-align:right">${delta(d)}</span></div>`).join("")}</div>
+          <div class="m-group">${[["Aim", 86, 12], ["Reaction", 78, 9], ["Decision", 80, -6], ["Game sense", 83, 9], ["Teamwork", 76, 3]].map(([s, v, d]) => `<div class="m-row"><span class="grow" style="font-weight:600">${s}</span><div class="meter" style="width:70px"><i style="width:${v}%;${d < 0 ? "background:var(--rose)" : ""}"></i></div><b class="num" style="width:22px;text-align: end">${v}</b><span style="width:42px;text-align: end">${delta(d)}</span></div>`).join("")}</div>
           <span class="faint" style="font-size:11px;text-align:center">Full breakdown on seta.gg</span>
         </div>${tabs(1)}`;
       const coach = `<div class="m-body">
@@ -145,7 +145,7 @@
           <div class="m-seg"><span class="on">${star(12)}AI Coach</span><span>${ic("user-round")}Reem</span></div>
           <div class="thread" style="gap:10px">
             <div class="msg ai"><span class="coach-mark" style="width:26px;height:26px">${star(12)}</span><div class="bub" style="font-size:12.5px">You lost 4 of 5 rounds where you entered before the recon landed.</div></div>
-            <div class="msg ai" style="padding-left:36px"><div class="bub" style="font-size:12.5px;padding:10px 12px"><span class="m-label" style="padding:0">Added to Saturday</span><div class="row" style="gap:8px;margin-top:6px">${ic("dumbbell", "i-sm")}<b style="font-size:12.5px">Trade spacing · 20 min</b></div></div></div>
+            <div class="msg ai" style="padding-inline-start:36px"><div class="bub" style="font-size:12.5px;padding:10px 12px"><span class="m-label" style="padding:0">Added to Saturday</span><div class="row" style="gap:8px;margin-top:6px">${ic("dumbbell", "i-sm")}<b style="font-size:12.5px">Trade spacing · 20 min</b></div></div></div>
             <div class="msg me"><div class="bub" style="font-size:12.5px">Every time?</div></div>
             <div class="msg ai"><span class="coach-mark" style="width:26px;height:26px">${star(12)}</span><div class="bub" style="font-size:12.5px">Only on B long (Bind) and A main (Haven). Elsewhere your early peeks win 61%.</div></div>
           </div>

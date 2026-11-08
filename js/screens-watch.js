@@ -16,7 +16,7 @@
     render() {
       const face = `<div style="display:flex;flex-direction:column;height:100%;gap:4px">
           <div class="row between" style="font-size:10.5px;color:#8A8396"><span>SUN 8</span><span class="row" style="gap:3px;color:#45D6A2">${ic("heart", "i-sm")}58</span></div>
-          <div class="w-big" style="font-size:58px;text-align:left;letter-spacing:-.04em">9:41</div>
+          <div class="w-big" style="font-size:58px;text-align: start;letter-spacing:-.04em">9:41</div>
           <div class="row" style="gap:6px;margin-top:auto">
             <div style="position:relative;width:52px;height:52px">${wring(74, { size: 52, stroke: 5, color: "#45D6A2", label: "74" })}</div>
             <div style="flex:1;background:#14121A;border-radius:14px;padding:7px 9px"><div class="w-lbl" style="color:#B29BFF">${star(8, "#B29BFF")} Next</div><div class="row" style="gap:4px;font-weight:650;font-size:11.5px;line-height:1.2;margin-top:2px">${K.brand("valorant", 10, "#FA4454")}Premier · Bind</div><div style="font-size:10.5px;color:#8A8396">21:00</div></div>
@@ -43,7 +43,7 @@
           <div style="font-size:11.5px;color:#C9C3D6;line-height:1.35">Premier tomorrow at 21:00. Aim for 8 hours.</div>
           <div class="row" style="height:28px;gap:2px;align-items:flex-end;margin-top:auto">${"DLLRDDLLRRLLDLLRRRLA".split("").map((s) => `<i style="flex:1;border-radius:2px;height:${{ D: 35, L: 60, R: 85, A: 100 }[s]}%;background:${{ D: "#9677FF", L: "#4B3F78", R: "#63C3FF", A: "#F2BC4B" }[s]}"></i>`).join("")}</div>`;
       const pair = `${top("Setup", "Pair")}<div style="margin-top:6px;font-weight:650;font-size:14px;line-height:1.2">Enter this code<br>in SETA on your phone</div>
-          <div class="row" style="gap:4px;justify-content:center;margin-top:auto">${"482913".split("").map((d, i) => `<b style="width:24px;height:32px;border-radius:7px;background:#1E1B25;display:grid;place-items:center;font-size:17px;font-stretch:118%;${i === 2 ? "margin-right:6px" : ""}">${d}</b>`).join("")}</div>
+          <div class="row" style="gap:4px;justify-content:center;margin-top:auto">${"482913".split("").map((d, i) => `<b style="width:24px;height:32px;border-radius:7px;background:#1E1B25;display:grid;place-items:center;font-size:17px;font-stretch:118%;${i === 2 ? "margin-inline-end:6px" : ""}">${d}</b>`).join("")}</div>
           <div class="w-lbl" style="text-align:center;margin-top:6px">Expires in 4:52</div>`;
       const rReady = `<div class="w-lbl">SETA · Readiness</div><div style="width:96px;height:96px;margin:6px 0">${wring(74, { size: 96, stroke: 8, color: "#45D6A2", label: "74" })}</div><div style="font-size:11.5px;font-weight:600">Good for ranked</div>`;
       const rLive = `<div class="w-lbl" style="color:#FF8550">● Session 1:42</div><div class="row" style="gap:4px;align-items:baseline;margin-top:6px"><span class="w-big" style="color:#FF6B81;font-size:50px">128</span></div><div style="font-size:11px;color:#8A8396">bpm · zone 4</div><div style="width:140px;margin-top:6px">${hrPath([96, 110, 122, 131, 120, 104, 112, 124, 133, 128], 140, 30)}</div>`;
@@ -89,7 +89,7 @@
       const code = `<div class="m-body">
           <div class="m-top">${ic("chevron-left")}<div class="m-steps" style="width:120px"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><span></span></div>
           <div><h2 class="m-title" style="font-size:24px">Open SETA on your watch</h2><p class="m-sub">It shows a 6-digit code. Type it here.</p></div>
-          <div style="display:grid;place-items:center;padding:6px 0;transform:scale(.62);margin:-46px 0">${W(`${`<div class="w-top"><span class="app">${star(10, "#B29BFF")}Pair</span><span>9:41</span></div>`}<div style="margin-top:8px;font-weight:650;font-size:14px">Your code</div><div class="row" style="gap:4px;justify-content:center;margin-top:auto">${"482913".split("").map((d, i) => `<b style="width:24px;height:32px;border-radius:7px;background:#1E1B25;display:grid;place-items:center;font-size:17px;${i === 2 ? "margin-right:6px" : ""}">${d}</b>`).join("")}</div><div class="w-lbl" style="text-align:center;margin-top:8px">4:52</div>`)}</div>
+          <div style="display:grid;place-items:center;padding:6px 0;transform:scale(.62);margin:-46px 0">${W(`${`<div class="w-top"><span class="app">${star(10, "#B29BFF")}Pair</span><span>9:41</span></div>`}<div style="margin-top:8px;font-weight:650;font-size:14px">Your code</div><div class="row" style="gap:4px;justify-content:center;margin-top:auto">${"482913".split("").map((d, i) => `<b style="width:24px;height:32px;border-radius:7px;background:#1E1B25;display:grid;place-items:center;font-size:17px;${i === 2 ? "margin-inline-end:6px" : ""}">${d}</b>`).join("")}</div><div class="w-lbl" style="text-align:center;margin-top:8px">4:52</div>`)}</div>
           <div class="code-box">${"4829".split("").map((d) => `<b>${d}</b>`).join("")}<b class="on"></b><b></b></div>
           <div class="row" style="gap:8px;justify-content:center;font-size:12px" class="faint"><span class="dot live" style="background:var(--violet);box-shadow:0 0 0 3px var(--violet-tint)"></span><span class="faint">Watch found nearby · Bluetooth</span></div>
           <span class="faint" style="font-size:11.5px;text-align:center;margin-top:auto;margin-bottom:30px">No code? Install SETA from the App Store on your watch.</span></div>`;

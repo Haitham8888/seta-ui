@@ -90,7 +90,7 @@
       const p = Math.min(1, (now - t0) / DURATION), e = 1 - Math.pow(1 - p, 2.2);
       bar.style.transform = `scaleX(${e})`;
       pct.textContent = Math.round(e * 100) + "%";
-      step.textContent = STEPS[Math.min(STEPS.length - 1, Math.floor(e * STEPS.length))];
+      const sv = STEPS[Math.min(STEPS.length - 1, Math.floor(e * STEPS.length))]; const tv = window.K && K.t ? K.t(sv) : sv; if (step.textContent !== tv) step.textContent = tv;
       if (p >= 1 && !done) leave(innerWidth / 2, innerHeight / 2);
       if (!done || sparks.length) raf = requestAnimationFrame(frame);
     }

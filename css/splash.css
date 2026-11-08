@@ -47,7 +47,7 @@
 .sp-star.s2 path { animation-delay: 1.45s, 2.6s; }
 @keyframes spStar { from { transform: scale(0) rotate(-90deg); opacity: 0; } }
 @keyframes spTw { 50% { transform: scale(.75) rotate(20deg); opacity: .7; } }
-.sp-tag { font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: rgba(237,234,244,.55); animation: spUp .8s cubic-bezier(.2,.7,.2,1) .7s both; padding-left: .32em; }
+.sp-tag { font-family: var(--font-mono, monospace); font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: rgba(237,234,244,.55); animation: spUp .8s cubic-bezier(.2,.7,.2,1) .7s both; padding-inline-start: .32em; }
 .sp-boot { width: min(300px, 70vw); display: flex; flex-direction: column; gap: 8px; animation: spUp .8s cubic-bezier(.2,.7,.2,1) .9s both; }
 .sp-bar { height: 2px; border-radius: 2px; background: rgba(150,119,255,.18); overflow: hidden; }
 .sp-bar i { display: block; height: 100%; background: linear-gradient(90deg, #9677FF, #FF8550); transform-origin: left; transform: scaleX(0); }
@@ -56,7 +56,7 @@
 @keyframes spUp { from { opacity: 0; transform: translateY(10px); } }
 
 .sp-hint { position: absolute; bottom: 28px; left: 0; right: 0; text-align: center; font-size: 12px; color: rgba(237,234,244,.4); animation: spUp .8s ease 1.4s both; }
-.sp-key { display: inline-block; padding: 1px 7px; margin-right: 4px; border: 1px solid rgba(237,234,244,.2); border-bottom-width: 2px; border-radius: 5px; font-family: var(--font-mono, monospace); font-size: 10.5px; color: rgba(237,234,244,.7); }
+.sp-key { display: inline-block; padding: 1px 7px; margin-inline-end: 4px; border: 1px solid rgba(237,234,244,.2); border-bottom-width: 2px; border-radius: 5px; font-family: var(--font-mono, monospace); font-size: 10.5px; color: rgba(237,234,244,.7); }
 
 @media (prefers-reduced-motion: reduce) {
   .sp-arc { stroke-dashoffset: 0; animation: none; }
