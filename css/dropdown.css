@@ -82,3 +82,13 @@ button.select { font: inherit; cursor: pointer; }
 .ticker .src-link { display: inline-block; margin-top: 8px; }
 .demo-tag { height: 26px; font-size: 11.5px; }
 @media (max-width: 760px) { .demo-tag { display: none; } }
+
+/* club logo avatars (light/dark aware) */
+.club-av { --s: 44px; width: var(--s); height: var(--s); flex: none; display: inline-grid; place-items: center; border-radius: calc(var(--s) * .28); background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; }
+.club-av img { width: 78%; height: 78%; object-fit: contain; display: block; }
+.club-av img.d { display: none; }
+:root[data-theme="dark"] .club-av img.l { display: none; }
+:root[data-theme="dark"] .club-av img.d { display: block; }
+.club-av.lg { border-radius: 20px; background: var(--surface); box-shadow: var(--shadow-1); }
+.mq-item .club-av { border-radius: 10px; }
+.clubs-strip { border-top: 0; padding-top: 6px; }

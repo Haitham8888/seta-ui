@@ -53,6 +53,14 @@
       facts: { ar: ["فرق نشطة في Rainbow Six وLeague of Legends"], en: ["Active rosters in Rainbow Six and League of Legends"] }, src: [S.lqR6, S.lol] },
   ];
 
+  /* official logos (from Liquipedia; trademarks of their owners). light/dark variants where the club has them */
+  const LOGO = { TF: "TF", TM: "TM", QA: "QA", PW: "PW", ST: "ST", GK: "GK", TE: "TE", ROC: ["ROC-light", "ROC-dark"], R8: ["R8-light", "R8-dark"], TV: ["TV-light", "TV-dark"] };
+  K.clubAv = (id, size = 44, extra = "") => {
+    const f = LOGO[id]; if (!f) return "";
+    const [l, d] = Array.isArray(f) ? f : [f, f];
+    const c = (K.SAUDI_CLUBS || []).find((x) => x.id === id);
+    return `<span class="club-av ${extra}" style="--s:${size}px" data-tip="${c ? c.en : id}"><img class="l" src="assets/clubs/${l}.png" alt="${c ? c.en : id}" loading="lazy"><img class="d" src="assets/clubs/${d}.png" alt="" aria-hidden="true" loading="lazy"></span>`;
+  };
   const L = (o) => (K.isAr ? o.ar : o.en);
   const host = (u) => u.replace(/^https?:\/\/(www\.)?/, "").split("/")[0];
 
@@ -60,7 +68,7 @@
 
   K.clubCard = (c) => `<article class="club-card" data-noi18n>
       <div class="row" style="gap:12px">
-        <span class="club-mono" style="background:${c.color}">${c.id}</span>
+        ${K.clubAv(c.id, 48)}
         <div style="min-width:0"><b class="club-name">${L(c)}</b><div class="faint" style="font-size:12px">${L(c.city)}${c.year ? ` · ${K.isAr ? "تأسس" : "est."} ${c.year}` : ""}</div></div>
         ${c.tier === 1 ? `<span class="tag v" style="margin-inline-start:auto">${K.isAr ? "بطل عالمي" : "World champion"}</span>` : ""}
       </div>
@@ -71,10 +79,11 @@
       </div>
     </article>`;
 
+  K.clubsStrip = () => `<div class="games-strip clubs-strip" data-noi18n><span class="eyebrow">${K.isAr ? "أندية سعودية في المشهد العالمي" : "Saudi clubs on the world stage"}</span><div class="marquee"><div class="mq-track">${[0, 1].map(() => K.SAUDI_CLUBS.map((c) => `<span class="mq-item">${K.clubAv(c.id, 34)}<b>${K.isAr ? c.ar : c.en}</b></span>`).join("")).join("")}</div></div></div>`;
   K.clubsSection = () => `<section class="sec" style="padding-top:0" data-noi18n>
       <div class="sec-h"><div><span class="eyebrow">${K.isAr ? "المشهد السعودي" : "The Saudi scene"}</span><h2>${K.isAr ? "أندية سعودية<br>تنافس العالم." : "Saudi clubs<br>taking on the world."}</h2></div>
         <p>${K.isAr ? "أندية سعودية لها فرق احترافية نشطة. كل معلومة مرتبطة بمصدرها المنشور." : "Saudi-based organisations with active pro rosters. Every fact links to its published source."}</p></div>
       <div class="clubs-grid">${K.SAUDI_CLUBS.map(K.clubCard).join("")}</div>
-      <p class="faint" style="font-size:12px;margin:16px 0 0">${K.isAr ? "آخر تحقق: نوفمبر 2026. الشعارات الرسمية للأندية غير مستخدمة لأنها علامات تجارية؛ تُعرض الأحرف الأولى فقط." : "Last checked November 2026. Official club logos are trademarks and are not used; initials are shown instead."}</p>
+      <p class="faint" style="font-size:12px;margin:16px 0 0">${K.isAr ? "آخر تحقق: نوفمبر 2026. شعارات الأندية علامات تجارية لأصحابها، معروضة للتعريف بكل نادٍ (المصدر: Liquipedia)." : "Last checked November 2026. Club logos are trademarks of their owners, shown to identify each club (source: Liquipedia)."}</p>
     </section>`;
 })();

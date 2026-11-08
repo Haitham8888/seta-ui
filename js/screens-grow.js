@@ -138,7 +138,7 @@
         <section class="card" style="overflow:hidden">
           <div style="position:absolute;inset:0;pointer-events:none;opacity:.6">${orbit({ w: 1400, h: 240, op: 0.5 })}</div>
           <div class="card-b row wrap" style="gap:22px;padding:22px;position:relative">
-            <span style="width:72px;height:72px;border-radius:18px;background:var(--ink);color:var(--bg);display:grid;place-items:center" class="cut">${ic("bird", "i-lg")}</span>
+            ${K.clubAv("TF", 76, "lg")}
             <div style="flex:1;min-width:220px"><span class="eyebrow" data-noi18n>${K.isAr ? "نادٍ · الرياض · تأسس 2017" : "Club · Riyadh · est. 2017"}</span><h1 class="h1" style="margin-top:4px" data-noi18n>Team Falcons</h1><div class="row wrap" style="gap:6px;margin-top:8px"><span class="tag" style="background:color-mix(in srgb,#FA4454 14%,transparent);color:#FA4454">${K.brand("valorant", 12, "#FA4454")}Valorant</span><span class="tag" data-noi18n>${ic("trophy")}${K.isAr ? "بطل أندية EWC" : "EWC Club Champion"}</span><span class="tag m">${ic("badge-check")}Verified club</span></div></div>
             <div class="row hide-m" style="gap:0">${(K.isAr ? [["بطل الأندية", "2024 · 2025"], ["بطولات EWC 2026", "18"], ["تأسس", "2017"]] : [["Club champion", "2024 · 2025"], ["EWC 2026 events", "18"], ["Founded", "2017"]]).map(([a, b], i) => `<div style="padding:0 22px;${i ? "border-inline-start:1px solid var(--line)" : ""}"><div class="eyebrow" style="font-size:10px">${a}</div><b class="wide num" style="font-size:24px">${b}</b></div>`).join("")}</div>
             <button class="btn">${ic("settings-2")}Club settings</button>

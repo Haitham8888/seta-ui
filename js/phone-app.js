@@ -27,7 +27,7 @@
       { i: "sparkles", c: "var(--violet)", t: "SETA Score went up to 82", s: "Best this season · 2h", go: "stats", unread: true },
       { i: "film", c: "var(--ember)", t: "3 key mistakes found in Bind", s: "Replay ready · 3h", go: "moment", unread: true },
       { i: "message-square", c: "var(--sky)", t: "Coach Reem replied", s: "“Bring your Bind replay” · 5h", go: "coach", unread: true },
-      { i: "shield", c: "var(--mint)", t: "Falcons invited you to a trial", s: "Sat 18:00 · 1d", go: "passport", unread: false },
+      { i: "club:TF", c: "var(--mint)", t: "Falcons invited you to a trial", s: "Sat 18:00 · 1d", go: "passport", unread: false },
     ],
     replayP: 41, playing: false,
   });
@@ -97,7 +97,7 @@
       ${matchRow(K.MATCHES[0], 0)}` };
     },
     notifs: () => ({ tabs: true, html: `${nav("Notifications", `<button class="link" data-act="readAll">Read all</button>`)}
-      <div class="m-group">${st.notifs.map((n, i) => `<button class="m-row pp-row-btn" data-act="openNotif" data-v="${i}"><span class="brand-tile" style="color:${n.c};background:color-mix(in srgb,${n.c} 12%,transparent);border:0">${ic(n.i, "i-sm")}</span><span class="grow"><b style="font-size:12.5px">${n.t}</b><span class="s" style="display:block">${n.s}</span></span>${n.unread ? `<i style="width:8px;height:8px;border-radius:50%;background:var(--violet)"></i>` : ""}</button>`).join("")}</div>
+      <div class="m-group">${st.notifs.map((n, i) => `<button class="m-row pp-row-btn" data-act="openNotif" data-v="${i}">${n.i.startsWith("club:") ? K.clubAv(n.i.slice(5), 36) : `<span class="brand-tile" style="color:${n.c};background:color-mix(in srgb,${n.c} 12%,transparent);border:0">${ic(n.i, "i-sm")}</span>`}<span class="grow"><b style="font-size:12.5px">${n.t}</b><span class="s" style="display:block">${n.s}</span></span>${n.unread ? `<i style="width:8px;height:8px;border-radius:50%;background:var(--violet)"></i>` : ""}</button>`).join("")}</div>
       <p class="pp-empty">That’s everything from this week.</p>` }),
     biosync: () => ({ tabs: true, html: `${nav("BioSync", `<button class="m-ib pp-tap" data-go="devices">${ic("watch")}</button>`)}
       ${st.watch ? `<div class="m-card" style="display:flex;gap:14px;align-items:center">${ring(74, { size: 96, stroke: 8, color: "var(--mint)", label: "74", sub: "READY" })}<div><b style="font-size:15px">Good day for ranked</b><p class="faint" style="margin:4px 0 0;font-size:12px">Keep tonight under 3 hours. HRV is above your baseline.</p></div></div>

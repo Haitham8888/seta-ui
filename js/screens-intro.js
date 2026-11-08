@@ -52,6 +52,7 @@
           ${K.saudiTicker()}
         </div>
         <div class="games-strip"><span class="eyebrow">Titles supported at launch</span><div class="marquee"><div class="mq-track">${[0, 1].map(() => Object.keys(K.GAME_META).map((c) => `<span class="mq-item">${K.game(c, 34)}<b>${K.gameName(c)}</b></span>`).join("")).join("")}</div></div></div>
+        ${K.clubsStrip()}
         ${K.clubsSection()}
         <section class="sec">
           <div class="sec-h"><div><span class="eyebrow">The platform</span><h2>Six tools. <br>One honest picture.</h2></div><p>Every module reads from the same match history, so the score you see on your dashboard is the same one a coach or scout sees. No vanity numbers.</p></div>

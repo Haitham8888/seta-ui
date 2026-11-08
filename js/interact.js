@@ -160,14 +160,14 @@
     ["sparkles", "var(--violet)", "Your SETA Score went up to 82", "Best this season · 2h ago", "#/performance"],
     ["film", "var(--ember)", "3 key mistakes found in Bind", "Replay ready · 3h ago", "#/replay"],
     ["message-square", "var(--sky)", "Coach Reem left feedback", "“Stop re-peeking after a kill” · 2d", "#/coach"],
-    ["shield", "var(--mint)", "Falcons invited you to a trial", "Sat 18:00 · 3d ago", "#/team"],
+    ["club:TF", "var(--mint)", "Falcons invited you to a trial", "Sat 18:00 · 3d ago", "#/team"],
   ];
   function openPop(kind, anchor) {
     if (pop && pop.dataset.kind === kind) return closePop();
     closePop();
     pop = document.createElement("div");
     pop.className = "pop"; pop.dataset.kind = kind;
-    if (kind === "notif") pop.innerHTML = `<div class="pop-h"><b>Notifications</b><button class="link" data-markall>Mark all read</button></div>${NOTIFS.map(([i, c, t, s, h]) => `<a class="pop-i unread" href="${h}"><span class="pop-ic" style="color:${c};background:color-mix(in srgb,${c} 14%,transparent)">${ic(i, "i-sm")}</span><span class="grow"><b>${t}</b><span>${s}</span></span><i class="ud"></i></a>`).join("")}<a class="pop-f" href="#/command">See all activity</a>`;
+    if (kind === "notif") pop.innerHTML = `<div class="pop-h"><b>Notifications</b><button class="link" data-markall>Mark all read</button></div>${NOTIFS.map(([i, c, t, s, h]) => `<a class="pop-i unread" href="${h}">${i.startsWith("club:") ? K.clubAv(i.slice(5), 30) : `<span class="pop-ic" style="color:${c};background:color-mix(in srgb,${c} 14%,transparent)">${ic(i, "i-sm")}</span>`}<span class="grow"><b>${t}</b><span>${s}</span></span><i class="ud"></i></a>`).join("")}<a class="pop-f" href="#/command">See all activity</a>`;
     if (kind === "help") pop.innerHTML = `<div class="pop-h"><b>Keyboard shortcuts</b></div>${[["Search and jump", "Ctrl K"], ["Quick search", "/"], ["Toggle dark mode", "T"], ["Next screen", "Alt →"], ["Previous screen", "Alt ←"], ["Close any panel", "Esc"]].map(([a, b]) => `<div class="pop-i" style="cursor:default"><span class="grow"><b style="font-weight:500">${a}</b></span><span class="kbd">${b}</span></div>`).join("")}`;
     if (kind === "me") {
       const coach = location.hash.includes("coachhub");
