@@ -31,9 +31,9 @@
 .m-tabs span { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 600; color: var(--text-3); }
 .m-tabs .on { color: var(--violet); }
 .m-tabs .lucide { width: 20px; height: 20px; }
-.m-tabs .go { margin-top: -28px; }
-.m-tabs .go i.b { width: 52px; height: 52px; border-radius: 17px; display: grid; place-items: center; background: var(--violet); color: var(--on-violet); box-shadow: 0 0 0 5px var(--surface); font-style: normal; }
-.m-tabs .go i.b .lucide { width: 22px; height: 22px; }
+.m-tabs .go { margin-top: -10px; }
+.m-tabs .go i.b { width: 42px; height: 34px; border-radius: 12px; display: grid; place-items: center; background: var(--violet); color: var(--on-violet); box-shadow: 0 6px 14px -8px var(--violet); font-style: normal; }
+.m-tabs .go i.b .lucide { width: 18px; height: 18px; }
 .m-tabs .go.live i.b { background: var(--ember); color: #fff; }
 .m-slider { position: relative; height: 30px; }
 .m-slider .tr { position: absolute; left: 0; right: 0; top: 13px; height: 4px; border-radius: 2px; background: var(--surface-3); }
