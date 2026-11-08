@@ -43,8 +43,9 @@
       ["Network", [["discovery", "radar", "Discovery"], ["team", "shield", "Team & Club"]]],
     ],
     coach: [
-      ["Coaching", [["coachhub", "clipboard-list", "Coach Hub"], ["coachhub#review", "film", "Review Queue", "6", true], ["coachhub#sessions", "calendar-days", "Sessions"]]],
-      ["Players", [["discovery", "radar", "Discovery"], ["team", "shield", "Team & Club"], ["performance", "activity", "Analytics"]]],
+      ["Coaching", [["coachhub", "layout-dashboard", "Dashboard"], ["coach-players", "users", "Players"], ["coach-review", "film", "Review queue", "6", true], ["coach-sessions", "calendar-days", "Sessions", "2"], ["coach-plans", "clipboard-list", "Training plans"]]],
+      ["Business", [["coach-earnings", "wallet", "Earnings"], ["coach-profile", "id-card", "Public profile"]]],
+      ["Network", [["discovery", "radar", "Discovery"], ["team", "shield", "Team & Club"]]],
     ],
   };
   const ME = { player: ["Yara Hamami", "NYX · Duelist"], coach: ["Reem Alqahtani", "Head Coach · Falcons"] };
@@ -53,7 +54,7 @@
     const role = scr.role || "player";
     const groups = NAV[role].map(([g, items]) => `<div class="nav-group"><span class="eyebrow">${g}</span>${items.map(([id, icon, label, count, hot]) =>
       `<a class="nav-item ${scr.nav === id ? "on" : ""}" href="#/${id.split("#")[0]}" title="${label}">${ic(icon)}<span>${label}</span>${count ? `<em class="count ${hot ? "hot" : ""}">${count}</em>` : ""}</a>`).join("")}</div>`).join("");
-    const tabs = [["command", "layout-dashboard", "Home"], ["performance", "activity", "Stats"], ["matches", "swords", "Matches"], ["coach", "graduation-cap", "Coach"], ["passport", "id-card", "Passport"]];
+    const tabs = role === "coach" ? [["coachhub", "layout-dashboard", "Hub"], ["coach-players", "users", "Players"], ["coach-review", "film", "Review"], ["coach-sessions", "calendar-days", "Sessions"], ["coach-profile", "id-card", "Profile"]] : [["command", "layout-dashboard", "Home"], ["performance", "activity", "Stats"], ["matches", "swords", "Matches"], ["coach", "graduation-cap", "Coach"], ["passport", "id-card", "Passport"]];
     return `<div class="shell">
       <aside class="side">
         <div class="brand">${wm(20)}<span class="role-pill">${role}</span></div>

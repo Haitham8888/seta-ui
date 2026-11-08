@@ -1,0 +1,42 @@
+/* =========================================================
+   SETA — coach account
+   ========================================================= */
+
+/* availability grid */
+.slot-grid { display: grid; grid-template-columns: 54px repeat(7, minmax(44px, 1fr)); gap: 6px; align-items: center; min-width: 420px; }
+.slot-grid > b { font-size: 12px; text-align: center; font-weight: 650; }
+.slot-grid > span { font-size: 10.5px; }
+.slot { height: 30px; border-radius: 8px; border: 1px dashed var(--line-2); background: transparent; transition: background .15s, border-color .15s, transform .12s; }
+.slot:hover { border-color: var(--violet); }
+.slot:active { transform: scale(.94); }
+.slot.on { background: var(--violet); border: 1px solid var(--violet); box-shadow: inset 0 -2px 0 rgba(0,0,0,.15); }
+
+/* weekly calendar */
+.cal { --rh: 46px; display: flex; flex-direction: column; }
+.cal-h { display: grid; grid-template-columns: 56px repeat(7, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.cal-h > * { padding: 12px 8px; font-size: 12px; text-align: center; font-weight: 650; }
+.cal-h b.today { color: var(--violet); }
+.cal-b { position: relative; display: grid; grid-template-columns: 56px repeat(7, minmax(0, 1fr)); height: calc(var(--rh) * 7); }
+.cal-times { display: flex; flex-direction: column; }
+.cal-times span { height: var(--rh); font-family: var(--font-mono); font-size: 10px; color: var(--text-3); padding: 4px 8px 0; text-align: right; border-top: 1px solid var(--line); }
+.cal-col { position: relative; border-left: 1px solid var(--line); background-image: repeating-linear-gradient(to bottom, var(--line) 0 1px, transparent 1px var(--rh)); }
+.cal-col.today { background-color: color-mix(in srgb, var(--violet) 4%, transparent); }
+.cal-ev { position: absolute; left: 4px; right: 4px; border-radius: 8px; padding: 6px 8px; font-size: 11.5px; font-weight: 650; line-height: 1.25; overflow: hidden; border-left: 3px solid var(--violet); background: var(--violet-tint); color: var(--text); cursor: pointer; transition: transform .15s var(--ease), box-shadow .15s; }
+.cal-ev span { display: block; font-family: var(--font-mono); font-size: 9.5px; font-weight: 500; color: var(--text-3); margin-top: 2px; }
+.cal-ev:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); z-index: 2; }
+.cal-ev.e { border-color: var(--ember); background: var(--ember-soft); }
+.cal-ev.s { border-color: var(--sky); background: var(--sky-soft); }
+.cal-ev.m { border-color: var(--mint); background: var(--mint-soft); }
+.cal-ev.free { border: 1px dashed var(--line-2); background: transparent; color: var(--text-3); }
+.cal-now { position: absolute; left: 56px; right: 0; height: 2px; background: var(--ember); pointer-events: none; }
+.cal-now::before { content: ""; position: absolute; left: -5px; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--ember); }
+
+/* plan builder */
+.day-add { margin-top: auto; height: 30px; border-radius: 8px; border: 1px dashed var(--line-2); color: var(--text-3); display: grid; place-items: center; transition: border-color .15s, color .15s, background .15s; }
+.day-add:hover { border-color: var(--violet); color: var(--violet); background: var(--violet-tint); }
+
+@media (max-width: 760px) {
+  .cal-h, .cal-b { grid-template-columns: 44px repeat(7, minmax(64px, 1fr)); }
+  .cal { overflow-x: auto; }
+  .cal-h, .cal-b { min-width: 520px; }
+}

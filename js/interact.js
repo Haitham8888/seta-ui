@@ -10,7 +10,7 @@
   let px = innerWidth / 2, py = 80;
 
   /* elements that already have their own behaviour */
-  const HANDLED = "[onclick],[data-tab],[data-role],[data-g],[data-goal],[data-pref],[data-next],[data-back],[data-edit],[data-sk],[data-m],[data-mf],[data-mo],[data-cm],[data-cmp],[data-tt],[data-pop],[data-palette],a[href],select,input,textarea";
+  const HANDLED = "[data-h],[onclick],[data-tab],[data-role],[data-g],[data-goal],[data-pref],[data-next],[data-back],[data-edit],[data-sk],[data-m],[data-mf],[data-mo],[data-cm],[data-cmp],[data-tt],[data-pop],[data-palette],a[href],select,input,textarea";
   const RIPPLE = ".btn,.icon-btn,.m-btn,.m-ib,.sso-ic,.chip,.m-chip,.role-card,.game-tile,.moment,.w-btn,.seg button,.m-seg span,.m-faces span,.tabs button";
 
   const labelOf = (el) => (el.getAttribute("aria-label") || el.getAttribute("data-tip") || el.textContent || "").replace(/\s+/g, " ").trim();

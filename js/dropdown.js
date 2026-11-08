@@ -16,6 +16,7 @@
   ];
   const opts = (arr, icon) => arr.map((label) => ({ label, icon }));
   const RULES = [
+    [/^\s*for/i, () => [{ group: "Your players" }, ...(K.COACH_PLAYERS || []).map((p) => ({ label: p.t, note: `${p.n} · ${p.role}`, icon: "user-round" })), { group: "Groups" }, { label: "Whole team · Falcons", icon: "users" }]],
     [/jazan|riyadh|jeddah|dammam|ksa|server|region/i, () => SAUDI],
     [/days|week|season|period/i, () => opts(["This week", "Last 7 days", "30 days", "90 days", "This season"], "calendar")],
     [/map/i, () => opts(["All maps", "Haven", "Bind", "Ascent", "Lotus", "Split", "Sunset", "Icebox", "Pearl"], "map")],

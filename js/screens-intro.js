@@ -117,7 +117,7 @@
             ${authTab === "up" ? `<div class="field"><label>Full name</label><div class="input">${ic("user")}<input value="Yara Hamami"></div></div>` : ""}
             <div class="field"><label>Email</label><div class="input">${ic("at-sign")}<input value="yara@jazanu.edu.sa" type="email"></div></div>
             <div class="field"><div class="row between"><label>Password</label>${authTab === "in" ? `<a class="link" href="#/auth">Forgot?</a>` : ""}</div><div class="input">${ic("lock")}<input type="${showPw ? "text" : "password"}" value="seta-season-26"><button data-pw title="Show password">${ic(showPw ? "eye-off" : "eye")}</button></div>${authTab === "up" ? `<div class="segbar" style="margin-top:4px"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div><span class="hint">Strong. Add a symbol to make it excellent.</span>` : ""}</div>
-            <a class="btn primary lg block" href="#/${authTab === "up" ? "setup" : "command"}">${authTab === "up" ? "Create account" : "Sign in"} ${ic("arrow-right")}</a>
+            <a class="btn primary lg block" href="#/${authTab === "up" ? (role === "coach" ? "coach-setup" : role === "club" ? "team" : "setup") : role === "coach" ? "coachhub" : "command"}">${authTab === "up" ? "Create account" : "Sign in"} ${ic("arrow-right")}</a>
             <p class="faint" style="font-size:12px;margin:0;text-align:center">By continuing you agree to SETA’s <a class="link" style="font-size:12px">Terms</a> and <a class="link" style="font-size:12px">Privacy Policy</a>.</p>
           </div>
         </main>
