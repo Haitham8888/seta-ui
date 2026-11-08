@@ -1,5 +1,5 @@
 /* SETA — real Saudi esports data. Every figure below is taken from a public source (linked).
-   Checked November 2026. Club logos are not used (trademarks); monograms only. */
+   Checked November 2026. Club logos from Liquipedia (trademarks of their owners). */
 (function () {
   const K = (window.K = window.K || {});
   const S = {
@@ -17,6 +17,7 @@
     lqR6: "https://liquipedia.net/rainbowsix/Category:Saudi_Arabian_Teams",
     lqRL: "https://liquipedia.net/rocketleague/Category:Saudi_Arabian_Teams",
     lol: "https://lol.fandom.com/wiki/Category:Saudi_Arabian_Teams",
+    sef: "https://saudiesports.sa/",
     ewc26: "https://esportsworldcup.com/en/press-releases/agal-crowned-ewc26-club-champion",
   };
   K.SRC = S;
@@ -83,7 +84,12 @@
   K.clubsSection = () => `<section class="sec" style="padding-top:0" data-noi18n>
       <div class="sec-h"><div><span class="eyebrow">${K.isAr ? "المشهد السعودي" : "The Saudi scene"}</span><h2>${K.isAr ? "أندية سعودية<br>تنافس العالم." : "Saudi clubs<br>taking on the world."}</h2></div>
         <p>${K.isAr ? "أندية سعودية لها فرق احترافية نشطة. كل معلومة مرتبطة بمصدرها المنشور." : "Saudi-based organisations with active pro rosters. Every fact links to its published source."}</p></div>
+      <a class="sef-card" href="${S.sef}" target="_blank" rel="noopener">
+        <span class="sef-ic">${K.ic("shield-check")}</span>
+        <span class="grow"><span class="eyebrow">${K.isAr ? "الجهة الرسمية" : "Official body"}</span><b>${K.isAr ? "الاتحاد السعودي للرياضات الإلكترونية" : "Saudi Esports Federation"}</b><span class="faint">${K.isAr ? "البطولات الوطنية والأندية المعتمدة والأخبار الرسمية" : "National tournaments, registered clubs and official news"}</span></span>
+        <span class="sef-go mono">saudiesports.sa ${K.ic("arrow-up-right", "i-sm")}</span>
+      </a>
       <div class="clubs-grid">${K.SAUDI_CLUBS.map(K.clubCard).join("")}</div>
-      <p class="faint" style="font-size:12px;margin:16px 0 0">${K.isAr ? "آخر تحقق: نوفمبر 2026. شعارات الأندية علامات تجارية لأصحابها، معروضة للتعريف بكل نادٍ (المصدر: Liquipedia)." : "Last checked November 2026. Club logos are trademarks of their owners, shown to identify each club (source: Liquipedia)."}</p>
+      <p class="faint" style="font-size:12px;margin:16px 0 0">${K.isAr ? "آخر تحقق: نوفمبر 2026. شعارات الأندية علامات تجارية لأصحابها، معروضة للتعريف بكل نادٍ (المصدر: Liquipedia). الموقع الرسمي للاتحاد: saudiesports.sa." : "Last checked November 2026. Club logos are trademarks of their owners, shown to identify each club (source: Liquipedia). Official federation: saudiesports.sa."}</p>
     </section>`;
 })();

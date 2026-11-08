@@ -73,7 +73,7 @@
           <h2 style="margin-top:14px">Better data. <br>Stronger you.</h2>
           <div class="row" style="margin-top:28px;gap:10px;flex-wrap:wrap;position:relative"><a class="btn primary lg" href="#/auth" style="--on-violet:#fff;background:#9677FF;border-color:#9677FF;color:#0E0C13">Get started free ${ic("arrow-right")}</a><a class="btn lg" href="#/m-start" style="background:transparent;color:#EDEAF4;border-color:#3A3349">Watch the tour</a></div>
         </section>
-        <footer class="land-foot">${wm(16)}<span>© 2026 SETA · Jazan University graduation project</span><span style="margin-inline-start: auto" class="row" style="gap:16px"><a href="#/system">Design system</a> · <a href="#/landing">Privacy</a> · <a href="#/landing">Terms</a></span></footer>
+        <footer class="land-foot">${wm(16)}<span>© 2026 SETA · Jazan University graduation project</span><span style="margin-inline-start: auto" class="row" style="gap:16px"><a href="https://saudiesports.sa/" target="_blank" rel="noopener" data-noi18n>${K.isAr ? "الاتحاد السعودي للرياضات الإلكترونية" : "Saudi Esports Federation"}</a> · <a href="#/system">Design system</a> · <a href="#/landing">Privacy</a> · <a href="#/landing">Terms</a></span></footer>
       </div>`;
     },
     mount(root) {
