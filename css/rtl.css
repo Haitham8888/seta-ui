@@ -35,7 +35,7 @@
 :root[lang="ar"] .hero > h1, :root[lang="ar"] .sec-h h2, :root[lang="ar"] .cta-band h2, :root[lang="ar"] .canvas-head .h1, :root[lang="ar"] .page-head .h1,
 :root[lang="ar"] .h1, :root[lang="ar"] .h2, :root[lang="ar"] .feat h3, :root[lang="ar"] .loop h3, :root[lang="ar"] .pp-large, :root[lang="ar"] .m-title, :root[lang="ar"] .role-col .h2 {
   font-family: var(--font-display); font-weight: 700; font-stretch: normal; letter-spacing: 0;
-  font-feature-settings: "kern" 1, "liga" 1, "dlig" 1, "swsh" 1, "salt" 1, "calt" 1;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 :root[lang="ar"] .hero > h1 { line-height: 1.22; font-size: clamp(42px, 6.6vw, 96px); }
 :root[lang="ar"] .sec-h h2, :root[lang="ar"] .cta-band h2 { line-height: 1.25; }
@@ -95,3 +95,10 @@
 
 :root[lang="ar"] .sp-tag, :root[lang="ar"] .sp-row, :root[lang="ar"] .sp-hint { font-family: var(--font-ui); }
 :root[lang="ar"] .sp-tag { font-size: 15px; font-weight: 600; padding: 0; }
+
+/* Thmanyah aesthetics guide: swash letters (salt) on a single word only, never adjacent words */
+:root[lang="ar"] .sw { font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "salt" 1; }
+:root[lang="ar"] .kw { white-space: nowrap; }
+.k-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 16px; }
+.k-rules > div { display: flex; gap: 10px; align-items: flex-start; padding: 12px; border-radius: 12px; background: var(--surface-2); font-size: 12.5px; line-height: 1.6; }
+.k-rules b.ok { color: var(--mint); } .k-rules b.no { color: var(--rose); }

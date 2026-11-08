@@ -49,12 +49,10 @@
           <div class="hero-stage"><div class="frame"><div class="bar"><i></i><i></i><i></i></div><div class="inner" id="heroShot"></div></div></div>
         </section>
         <div class="ticker">
-          <div><span class="eyebrow">Players tracked</span><div class="big num">12.4k</div></div>
-          <div><span class="eyebrow">Replays analysed</span><div class="big num">310k</div></div>
-          <div><span class="eyebrow">Avg. score lift · 90d</span><div class="big num" style="color:var(--violet)">+14%</div></div>
-          <div><span class="eyebrow">Clubs scouting</span><div class="big num">86</div></div>
+          ${K.saudiTicker()}
         </div>
         <div class="games-strip"><span class="eyebrow">Titles supported at launch</span><div class="marquee"><div class="mq-track">${[0, 1].map(() => Object.keys(K.GAME_META).map((c) => `<span class="mq-item">${K.game(c, 34)}<b>${K.gameName(c)}</b></span>`).join("")).join("")}</div></div></div>
+        ${K.clubsSection()}
         <section class="sec">
           <div class="sec-h"><div><span class="eyebrow">The platform</span><h2>Six tools. <br>One honest picture.</h2></div><p>Every module reads from the same match history, so the score you see on your dashboard is the same one a coach or scout sees. No vanity numbers.</p></div>
           <div class="feat-grid">${feats.map(([n, i, t, p, v]) => `<article class="feat"><div class="row between"><span class="n">${n}</span>${ic(i, "faint")}</div><div class="vis">${v}</div><h3>${t}</h3><p>${p}</p></article>`).join("")}</div>
@@ -103,7 +101,7 @@
             <p class="wide" style="font-size:26px;line-height:1.25;font-weight:560;letter-spacing:-.01em;margin:14px 0 22px">“I stopped guessing what to fix. The replay timeline shows me the second it went wrong.”</p>
             <div class="row" style="gap:12px">${av("Reem Alqahtani", "")}<div style="line-height:1.3"><b style="font-size:13.5px">Reem Alqahtani</b><div style="font-size:12px;color:rgba(237,234,244,.55)">Head Coach, Falcons</div></div></div>
             <div class="row" style="gap:28px;margin-top:40px;padding-top:24px;border-top:1px solid #2A2245">
-              ${[["12.4k", "players"], ["86", "clubs"], ["4.9", "coach rating"]].map(([a, b]) => `<div><b class="wide num" style="font-size:24px">${a}</b><div style="font-size:12px;color:rgba(237,234,244,.5)">${b}</div></div>`).join("")}
+              ${[["23.5M", K.isAr ? "مهتم بالألعاب في السعودية" : "gaming enthusiasts in KSA"], ["$70M+", K.isAr ? "جوائز EWC 2025" : "EWC 2025 prize pool"], ["2×", K.isAr ? "Team Falcons بطل الأندية" : "Team Falcons club champion"]].map(([a, b]) => `<div data-noi18n><b class="wide num" style="font-size:24px">${a}</b><div style="font-size:12px;color:rgba(237,234,244,.5)">${b}</div></div>`).join("")}
             </div>
           </div>
         </aside>

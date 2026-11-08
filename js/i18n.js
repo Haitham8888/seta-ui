@@ -31,47 +31,97 @@
   }
   K.t = t;
 
-  /* ---------- kashida (tatweel) ---------- */
+  /* ---------- kashida + swash, following “دليل جماليات خط ثمانية” ----------
+     Slanted kashida (الكشيدة المائلة):
+       1. only between the LAST letter and the one before it
+       2. never more than once in a word
+       3. never stretched to its maximum (we cap at 3 units)
+     Swash letters (الأحرف المرسلة · OpenType "salt"):
+       4. never used heavily in a sentence (one word per headline)
+       5. never on two adjacent words (kept away from the kashida word too) */
   const TATWEEL = "ـ";
+  const KMAX = 3;
   const NON_JOIN_AFTER = new Set("اأإآدذرزوؤةءىـ".split(""));
-  const ARABIC = /[ء-ي]/;
-  function kashidaWord(w, n) {
-    // candidate joints: letter i joins to i+1 (i is dual-joining and next is an Arabic letter)
-    const chars = [...w], cands = [];
-    for (let i = 0; i < chars.length - 1; i++) {
-      if (ARABIC.test(chars[i]) && ARABIC.test(chars[i + 1]) && !NON_JOIN_AFTER.has(chars[i]) && !/[ً-ْ]/.test(chars[i + 1])) cands.push(i);
+  const LETTER = /[ء-ي]/;
+  const MARK = /[ً-ْٰ]/;
+  const ARABIC = LETTER;
+  /* returns the insertion index (before the last letter) or -1 when the rule can't be met */
+  function kashidaPoint(chars) {
+    if (chars.includes(TATWEEL)) return -1;                            // once per word
+    // the last place where a letter connects to the next one — i.e. inside the word's final connected group
+    for (let j = chars.length - 1; j > 0; j--) {
+      if (!LETTER.test(chars[j])) continue;
+      let prev = j - 1;
+      while (prev >= 0 && MARK.test(chars[prev])) prev--;             // marks belong to the previous letter
+      if (prev >= 0 && LETTER.test(chars[prev]) && !NON_JOIN_AFTER.has(chars[prev])) return j;
     }
-    if (!cands.length) return w;
-    // traditional placement: the joint closest to the end (before the last connected letter), never the first joint of short words
-    let pick = cands[cands.length - 1];
-    if (chars.length > 4 && cands.length > 1 && pick === chars.length - 2) pick = cands[cands.length - 1];
-    chars.splice(pick + 1, 0, TATWEEL.repeat(n));
+    return -1;
+  }
+  function kashidaWord(w, n) {
+    const chars = [...w], at = kashidaPoint(chars);
+    if (at < 0 || n <= 0) return w;
+    chars.splice(at, 0, TATWEEL.repeat(Math.min(KMAX, n)));
     return chars.join("");
   }
-  K.kashida = function (text, n = 2, maxWords = 1) {
+  const eligible = (w) => LETTER.test(w) && [...w].filter((c) => LETTER.test(c)).length >= 3 && kashidaPoint([...w]) > -1;
+  /* stretch the longest eligible word(s) — one kashida per word */
+  K.kashida = function (text, n = 1, maxWords = 1) {
     const words = text.split(/(\s+)/);
-    const idx = words.map((w, i) => [w, i]).filter(([w]) => ARABIC.test(w) && [...w].length >= 4).sort((a, b) => [...b[0]].length - [...a[0]].length).slice(0, maxWords).map((x) => x[1]);
+    const idx = words.map((w, i) => [w, i]).filter(([w]) => eligible(w)).sort((a, b) => [...b[0]].length - [...a[0]].length).slice(0, maxWords).map((x) => x[1]);
     idx.forEach((i) => (words[i] = kashidaWord(words[i], n)));
     return words.join("");
   };
+  K.kashidaRules = { max: KMAX };
+
   const KASHIDA_SEL = ".hero > h1, .sec-h h2, .cta-band h2, .canvas-head .h1, .page-head .h1, .loop h3, .sp-tag, .pp-large, .m-title, .feat h3";
+  const BIG = ".hero > h1, .cta-band h2, .sec-h h2, .canvas-head .h1";
+  const reduced = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   function applyKashida(scope) {
     if (!K.isAr) return;
-    (scope.matches && scope.matches(KASHIDA_SEL) ? [scope] : []).concat([...scope.querySelectorAll ? scope.querySelectorAll(KASHIDA_SEL) : []]).forEach((el) => {
+    (scope.matches && scope.matches(KASHIDA_SEL) ? [scope] : []).concat([...(scope.querySelectorAll ? scope.querySelectorAll(KASHIDA_SEL) : [])]).forEach((el) => {
       if (el.dataset.k || el.closest("[data-noi18n]")) return;
-      const tn = [...el.childNodes].filter((n) => n.nodeType === 3 && ARABIC.test(n.textContent));
-      if (!tn.length) return;
-      // one stretched word per headline, on the longest text node
-      const target = tn.sort((a, b) => b.textContent.length - a.textContent.length)[0];
-      const base = target.textContent;
-      const n = el.matches(".hero > h1, .cta-band h2") ? 3 : el.matches(".sec-h h2, .canvas-head .h1, .sp-tag") ? 2 : 1;
-      target.textContent = K.kashida(base, n);
+      const tns = [...el.childNodes].filter((n) => n.nodeType === 3 && LETTER.test(n.textContent));
+      if (!tns.length) return;
       el.dataset.k = "1";
-      if (el.matches(".hero > h1, .sec-h h2, .cta-band h2, .canvas-head .h1")) {
+      // pick the text node holding the longest eligible word
+      let best = null;
+      tns.forEach((tn) => tn.textContent.split(/\s+/).forEach((w) => { if (eligible(w) && (!best || [...w].length > [...best.w].length)) best = { tn, w }; }));
+      if (!best) return;
+      const n = el.matches(".hero > h1, .cta-band h2") ? 2 : 1;
+      // split that text node into: before · <span.kw>word</span> · after   (so we can animate just the word)
+      const txt = best.tn.textContent, pos = txt.indexOf(best.w);
+      const frag = document.createDocumentFragment();
+      if (pos > 0) frag.appendChild(document.createTextNode(txt.slice(0, pos)));
+      const kw = document.createElement("span"); kw.className = "kw"; kw.textContent = kashidaWord(best.w, n); frag.appendChild(kw);
+      const rest = txt.slice(pos + best.w.length);
+      if (rest) frag.appendChild(document.createTextNode(rest));
+      best.tn.replaceWith(frag);
+      // swash: one word, never adjacent to the kashida word (or to another swash)
+      if (el.matches(BIG)) {
+        const nodes = [...el.childNodes].filter((n) => n.nodeType === 3 && LETTER.test(n.textContent));
+        const order = [];
+        [...el.childNodes].forEach((n) => { if (n === kw) order.push({ kw: true }); else if (n.nodeType === 3) n.textContent.split(/(\s+)/).forEach((w) => /\S/.test(w) && order.push({ n, w })); else if (n.nodeType === 1 && n.tagName !== "BR") order.push({ el: n }); });
+        const ki = order.findIndex((o) => o.kw);
+        const cand = order.map((o, i) => [o, i]).filter(([o, i]) => o.n && LETTER.test(o.w) && Math.abs(i - ki) >= 2 && [...o.w].length >= 3).pop();
+        if (cand && nodes.includes(cand[0].n)) {
+          const tn = cand[0].n, t2 = tn.textContent, p2 = t2.lastIndexOf(cand[0].w);
+          const f2 = document.createDocumentFragment();
+          if (p2 > 0) f2.appendChild(document.createTextNode(t2.slice(0, p2)));
+          const sw = document.createElement("span"); sw.className = "sw"; sw.textContent = cand[0].w; f2.appendChild(sw);
+          if (t2.slice(p2 + cand[0].w.length)) f2.appendChild(document.createTextNode(t2.slice(p2 + cand[0].w.length)));
+          tn.replaceWith(f2);
+        }
+      }
+      // motion: the kashida draws in, and breathes on hover — never past the font's comfortable maximum
+      if (el.matches(BIG) && !reduced()) {
         el.classList.add("k-live");
-        let timer;
-        el.addEventListener("mouseenter", () => { clearInterval(timer); let s = n; timer = setInterval(() => { s++; target.textContent = K.kashida(base, s); if (s >= n + 4) clearInterval(timer); }, 45); });
-        el.addEventListener("mouseleave", () => { clearInterval(timer); let s = n + 4; timer = setInterval(() => { s--; target.textContent = K.kashida(base, s); if (s <= n) clearInterval(timer); }, 45); });
+        const base = best.w; let timer, cur = 0;
+        const set = (k) => { cur = k; kw.textContent = kashidaWord(base, k); };
+        const tween = (to, ms) => { clearInterval(timer); timer = setInterval(() => { if (cur === to) return clearInterval(timer); set(cur + (to > cur ? 1 : -1)); }, ms); };
+        set(0); setTimeout(() => tween(n, 160), 650);
+        el.addEventListener("mouseenter", () => tween(KMAX, 110));
+        el.addEventListener("mouseleave", () => tween(n, 140));
       }
     });
   }

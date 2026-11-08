@@ -101,7 +101,7 @@
       const [a, b] = [...cmp].map((i) => PL[i]);
       const va = [95, 94, 92, 89, 88, 90], vb = [91, 89, 90, 87, 85, 88];
       return `<div class="page fade-in">
-        ${head("Talent discovery", "Find the right player", "2,340 verified passports. Filter, shortlist and compare up to two players side by side.", `<button class="btn">${ic("bookmark")}Shortlist <span class="mono faint">4</span></button><button class="btn primary">${ic("bell-plus")}Save search</button>`)}
+        ${head("Talent discovery", "Find the right player", "Verified passports only. Filter, shortlist and compare up to two players side by side.", `<button class="btn">${ic("bookmark")}Shortlist <span class="mono faint">4</span></button><button class="btn primary">${ic("bell-plus")}Save search</button>`)}
         <div class="card" style="padding:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
           <label class="input sm" style="flex:1;min-width:220px">${ic("search")}<input placeholder="Search name, tag or passport ID"></label>
           <button class="select game-sel" data-pop="games">${K.game("VAL", 22, 6)}<b style="font-weight:600">Valorant</b>${ic("chevron-down")}</button>${[["crosshair", "Any role"], ["map-pin", "Jazan · KSA South"], ["sparkles", "Potential ≥ 85"], ["cake", "16 – 22"]].map(([i, t]) => `<span class="select">${ic(i)}${t}${ic("chevron-down")}</span>`).join("")}
@@ -139,8 +139,8 @@
           <div style="position:absolute;inset:0;pointer-events:none;opacity:.6">${orbit({ w: 1400, h: 240, op: 0.5 })}</div>
           <div class="card-b row wrap" style="gap:22px;padding:22px;position:relative">
             <span style="width:72px;height:72px;border-radius:18px;background:var(--ink);color:var(--bg);display:grid;place-items:center" class="cut">${ic("bird", "i-lg")}</span>
-            <div style="flex:1;min-width:220px"><span class="eyebrow">Club · Jazan · est. 2023</span><h1 class="h1" style="margin-top:4px">Falcons</h1><div class="row wrap" style="gap:6px;margin-top:8px"><span class="tag" style="background:color-mix(in srgb,#FA4454 14%,transparent);color:#FA4454">${K.brand("valorant", 12, "#FA4454")}Valorant</span><span class="tag">${ic("graduation-cap")}University league</span><span class="tag m">${ic("badge-check")}Verified club</span></div></div>
-            <div class="row hide-m" style="gap:0">${[["Players", "12"], ["Coaches", "3"], ["Win rate", "68%"], ["League rank", "#2"]].map(([a, b], i) => `<div style="padding:0 22px;${i ? "border-inline-start:1px solid var(--line)" : ""}"><div class="eyebrow" style="font-size:10px">${a}</div><b class="wide num" style="font-size:24px">${b}</b></div>`).join("")}</div>
+            <div style="flex:1;min-width:220px"><span class="eyebrow" data-noi18n>${K.isAr ? "نادٍ · الرياض · تأسس 2017" : "Club · Riyadh · est. 2017"}</span><h1 class="h1" style="margin-top:4px" data-noi18n>Team Falcons</h1><div class="row wrap" style="gap:6px;margin-top:8px"><span class="tag" style="background:color-mix(in srgb,#FA4454 14%,transparent);color:#FA4454">${K.brand("valorant", 12, "#FA4454")}Valorant</span><span class="tag" data-noi18n>${ic("trophy")}${K.isAr ? "بطل أندية EWC" : "EWC Club Champion"}</span><span class="tag m">${ic("badge-check")}Verified club</span></div></div>
+            <div class="row hide-m" style="gap:0">${(K.isAr ? [["بطل الأندية", "2024 · 2025"], ["بطولات EWC 2026", "18"], ["تأسس", "2017"]] : [["Club champion", "2024 · 2025"], ["EWC 2026 events", "18"], ["Founded", "2017"]]).map(([a, b], i) => `<div style="padding:0 22px;${i ? "border-inline-start:1px solid var(--line)" : ""}"><div class="eyebrow" style="font-size:10px">${a}</div><b class="wide num" style="font-size:24px">${b}</b></div>`).join("")}</div>
             <button class="btn">${ic("settings-2")}Club settings</button>
           </div>
           <div style="padding:0 22px" class="tabs">${["Overview", "Roster", "Analysis", "Matches", "Training", "Strategy"].map((t) => `<button class="${teamTab === t ? "on" : ""}" data-tt="${t}">${t}</button>`).join("")}</div>
@@ -233,15 +233,16 @@
 
         <section class="card" style="padding:24px" data-noi18n dir="rtl" lang="ar" id="arType">
           <div class="row between wrap" style="gap:12px"><span class="eyebrow" style="font-family:var(--font-ui)">الطباعة العربية · خط ثمانية</span><span class="tag v mono">THMANYAH · RTL</span></div>
-          <div class="k-sample" id="kDemo" style="font-size:clamp(40px,6vw,84px);margin:18px 0 6px">موهبتك بيانات لم تُقرأ بعد</div>
+          <div class="k-sample" id="kDemo" style="font-size:clamp(40px,6vw,84px);margin:18px 0 6px">خط حي يجمّل أي شيء يكتبه</div>
           <div class="row wrap" style="gap:16px;align-items:center">
-            <label class="row" style="gap:10px;font-size:13px;font-family:var(--font-ui)">الكشيدة <input type="range" min="0" max="6" value="2" id="kRange" style="accent-color:var(--violet);width:160px"><b class="num" id="kVal">2</b></label>
-            <div class="row wrap" style="gap:6px" id="kFeats">${[["swsh", "زخارف"], ["dlig", "ربطات"], ["salt", "بدائل"], ["ss01", "ss01"], ["ss03", "ss03"], ["ss04", "ss04"], ["ss05", "ss05"]].map(([f, l], i) => `<button class="chip ${i < 3 ? "on" : ""}" data-h data-feat="${f}" style="height:28px;font-size:12px;font-family:var(--font-ui)">${l}</button>`).join("")}</div>
+            <label class="row" style="gap:10px;font-size:13px;font-family:var(--font-ui)">الكشيدة <input type="range" min="0" max="3" value="1" id="kRange" style="accent-color:var(--violet);width:160px"><b class="num" id="kVal">1</b></label>
+            <div class="row wrap" style="gap:6px" id="kFeats">${[["salt", "الأحرف المرسلة"], ["ss01", "ss01"], ["ss03", "الفتحة الممتدة 1"], ["ss04", "الفتحة الممتدة 2"], ["dlig", "ربطات"]].map(([f, l], i) => `<button class="chip ${i === 0 ? "on" : ""}" data-h data-feat="${f}" style="height:28px;font-size:12px;font-family:var(--font-ui)">${l}</button>`).join("")}</div>
           </div>
           <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px" id="arFaces">
             ${[["Thmanyah Serif Display", "var(--font-display)", "للعناوين الكبيرة", "مركز القيادة"], ["Thmanyah Sans", "var(--font-ui)", "للواجهة والأزرار", "ابدأ الجلسة الآن"], ["Thmanyah Serif Text", "var(--font-read)", "للنصوص الطويلة", "التصويب هو الأفضل لك هذا الشهر."]].map(([n, f, d, ex]) => `<div class="card sunk" style="padding:16px"><div class="mono faint" style="font-size:10.5px;direction:ltr;text-align:start">${n}</div><div style="font-family:${f};font-size:24px;font-weight:700;margin:10px 0 4px;line-height:1.4">${ex}</div><div class="faint" style="font-size:12px;font-family:var(--font-ui)">${d}</div><div class="row" style="gap:10px;margin-top:10px;font-family:${f};font-size:18px">${[300, 400, 500, 700, 900].map((w) => `<span style="font-weight:${w}">أ</span>`).join("")}</div></div>`).join("")}
           </div>
-          <p class="faint" style="font-size:12px;margin:14px 0 0;font-family:var(--font-ui)">يُعرض خط ثمانية من الخطوط المثبّتة على جهازك وفق ترخيصه. الزوّار الآخرون يرون بديلًا مفتوح الترخيص (IBM Plex Sans Arabic وNoto Naskh Arabic).</p>
+          <div class="k-rules" style="font-family:var(--font-ui)">${[["ok", "الكشيدة المائلة", "بين الحرف الأخير وما يسبقه فقط (آخر موضع اتصال في الكلمة)."], ["no", "لا تتكرر", "لا تُستخدم أكثر من مرة في الكلمة الواحدة."], ["no", "لا تُمدّ لأقصاها", "الحد الأقصى هنا 3 وحدات."], ["no", "الأحرف المرسلة", "لا تُستخدم بكثرة في الجملة، ولا في كلمتين متجاورتين."]].map(([c, t, d]) => `<div><b class="${c}">${c === "ok" ? "✓" : "✕"}</b><span><b>${t}</b> — ${d}</span></div>`).join("")}</div>
+          <p class="faint" style="font-size:12px;margin:14px 0 0;font-family:var(--font-ui)">المرجع: دليل جماليات خط ثمانية. يُعرض خط ثمانية من الخطوط المثبّتة على جهازك وفق ترخيصه. الزوّار الآخرون يرون بديلًا مفتوح الترخيص (IBM Plex Sans Arabic وNoto Naskh Arabic).</p>
         </section>
         <section class="card" style="padding:24px"><span class="eyebrow">Principles</span>
           <div class="grid" style="grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:18px" id="prGrid">${[["01", "Quiet base, one voice", "Neutrals do the work. Violet marks the one thing to look at."], ["02", "Numbers first", "Every card leads with its number. Charts support it, never replace it."], ["03", "Honest data", "Show the sample size and the comparison. BioSync never implies cause."], ["04", "Easy on the eyes", "Warm paper in light mode, ink (not black) in dark. Contrast AA or better."]].map(([n, t, d]) => `<div><span class="mono" style="color:var(--violet);font-size:11px">${n}</span><h3 class="h3" style="margin:8px 0 6px">${t}</h3><p class="faint" style="margin:0;font-size:13px">${d}</p></div>`).join("")}</div></section>
@@ -251,8 +252,8 @@
       const demo = root.querySelector("#kDemo"), range = root.querySelector("#kRange"), val = root.querySelector("#kVal");
       if (!demo) return;
       const base = demo.textContent;
-      const feats = new Set(["swsh", "dlig", "salt"]);
-      const paint = () => { const n = +range.value; val.textContent = n; demo.textContent = n ? K.kashida(base, n, 2) : base; demo.style.fontFeatureSettings = [...feats].map((f) => `"${f}" 1`).join(", ") || "normal"; };
+      const feats = new Set(["salt"]);
+      const paint = () => { const n = +range.value; val.textContent = n; const words = (n ? K.kashida(base, n, 1) : base).split(" "); const ki = words.findIndex((w) => w.includes("ـ")); const si = feats.has("salt") ? words.map((w, i) => i).filter((i) => Math.abs(i - (ki < 0 ? -9 : ki)) >= 2).pop() : -1; demo.innerHTML = words.map((w, i) => (i === si ? `<span style="font-feature-settings:'salt' 1">${w}</span>` : w)).join(" "); demo.style.fontFeatureSettings = [...feats].filter((f) => f !== "salt").map((f) => `"${f}" 1`).join(", ") || "normal"; };
       range.oninput = paint;
       root.querySelectorAll("[data-feat]").forEach((b) => (b.onclick = () => { const f = b.dataset.feat; feats.has(f) ? feats.delete(f) : feats.add(f); b.classList.toggle("on", feats.has(f)); paint(); }));
       paint();

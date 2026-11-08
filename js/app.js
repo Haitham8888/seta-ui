@@ -68,6 +68,7 @@
         <header class="topbar">
           <div class="crumbs"><span class="crumb-mark">${K.star(13)}</span>${scr.crumbs ? scr.crumbs.map((c, i, a) => (i === a.length - 1 ? `<b>${c}</b>` : `<span>${c}</span>${ic("chevron-right")}`)).join("") : `<b>${scr.title}</b>`}</div>
           <label class="search" data-palette>${ic("search")}<input placeholder="Search players, matches, drills"><span class="kbd">Ctrl K</span></label>
+          <span class="tag a demo-tag" data-noi18n data-tip="${K.isAr ? "بيانات اللاعبين والمباريات في هذا النموذج توضيحية، وليست لأشخاص حقيقيين" : "Player and match data in this prototype is illustrative, not real people"}">${K.ic("flask-conical")}${K.isAr ? "بيانات توضيحية" : "Illustrative data"}</span>
           <button class="icon-btn" title="Notifications" data-pop="notif">${ic("bell")}<span class="pip"></span></button>
           <button class="icon-btn hide-m" title="Shortcuts" data-pop="help">${ic("life-buoy")}</button>
         </header>

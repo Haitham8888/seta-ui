@@ -2089,6 +2089,11 @@ Object.assign(window.SETA_AR, {
   "Interface v2 · 29 screens": "الواجهة 2 · 29 شاشة", "Interface v2 · 30 screens": "الواجهة 2 · 30 شاشة"
 });
 
+Object.assign(window.SETA_AR, {
+  "Verified passports only. Filter, shortlist and compare up to two players side by side.": "جوازات موثّقة فقط. صفِّ اللاعبين، وأضفهم للقائمة المختصرة، وقارن بين اثنين جنبًا إلى جنب.",
+  "You score higher than 82% of Immortal duelists in Saudi Arabia.": "درجتك أعلى من 82% من مبارزي Immortal في السعودية."
+});
+
 /* dynamic patterns: numbers, dates, names inside sentences */
 (function () {
   const T = (s) => (window.K && K.t ? K.t(s) : s);
