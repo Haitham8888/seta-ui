@@ -160,7 +160,7 @@
     ["sparkles", "var(--violet)", "Your SETA Score went up to 82", "Best this season · 2h ago", "#/performance"],
     ["film", "var(--ember)", "3 key mistakes found in Bind", "Replay ready · 3h ago", "#/replay"],
     ["message-square", "var(--sky)", "Coach Reem left feedback", "“Stop re-peeking after a kill” · 2d", "#/coach"],
-    ["shield", "var(--mint)", "Falcon invited you to a trial", "Sat 18:00 · 3d ago", "#/team"],
+    ["shield", "var(--mint)", "Falcons invited you to a trial", "Sat 18:00 · 3d ago", "#/team"],
   ];
   function openPop(kind, anchor) {
     if (pop && pop.dataset.kind === kind) return closePop();
@@ -171,7 +171,7 @@
     if (kind === "help") pop.innerHTML = `<div class="pop-h"><b>Keyboard shortcuts</b></div>${[["Search and jump", "Ctrl K"], ["Quick search", "/"], ["Toggle dark mode", "T"], ["Next screen", "Alt →"], ["Previous screen", "Alt ←"], ["Close any panel", "Esc"]].map(([a, b]) => `<div class="pop-i" style="cursor:default"><span class="grow"><b style="font-weight:500">${a}</b></span><span class="kbd">${b}</span></div>`).join("")}`;
     if (kind === "me") {
       const coach = location.hash.includes("coachhub");
-      pop.innerHTML = `<div class="pop-h" style="gap:10px;justify-content:flex-start">${K.av(coach ? "Reem Alqahtani" : "Yara Hamami", "sm")}<span><b>${coach ? "Reem Alqahtani" : "Yara Hamami"}</b><span class="faint" style="display:block;font-size:11.5px">${coach ? "Head Coach · Falcon" : "NYX · Falcon"}</span></span></div>
+      pop.innerHTML = `<div class="pop-h" style="gap:10px;justify-content:flex-start">${K.av(coach ? "Reem Alqahtani" : "Yara Hamami", "sm")}<span><b>${coach ? "Reem Alqahtani" : "Yara Hamami"}</b><span class="faint" style="display:block;font-size:11.5px">${coach ? "Head Coach · Falcons" : "NYX · Falcons"}</span></span></div>
         <a class="pop-i" href="#/${coach ? "command" : "coachhub"}">${ic("repeat", "i-sm")}<span class="grow"><b style="font-weight:500">Switch to ${coach ? "player" : "coach"} view</b></span></a>
         <a class="pop-i" href="#/passport">${ic("id-card", "i-sm")}<span class="grow"><b style="font-weight:500">My Talent Passport</b></span></a>
         <a class="pop-i" href="#/pair">${ic("watch", "i-sm")}<span class="grow"><b style="font-weight:500">Devices</b></span></a>

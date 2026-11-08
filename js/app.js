@@ -47,7 +47,7 @@
       ["Players", [["discovery", "radar", "Discovery"], ["team", "shield", "Team & Club"], ["performance", "activity", "Analytics"]]],
     ],
   };
-  const ME = { player: ["Yara Hamami", "NYX · Duelist"], coach: ["Reem Alqahtani", "Head Coach · Falcon"] };
+  const ME = { player: ["Yara Hamami", "NYX · Duelist"], coach: ["Reem Alqahtani", "Head Coach · Falcons"] };
 
   function shell(scr, body) {
     const role = scr.role || "player";

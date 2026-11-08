@@ -101,7 +101,7 @@
           <div style="margin-top:auto;position:relative;max-width:460px">
             <span class="eyebrow">From a SETA coach</span>
             <p class="wide" style="font-size:26px;line-height:1.25;font-weight:560;letter-spacing:-.01em;margin:14px 0 22px">“I stopped guessing what to fix. The replay timeline shows me the second it went wrong.”</p>
-            <div class="row" style="gap:12px">${av("Reem Alqahtani", "")}<div style="line-height:1.3"><b style="font-size:13.5px">Reem Alqahtani</b><div style="font-size:12px;color:rgba(237,234,244,.55)">Head Coach, Falcon</div></div></div>
+            <div class="row" style="gap:12px">${av("Reem Alqahtani", "")}<div style="line-height:1.3"><b style="font-size:13.5px">Reem Alqahtani</b><div style="font-size:12px;color:rgba(237,234,244,.55)">Head Coach, Falcons</div></div></div>
             <div class="row" style="gap:28px;margin-top:40px;padding-top:24px;border-top:1px solid #2A2245">
               ${[["12.4k", "players"], ["86", "clubs"], ["4.9", "coach rating"]].map(([a, b]) => `<div><b class="wide num" style="font-size:24px">${a}</b><div style="font-size:12px;color:rgba(237,234,244,.5)">${b}</div></div>`).join("")}
             </div>
