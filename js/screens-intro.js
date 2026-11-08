@@ -2,16 +2,7 @@
 (function () {
   const { ic, wm, logo, star, orbit, av, spark, radar, ring, lines, qr } = K;
   const S = (window.SCREENS = window.SCREENS || []);
-  const GAMES = [
-    ["VAL", "Valorant", "Tactical FPS", "#C9374F"],
-    ["RL", "Rocket League", "Vehicle sports", "#1F78B4"],
-    ["CS2", "Counter-Strike 2", "Tactical FPS", "#A86B00"],
-    ["LoL", "League of Legends", "MOBA", "#2E6F6A"],
-    ["FC", "EA Sports FC", "Football sim", "#12895F"],
-    ["APX", "Apex Legends", "Battle royale", "#D9531E"],
-    ["OW2", "Overwatch 2", "Hero shooter", "#A33A86"],
-    ["SF6", "Street Fighter 6", "Fighting", "#3D4A9E"],
-  ];
+  const GAMES = Object.entries(K.GAME_META).map(([k, g]) => [k, g.name, g.genre, g.bg]);
   K.GAMES = GAMES;
 
   /* sign-in providers with official marks */
@@ -63,6 +54,7 @@
           <div><span class="eyebrow">Avg. score lift · 90d</span><div class="big num" style="color:var(--violet)">+14%</div></div>
           <div><span class="eyebrow">Clubs scouting</span><div class="big num">86</div></div>
         </div>
+        <div class="games-strip"><span class="eyebrow">Titles supported at launch</span><div class="marquee"><div class="mq-track">${[0, 1].map(() => Object.keys(K.GAME_META).map((c) => `<span class="mq-item">${K.game(c, 34)}<b>${K.gameName(c)}</b></span>`).join("")).join("")}</div></div></div>
         <section class="sec">
           <div class="sec-h"><div><span class="eyebrow">The platform</span><h2>Six tools. <br>One honest picture.</h2></div><p>Every module reads from the same match history, so the score you see on your dashboard is the same one a coach or scout sees. No vanity numbers.</p></div>
           <div class="feat-grid">${feats.map(([n, i, t, p, v]) => `<article class="feat"><div class="row between"><span class="n">${n}</span>${ic(i, "faint")}</div><div class="vis">${v}</div><h3>${t}</h3><p>${p}</p></article>`).join("")}</div>
@@ -148,8 +140,8 @@
       const main = GAMES.find((g) => picked.has(g[0])) || GAMES[0];
       let body = "";
       if (step === 0) body = `<div><span class="eyebrow">Step 1</span><h1 class="h1" style="margin-top:6px">What do you play?</h1><p class="muted" style="margin:8px 0 0">Pick one or more. Your first pick becomes your main title.</p></div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">${GAMES.map(([k, n, t, c]) => `<button class="game-tile ${picked.has(k) ? "on" : ""}" data-g="${k}"><span class="gmark" style="background:${c}">${k}</span><span class="check ${picked.has(k) ? "on" : ""}">${ic("check")}</span><div><b>${n}</b><br><span>${t}</span></div></button>`).join("")}</div>
-        <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:12px"><div class="field"><label>Current rank</label><div class="input">${ic("trophy")}<select><option>Immortal 1</option><option>Diamond 3</option><option>Ascendant 2</option></select>${ic("chevron-down", "i-sm")}</div></div><div class="field"><label>Main role</label><div class="input">${ic("crosshair")}<select><option>Duelist</option><option>Initiator</option><option>Controller</option><option>Sentinel</option></select>${ic("chevron-down", "i-sm")}</div></div><div class="field"><label>Server region</label><div class="input">${ic("globe-2")}<select><option>Middle East · Bahrain</option><option>Europe · Frankfurt</option></select>${ic("chevron-down", "i-sm")}</div></div></div>`;
+        <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px">${GAMES.map(([k, n, t, c]) => `<button class="game-tile ${picked.has(k) ? "on" : ""}" data-g="${k}">${K.game(k, 40)}<span class="check ${picked.has(k) ? "on" : ""}">${ic("check")}</span><div><b>${n}</b><br><span>${t}</span></div></button>`).join("")}</div>
+        <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:12px"><div class="field"><label>Current rank</label><div class="input">${ic("trophy")}<select><option>Immortal 1</option><option>Diamond 3</option><option>Ascendant 2</option></select>${ic("chevron-down", "i-sm")}</div></div><div class="field"><label>Main role</label><div class="input">${ic("crosshair")}<select><option>Duelist</option><option>Initiator</option><option>Controller</option><option>Sentinel</option></select>${ic("chevron-down", "i-sm")}</div></div><div class="field"><label>Server region</label><div class="input">${ic("globe-2")}<select><option selected>Jazan · KSA South (base)</option><option>Riyadh · KSA Central</option><option>Jeddah · KSA West</option><option>Dammam · KSA East</option></select>${ic("chevron-down", "i-sm")}</div></div></div>`;
       if (step === 1) body = `<div><span class="eyebrow">Step 2</span><h1 class="h1" style="margin-top:6px">How should we show you?</h1><p class="muted" style="margin:8px 0 0">This is what coaches and scouts see first.</p></div>
         <div class="row" style="gap:16px">${av("Yara Hamami", "xl")}<div class="col" style="gap:6px"><div class="row" style="gap:8px"><button class="btn sm">${ic("upload")} Upload photo</button><button class="btn sm ghost">Use initials</button></div><span class="hint">PNG or JPG, at least 400 × 400.</span></div></div>
         <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px"><div class="field"><label>Gamer tag</label><div class="input"><span class="mono faint">@</span><input value="NYX"><span class="tag m">${ic("check")}Available</span></div></div><div class="field"><label>Riot ID</label><div class="input">${ic("link-2")}<input value="NYX#KSA1"></div></div><div class="field"><label>Date of birth</label><div class="input">${ic("calendar")}<input value="14 / 03 / 2005"></div></div><div class="field"><label>City</label><div class="input">${ic("map-pin")}<input value="Jazan, Saudi Arabia"></div></div></div>
@@ -176,8 +168,8 @@
             <div class="passport" style="min-height:0;gap:14px">${K.guil(360, 300)}
               <div class="row between" style="position:relative"><span class="wm on-ink" style="height:14px"><img class="l" src="assets/wordmark-light.png"><img class="d" src="assets/wordmark-dark.png"></span><span class="lbl">Draft passport</span></div>
               <div class="row" style="gap:12px;position:relative">${av("Yara Hamami", "lg")}<div><b class="wide" style="font-size:22px">NYX</b><div class="lbl" style="margin-top:2px">${main[1]} · Duelist</div></div></div>
-              <div class="row wrap" style="gap:6px;position:relative">${sel.map((g) => `<span class="tag" style="background:rgba(255,255,255,.08);color:#EDEAF4">${g[1]}</span>`).join("")}</div>
-              <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px;position:relative"><div><div class="lbl">Rank</div><div class="v">Immortal 1</div></div><div><div class="lbl">Region</div><div class="v">ME</div></div><div><div class="lbl">Age</div><div class="v">21</div></div></div>
+              <div class="row wrap" style="gap:6px;position:relative">${sel.map((g) => `<span class="tag" style="background:rgba(255,255,255,.08);color:#EDEAF4">${K.brand(K.GAME_META[g[0]].k, 11, "#EDEAF4")}${g[1]}</span>`).join("")}</div>
+              <div class="grid" style="grid-template-columns:1fr 1fr 1fr;gap:10px;position:relative"><div><div class="lbl">Rank</div><div class="v">Immortal 1</div></div><div><div class="lbl">Server</div><div class="v">Jazan</div></div><div><div class="lbl">Age</div><div class="v">21</div></div></div>
               <div class="mrz" style="position:relative">P&lt;SETA&lt;NYX&lt;&lt;HAMAMI&lt;YARA&lt;&lt;&lt;&lt;</div>
             </div>
             <div class="card" style="padding:16px"><div class="row between"><b style="font-size:13px">Profile strength</b><span class="mono" style="font-size:12px;color:var(--violet)">${[35, 60, 80, 96][step]}%</span></div><div class="meter" style="margin-top:10px"><i style="width:${[35, 60, 80, 96][step]}%"></i></div><p class="faint" style="font-size:12px;margin:10px 0 0">Complete profiles get 3× more coach replies.</p></div>
@@ -214,7 +206,7 @@
           <div class="row wrap" style="gap:8px;justify-content:center;margin-top:6px">${done.map(([i, t]) => `<span class="chip on" style="cursor:default">${ic(i)}${t}</span>`).join("")}</div>
           <div class="row" style="gap:10px;margin-top:10px;flex-wrap:wrap;justify-content:center"><a class="btn primary lg" href="#/command">Open Command Center ${ic("arrow-right")}</a><a class="btn lg" href="#/command">${ic("compass")} Take the 60-second tour</a></div>
           <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:980px;width:100%;margin-top:36px;text-align:left" id="nextGrid">
-            ${[["01", "activity", "Your first SETA Score", "82", "Top 18% of Immortal duelists in the region.", "#/performance"],
+            ${[["01", "activity", "Your first SETA Score", "82", "Top 18% of Immortal duelists in Saudi Arabia.", "#/performance"],
                ["02", "film", "Review your worst round", "8:42", "Round 14 on Haven. One wide peek cost the half.", "#/replay"],
                ["03", "graduation-cap", "Meet your AI coach", "3 drills", "A 25-minute plan is ready for today.", "#/coach"]].map(([n, i, t, big, d, h]) => `<a class="card" href="${h}" style="padding:20px;display:flex;flex-direction:column;gap:14px;transition:border-color .15s" onmouseover="this.style.borderColor='var(--violet)'" onmouseout="this.style.borderColor=''"><div class="row between"><span class="mono faint" style="font-size:11px">${n}</span>${ic(i, "faint")}</div><b class="wide num" style="font-size:30px;line-height:1">${big}</b><div><div class="h3">${t}</div><p class="faint" style="margin:4px 0 0;font-size:12.5px">${d}</p></div><span class="link">Open ${ic("arrow-right")}</span></a>`).join("")}
           </div>

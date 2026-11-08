@@ -19,7 +19,7 @@
           <div class="w-big" style="font-size:58px;text-align:left;letter-spacing:-.04em">9:41</div>
           <div class="row" style="gap:6px;margin-top:auto">
             <div style="position:relative;width:52px;height:52px">${wring(74, { size: 52, stroke: 5, color: "#45D6A2", label: "74" })}</div>
-            <div style="flex:1;background:#14121A;border-radius:14px;padding:7px 9px"><div class="w-lbl" style="color:#B29BFF">${star(8, "#B29BFF")} Next</div><div style="font-weight:650;font-size:11.5px;line-height:1.2;margin-top:2px">Premier · Bind</div><div style="font-size:10.5px;color:#8A8396">21:00</div></div>
+            <div style="flex:1;background:#14121A;border-radius:14px;padding:7px 9px"><div class="w-lbl" style="color:#B29BFF">${star(8, "#B29BFF")} Next</div><div class="row" style="gap:4px;font-weight:650;font-size:11.5px;line-height:1.2;margin-top:2px">${K.brand("valorant", 10, "#FA4454")}Premier · Bind</div><div style="font-size:10.5px;color:#8A8396">21:00</div></div>
           </div></div>`;
       const ready = `${top()}<div class="row" style="gap:10px;margin-top:2px"><div style="width:72px;height:72px">${wring(74, { size: 72, stroke: 7, color: "#45D6A2", label: "74" })}</div><div><div class="w-lbl">Readiness</div><div style="font-weight:650;font-size:13px;line-height:1.2;margin-top:2px">Good day for ranked</div></div></div>
           <div class="grid" style="grid-template-columns:1fr 1fr;gap:6px;margin-top:auto">${[["moon", "7h40", "#9677FF"], ["activity", "68 ms", "#63C3FF"]].map(([i, v, c]) => `<div style="background:#14121A;border-radius:12px;padding:7px 8px" class="row"><span style="color:${c}">${ic(i, "i-sm")}</span><b style="font-size:12px">${v}</b></div>`).join("")}</div>`;
@@ -35,7 +35,7 @@
       const nudge = `${top()}<span style="width:40px;height:40px;border-radius:12px;background:#352A15;color:#F2BC4B;display:grid;place-items:center;margin-top:4px">${ic("coffee")}</span>
           <div style="font-weight:650;font-size:15px;line-height:1.2">2h 50m played.<br>Take 10?</div><div style="font-size:11px;color:#8A8396">Heart rate is recovering slower than usual.</div>
           <div class="grid" style="grid-template-columns:1fr 1fr;gap:6px;margin-top:auto"><span class="w-btn dim">Later</span><span class="w-btn" style="background:#F2BC4B">Break</span></div>`;
-      const result = `${top("Haven", "Match")}<div style="margin-top:4px"><span class="w-pill" style="background:#15302A;color:#45D6A2">Victory</span></div>
+      const result = `${top("Haven", "Match")}<div class="row" style="gap:5px;font-size:10.5px;color:#8A8396;margin-top:2px">${K.brand("valorant", 11, "#FA4454")}Valorant · Competitive</div><div style="margin-top:4px"><span class="w-pill" style="background:#15302A;color:#45D6A2">Victory</span></div>
           <div class="w-big" style="font-size:46px;margin-top:2px">13–7</div>
           <div class="grid" style="grid-template-columns:1fr 1fr;gap:6px">${[["RR", "+18", "#45D6A2"], ["SETA", "+2", "#B29BFF"]].map(([a, b, c]) => `<div style="background:#14121A;border-radius:12px;padding:6px 8px"><div class="w-lbl">${a}</div><b style="color:${c};font-size:15px">${b}</b></div>`).join("")}</div>
           <span class="w-btn dim" style="margin-top:auto">${ic("smartphone")}Debrief on phone</span>`;

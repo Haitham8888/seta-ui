@@ -1,0 +1,76 @@
+/* =========================================================
+   SETA — dropdowns, game marks, logo placements
+   ========================================================= */
+
+/* ---------- triggers ---------- */
+.dd-native { display: none !important; }
+.dd-trigger {
+  flex: 1; min-width: 0; height: 100%; display: flex; align-items: center; text-align: left;
+  font-size: 14px; font-weight: 500; color: var(--text); cursor: pointer; background: none; border: 0; padding: 0;
+}
+.dd-trigger .dd-val { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.input:has(.dd-trigger) { cursor: pointer; }
+.input:has(.dd-trigger):hover { border-color: var(--text-3); }
+.input.dd-open, .proto-sel.dd-open, .select.dd-open { border-color: var(--violet); box-shadow: 0 0 0 3px var(--violet-tint); }
+.input .lucide-chevron-down, .select .lucide-chevron-down, .proto-sel .lucide-chevron-down { transition: transform .2s var(--ease); }
+.dd-open .lucide-chevron-down { transform: rotate(180deg); }
+.proto-sel .dd-trigger { font-size: 12.5px; font-weight: 600; }
+
+button.select { font: inherit; cursor: pointer; }
+.select { cursor: pointer; user-select: none; transition: border-color .15s, box-shadow .15s, transform .15s var(--ease); }
+.select:hover { border-color: var(--line-2); }
+.select:active { transform: scale(.98); }
+.select.dd-changed { animation: ddFlash .5s var(--ease); }
+@keyframes ddFlash { 30% { border-color: var(--violet); box-shadow: 0 0 0 3px var(--violet-tint); } }
+.game-sel { padding-left: 6px; gap: 8px; }
+
+/* ---------- menu ---------- */
+.dd-menu { width: auto; max-width: min(360px, calc(100vw - 16px)); padding: 6px; z-index: 260; }
+.dd-title { padding: 8px 10px 6px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.dd-scroll { max-height: min(360px, 60vh); overflow: auto; overscroll-behavior: contain; }
+.dd-group { padding: 10px 10px 4px; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.dd-group:first-child { padding-top: 4px; }
+.dd-i { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 9px; text-align: left; color: var(--text-2); font-size: 13px; transition: background .12s, color .12s; }
+.dd-i .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.dd-i .grow b { font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dd-i .grow span { font-size: 11px; color: var(--text-3); }
+.dd-i .tick { color: var(--violet); opacity: 0; transition: opacity .12s; display: grid; }
+.dd-i.sel .tick { opacity: 1; }
+.dd-i.sel .grow b { color: var(--violet); }
+.dd-i.on, .dd-i:hover { background: var(--surface-2); }
+.dd-i .gmark { box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
+
+/* ---------- game marks ---------- */
+.gmark svg { display: block; }
+.game-tile .gmark { width: 40px; height: 40px; }
+
+/* landing: titles strip */
+.games-strip { padding: 34px 0 10px; display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid var(--line); overflow: hidden; }
+.games-strip > .eyebrow { padding: 0 clamp(16px, 5vw, 64px); }
+.marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); padding-bottom: 24px; }
+.mq-track { display: flex; gap: 14px; width: max-content; animation: mq 38s linear infinite; }
+.marquee:hover .mq-track { animation-play-state: paused; }
+.mq-item { display: inline-flex; align-items: center; gap: 12px; padding: 10px 18px 10px 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); white-space: nowrap; transition: border-color .2s, transform .2s var(--ease); }
+.mq-item:hover { border-color: var(--line-2); transform: translateY(-2px); }
+.mq-item b { font-size: 14px; font-weight: 620; }
+@keyframes mq { to { transform: translateX(calc(-50% - 7px)); } }
+
+/* ---------- logo placements ---------- */
+.crumb-mark { color: var(--violet); display: grid; margin-right: 2px; }
+.app-foot { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 18px 28px 26px; margin-top: auto; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-2); }
+.app-foot .sp { flex: 1; }
+.app-foot a:hover { color: var(--violet); }
+.canvas + .app-foot { max-width: none; }
+
+/* intro */
+.intro { position: fixed; inset: 0; z-index: 400; background: #120D1F; display: grid; place-items: center; transition: opacity .6s cubic-bezier(.2,.7,.2,1), visibility .6s; }
+.intro.out { opacity: 0; visibility: hidden; }
+.intro-in { position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; animation: introIn .8s cubic-bezier(.2,.7,.2,1) both; }
+.intro-in img { width: min(320px, 70vw); height: auto; position: relative; }
+.intro-in span { font-family: var(--font-mono); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: rgba(237,234,244,.5); }
+.intro-arc { position: absolute; width: 140%; left: -20%; top: -30%; opacity: .6; }
+.intro-arc path { stroke-dasharray: 520; stroke-dashoffset: 520; animation: draw 1.1s cubic-bezier(.2,.7,.2,1) .1s forwards; }
+@keyframes introIn { from { opacity: 0; transform: scale(.94); filter: blur(6px); } }
+
+@media (max-width: 760px) { .app-foot { padding: 16px 16px 96px; } }
+@media (prefers-reduced-motion: reduce) { .mq-track { animation: none; flex-wrap: wrap; width: auto; } }

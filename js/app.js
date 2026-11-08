@@ -65,17 +65,19 @@
       </aside>
       <div class="main">
         <header class="topbar">
-          <div class="crumbs">${scr.crumbs ? scr.crumbs.map((c, i, a) => (i === a.length - 1 ? `<b>${c}</b>` : `<span>${c}</span>${ic("chevron-right")}`)).join("") : `<b>${scr.title}</b>`}</div>
+          <div class="crumbs"><span class="crumb-mark">${K.star(13)}</span>${scr.crumbs ? scr.crumbs.map((c, i, a) => (i === a.length - 1 ? `<b>${c}</b>` : `<span>${c}</span>${ic("chevron-right")}`)).join("") : `<b>${scr.title}</b>`}</div>
           <label class="search" data-palette>${ic("search")}<input placeholder="Search players, matches, drills"><span class="kbd">Ctrl K</span></label>
           <button class="icon-btn" title="Notifications" data-pop="notif">${ic("bell")}<span class="pip"></span></button>
           <button class="icon-btn hide-m" title="Shortcuts" data-pop="help">${ic("life-buoy")}</button>
         </header>
         ${body}
+        ${K.footer()}
       </div>
       <nav class="tabbar">${tabs.map(([id, icon, l]) => `<a href="#/${id}" class="${scr.nav === id ? "on" : ""}">${ic(icon)}${l}</a>`).join("")}</nav>
     </div>`;
   }
 
+  K.footer = () => `<footer class="app-foot">${wm(14)}<span class="faint">Smart Esports Talent Platform</span><span class="sp"></span><a href="#/system">Design system</a><a href="#/landing">Website</a><span class="mono faint">v2 · 2026</span></footer>`;
   K.shell = shell;
 
   /* ---------- prototype bar ---------- */
@@ -105,7 +107,8 @@
     const scr = S.find((s) => s.id === h) || S[0];
     current = scr.id;
     const body = scr.render();
-    const html = protoBar(scr) + (scr.kind === "app" ? shell(scr, body) : body);
+    const bare = ["landing", "auth", "setup", "complete"].includes(scr.id);
+    const html = protoBar(scr) + (scr.kind === "app" ? shell(scr, body) : body + (bare ? "" : K.footer()));
     const root = document.getElementById("app");
     root.innerHTML = html;
     document.title = `SETA — ${scr.title}`;
@@ -118,7 +121,7 @@
   window.rerender = () => { const y = scrollY; render(); scrollTo(0, y); };
   window.addEventListener("hashchange", render);
   document.addEventListener("keydown", (e) => {
-    if (e.target.matches("input,textarea,select")) return;
+    if (e.target.matches?.("input,textarea,select")) return;
     if (e.key === "ArrowRight" && e.altKey) go(1);
     if (e.key === "ArrowLeft" && e.altKey) go(-1);
   });

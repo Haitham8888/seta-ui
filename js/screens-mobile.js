@@ -87,7 +87,7 @@
           <div class="m-card" style="display:flex;gap:12px;align-items:center;border-color:var(--violet);background:var(--violet-tint)"><span class="brand-tile" style="background:var(--violet);color:var(--on-violet);border:0">${ic("smile")}</span><div style="flex:1"><b style="font-size:13px">How do you feel?</b><div class="faint" style="font-size:11.5px">20-second check-in</div></div>${ic("chevron-right", "faint")}</div>
           <div class="row between"><span class="m-label">Today’s plan · 25 min</span><span class="mono faint" style="font-size:10.5px">1/3</span></div>
           <div class="m-group">${[["Crossfire timing", "Range · 10 min", true], ["Utility-first entries", "Custom · 10 min", false], ["Review: Bind R14", "Replay · 5 min", false]].map(([t, s, d]) => `<div class="m-row"><span class="check ${d ? "on" : ""}">${ic("check")}</span><div class="grow"><div style="font-weight:600;${d ? "text-decoration:line-through;color:var(--text-3)" : ""}">${t}</div><div class="s">${s}</div></div></div>`).join("")}</div>
-          <div class="m-card" style="display:flex;gap:12px;align-items:center;padding:12px"><span class="brand-tile">${K.brand("riotgames", 16)}</span><div style="flex:1"><b style="font-size:13px">Premier vs Najd Vipers</b><div class="faint" style="font-size:11.5px">21:00 · Bind</div></div><span class="tag e mono">IN 2H</span></div>
+          <div class="m-card" style="display:flex;gap:12px;align-items:center;padding:12px">${K.game("VAL", 36, 10)}<div style="flex:1"><b style="font-size:13px">Premier vs Najd Vipers</b><div class="faint" style="font-size:11.5px">21:00 · Bind</div></div><span class="tag e mono">IN 2H</span></div>
         </div>${tabs(0)}`;
       const checkin = `<div class="m-body">
           <div class="m-top">${ic("x")}<span style="font-weight:650">Check-in</span><span class="faint" style="font-size:12px">2 / 3</span></div>
@@ -109,7 +109,7 @@
         </div>${tabs(-1, true)}`;
       const debrief = `<div class="m-body">
           <div class="m-top">${ic("chevron-left")}<span style="font-weight:650">Debrief</span><span class="m-ib">${ic("share")}</span></div>
-          <div class="row between" style="align-items:flex-end"><div><span class="m-label" style="padding:0">Bind · Premier</span><div class="row" style="gap:10px;align-items:baseline"><b class="m-big">8–13</b><span class="tag r">Defeat</span></div></div><div style="text-align:right"><span class="m-label" style="padding:0">SETA</span><div>${delta(-2)}</div></div></div>
+          <div class="row between" style="align-items:flex-end"><div><span class="m-label row" style="padding:0;gap:6px">${K.brand("valorant", 11, "#FA4454")}Bind · Premier</span><div class="row" style="gap:10px;align-items:baseline"><b class="m-big">8–13</b><span class="tag r">Defeat</span></div></div><div style="text-align:right"><span class="m-label" style="padding:0">SETA</span><div>${delta(-2)}</div></div></div>
           <div class="m-card" style="padding:0;overflow:hidden"><div style="height:110px">${K.map().replace('width="100%" height="100%"', 'width="100%" height="110"')}</div>
             <div style="padding:12px"><span class="tag e mono">ONE THING TO FIX · 08:42</span><div style="font-weight:650;margin-top:8px">Wide peek before the recon dart</div><p class="faint" style="margin:4px 0 0;font-size:12px">Wait about 2 s, then swing as a pair with Kairo.</p></div></div>
           <div><div class="m-label" style="margin-bottom:8px">How was your focus?</div><div class="m-faces">${["angry", "frown", "meh", "smile", "laugh"].map((f, i) => `<span class="${i === 2 ? "on" : ""}">${ic(f)}</span>`).join("")}</div></div>
@@ -134,7 +134,7 @@
     id: "m-grow", part: PART, title: "Mobile · grow & profile", kind: "full",
     render() {
       const stats = `<div class="m-body">
-          <div class="m-top"><h2 class="m-title">Stats</h2><span class="m-chip" style="height:30px">${K.brand("riotgames", 13)}Valorant${ic("chevron-down")}</span></div>
+          <div class="m-top"><h2 class="m-title">Stats</h2><span class="m-chip" style="height:30px">${K.brand("valorant", 13, "#FA4454")}Valorant${ic("chevron-down")}</span></div>
           <div class="m-seg">${["7D", "30D", "90D", "Season"].map((p, i) => `<span class="${i === 1 ? "on" : ""}">${p}</span>`).join("")}</div>
           <div class="m-card" style="display:flex;gap:14px;align-items:center">${ring(82, { size: 84, stroke: 7, label: "82", mark: 76 })}<div class="col" style="gap:4px"><span class="m-label" style="padding:0">SETA Score</span>${delta(4)}<span class="faint" style="font-size:11.5px">Top 18% · Immortal duelists</span></div></div>
           <div class="m-group">${[["Aim", 86, 12], ["Reaction", 78, 9], ["Decision", 80, -6], ["Game sense", 83, 9], ["Teamwork", 76, 3]].map(([s, v, d]) => `<div class="m-row"><span class="grow" style="font-weight:600">${s}</span><div class="meter" style="width:70px"><i style="width:${v}%;${d < 0 ? "background:var(--rose)" : ""}"></i></div><b class="num" style="width:22px;text-align:right">${v}</b><span style="width:42px;text-align:right">${delta(d)}</span></div>`).join("")}</div>

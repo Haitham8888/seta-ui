@@ -115,7 +115,7 @@
 
   /* keyboard activation for custom buttons */
   document.addEventListener("keydown", (e) => {
-    if ((e.key === "Enter" || e.key === " ") && e.target.matches("[role=button]")) { e.preventDefault(); e.target.click(); }
+    if ((e.key === "Enter" || e.key === " ") && e.target.matches?.("[role=button]")) { e.preventDefault(); e.target.click(); }
   });
 
   /* ---------- tooltip ---------- */
@@ -239,7 +239,7 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { closePalette(); closePop(); return; }
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); pal ? closePalette() : openPalette(); return; }
-    if (e.target.matches("input,textarea,select") || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target.matches?.("input,textarea,select") || e.ctrlKey || e.metaKey || e.altKey) return;
     if (e.key === "/") { e.preventDefault(); openPalette(); }
     if (e.key.toLowerCase() === "t") { const dark = document.documentElement.getAttribute("data-theme") === "dark"; setTheme(dark ? "light" : "dark"); }
   });
@@ -264,6 +264,19 @@
     c.style.setProperty("--mx", e.clientX - r.left + "px");
     c.style.setProperty("--my", e.clientY - r.top + "px");
   }, { passive: true });
+
+  /* ---------- logo intro (once per visit) ---------- */
+  (function intro() {
+    let seen = false;
+    try { seen = sessionStorage.getItem("seta-intro") === "1"; sessionStorage.setItem("seta-intro", "1"); } catch (e) {}
+    if (seen || reduced()) return;
+    const el = document.createElement("div");
+    el.className = "intro";
+    el.innerHTML = `<div class="intro-in"><svg class="intro-arc" viewBox="0 0 400 200" aria-hidden="true"><path d="M20 190 C 120 40, 300 0, 390 90" fill="none" stroke="#9677FF" stroke-width="2" stroke-linecap="round"/></svg><img src="assets/logo-dark.png" alt="SETA"><span>Smart Esports Talent Platform</span></div>`;
+    document.body.appendChild(el);
+    setTimeout(() => el.classList.add("out"), 1250);
+    setTimeout(() => el.remove(), 1900);
+  })();
 
   /* ---------- per-render enhancements ---------- */
   function countUp(root) {
